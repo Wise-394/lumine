@@ -5,6 +5,7 @@
   align-items: center;
   position: relative;
   height: 8vh;
+  background-color: var(--background);
 }
 
 .logo {
@@ -40,13 +41,14 @@
   cursor: pointer;
   text-decoration: none;
   font-size: 0.8rem;
+  transition: color 0.3s;
 }
 
 .link:hover {
   color: var(--text-normal);
 }
 
-.link:last-of-type {
+.cta {
   padding: 0.5rem 1.5rem;
   background-color: var(--primary);
   color: black;
@@ -58,7 +60,7 @@
     color 0.3s;
 }
 
-.link:last-of-type:hover {
+.cta:hover {
   color: var(--text-normal);
   transform: scale(1.05);
 }
@@ -79,10 +81,7 @@
 
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 90;
 }
@@ -117,5 +116,6 @@
     display: block;
     width: 100%;
     font-size: 1rem;
+    text-align: center;
   }
 }

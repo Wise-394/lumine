@@ -1,0 +1,164 @@
+.exportWrapper {
+  padding: clamp(1rem, 5vw, 2.5rem);
+  background-color: #0d131f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.terminal {
+  --header-bg: #0b121f;
+  --body-bg: #060a12;
+  --footer-bg: #0b121f;
+  width: 100%;
+  max-width: 42rem;
+  background-color: var(--body-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.terminalHeader {
+  background-color: var(--header-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.terminalIcons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminalIcons span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.iconRed {
+  background-color: #ff5f56;
+}
+.iconYellow {
+  background-color: #ffbd2e;
+}
+.iconGreen {
+  background-color: #27c93f;
+}
+
+.fileName {
+  font-family: var(--font-code);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.langBadge {
+  color: var(--text-muted);
+  text-transform: lowercase;
+  opacity: 0.5;
+  font-size: 0.75rem;
+}
+
+.terminalBody {
+  padding: 1.5rem 0;
+}
+
+.codeRow {
+  display: flex;
+  align-items: flex-start;
+}
+
+.gutter {
+  flex: 0 0 3.5rem;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1.25rem;
+  user-select: none;
+}
+
+.lineNumber {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: #2d3e5a;
+  line-height: 1.7;
+}
+
+.codeWrapper {
+  flex: 1;
+  min-width: 0;
+  padding-right: 1.5rem;
+}
+
+.codeContent {
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  color: var(--text-normal);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: block;
+}
+
+.terminalFooter {
+  background-color: var(--footer-bg);
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border-primary);
+}
+
+.description {
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.description strong {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.engagementBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.userTag {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stats {
+  display: flex;
+  gap: 1.25rem;
+  color: var(--text-muted);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 4.8px;
+}
+
+@media (max-width: 600px) {
+  .terminalFooter {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .gutter {
+    flex-basis: 2.5rem;
+    padding-right: 0.75rem;
+  }
+}

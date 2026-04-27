@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <header className={styles.container}>
-      <p className={styles.logo}>lumine</p>
+      <div className={styles.logo}>lumine</div>
 
       <nav className={`${styles.nav} ${isSidebarOpen ? styles.active : ""}`}>
         {isSidebarOpen && (
@@ -19,10 +19,12 @@ export function Header() {
         )}
         <a className={styles.link}>Login</a>
         <a className={styles.link}>Create Account</a>
-        <a className={styles.link}>Paste Code</a>
+        <a className={`${styles.link} ${styles.cta}`}>Try Lumine</a>
       </nav>
 
-      <FiMenu className={styles.hamburger} onClick={toggleSidebar} />
+      {!isSidebarOpen && (
+        <FiMenu className={styles.hamburger} onClick={toggleSidebar} />
+      )}
 
       {isSidebarOpen && (
         <div className={styles.overlay} onClick={toggleSidebar}></div>
