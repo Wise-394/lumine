@@ -1,0 +1,74 @@
+/* CSS RESET */
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* ======================== */
+:root {
+  --background: #060a12;
+  --primary: #4fa8ff;
+  --secondary: #00d4ff;
+  --text-normal: white;
+  --text-muted: #cbd5e1;
+  --border-primary: #1a2a44;
+
+  --font-primary: "Geist", sans-serif;
+  --font-normal: "Inter", sans-serif;
+  --font-code: "Geist Mono", monospace;
+
+  --fw-bold: 700;
+  --fw-medium: 500;
+  --fw-regular: 400;
+}
+body {
+  font-size: clamp(0.8rem, 0.95rem + 0.25vw, 1rem);
+
+  background-color: var(--background);
+  color: var(--text-normal);
+  font-family: var(--font-normal);
+  font-weight: var(--fw-regular);
+}

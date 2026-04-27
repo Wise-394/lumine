@@ -1,3 +1,6 @@
+import { Header } from "./components/Header.jsx";
 export function App() {
-  return <p>Hello world</p>;
+  return <Header />;
 }
+
+export default App;
