@@ -1,15 +1,32 @@
+import { useState } from "react";
 import styles from "@styles/components/Header.module.css";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
+
 export function Header() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <header className={styles.container}>
       <p className={styles.logo}>lumine</p>
-      <nav>
+
+      <nav className={`${styles.nav} ${isSidebarOpen ? styles.active : ""}`}>
+        {isSidebarOpen && (
+          <FiX className={styles.closeIcon} onClick={toggleSidebar} />
+        )}
         <a className={styles.link}>Login</a>
         <a className={styles.link}>Create Account</a>
         <a className={styles.link}>Paste Code</a>
-        <FiMenu className={styles.hamburger} />
       </nav>
+
+      <FiMenu className={styles.hamburger} onClick={toggleSidebar} />
+
+      {isSidebarOpen && (
+        <div className={styles.overlay} onClick={toggleSidebar}></div>
+      )}
     </header>
   );
 }

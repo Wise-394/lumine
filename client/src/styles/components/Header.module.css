@@ -3,6 +3,7 @@
   padding: 1.2rem clamp(1rem, 5vw, 5rem);
   border-bottom: var(--border-primary) 1px solid;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -13,6 +14,7 @@
   letter-spacing: -0.03em;
   font-family: var(--font-primary);
   font-weight: var(--fw-bold);
+  z-index: 10;
 }
 
 .logo::before {
@@ -24,16 +26,18 @@
   flex-shrink: 0;
 }
 
-.container nav {
+.nav {
   justify-content: center;
   align-items: center;
   margin-left: auto;
   display: flex;
   gap: clamp(1rem, 5vw, 5rem);
 }
+
 .link {
   color: var(--text-muted);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .link:hover {
@@ -59,14 +63,57 @@
 
 .hamburger {
   display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.closeIcon {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
 }
 
 @media screen and (max-width: 768px) {
-  .link {
-    display: none;
-  }
-
   .hamburger {
     display: block;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(70vw, 20rem);
+    height: 100vh;
+    background-color: var(--background);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    transition: right 0.3s ease-in-out;
+    z-index: 100;
+    border-left: 1px solid var(--border-primary);
+    gap: 2rem;
+  }
+
+  .nav.active {
+    right: 0;
+  }
+
+  .link {
+    display: block;
+    width: 100%;
+    font-size: 1.1rem;
   }
 }
