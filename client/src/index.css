@@ -72,3 +72,10 @@ body {
   font-family: var(--font-normal);
   font-weight: var(--fw-regular);
 }
+
+h1,
+h2,
+h3 {
+  font-weight: var(--fw-bold);
+  font-family: var(--font-primary);
+}

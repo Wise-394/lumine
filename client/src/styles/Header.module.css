@@ -1,9 +1,10 @@
 .container {
   display: flex;
-  padding: 1.2rem clamp(1rem, 5vw, 5rem);
+  padding: 0 clamp(1rem, 5vw, 3rem);
   border-bottom: var(--border-primary) 1px solid;
   align-items: center;
   position: relative;
+  height: 8vh;
 }
 
 .logo {
@@ -38,6 +39,7 @@
   color: var(--text-muted);
   cursor: pointer;
   text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .link:hover {
@@ -85,7 +87,7 @@
   z-index: 90;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .hamburger {
     display: block;
   }
@@ -114,6 +116,6 @@
   .link {
     display: block;
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }

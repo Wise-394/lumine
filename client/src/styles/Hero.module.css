@@ -1,0 +1,70 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 92vh;
+  padding: 0 clamp(1.5rem, 8vw, 6rem);
+  align-items: center;
+  gap: 4rem;
+}
+
+.leftContainer {
+  width: clamp(30rem, 80% - 10vw, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.grid h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+}
+
+.grid p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 45ch;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons > a {
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border-primary);
+  font-weight: var(--fw-bold);
+  border-radius: 10px;
+  text-align: center;
+  transition:
+    transform 0.3s ease-in-out,
+    color 0.3s;
+}
+.buttons > .cta {
+  color: black;
+  background-color: var(--primary);
+}
+
+.buttons > a:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .leftContainer {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
