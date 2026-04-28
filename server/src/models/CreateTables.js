@@ -1,4 +1,4 @@
-import { pool } from "./databaseConfig.js";
+import { pool } from "../configs/databaseConfig.js";
 
 export const createTablesIfNotExist = async () => {
   await createUsersTable();

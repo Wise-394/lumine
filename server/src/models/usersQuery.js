@@ -1,4 +1,4 @@
-import { pool } from "./databaseConfig.js";
+import { pool } from "../configs/databaseConfig.js";
 
 export const getUserById = async (id) => {
   try {
@@ -30,5 +30,15 @@ export const getUserByUsername = async (username) => {
   }
 };
 
-// export const insertUser = async(username, password, role);
+export const insertUser = async (username, password, role) => {
+  try {
+    const { rows } = await pool.query(
+      `INSERT INTO users(username, password, role) VALUES($1, $2, $3)`,
+      [username, password, role],
+    );
+  } catch (err) {
+    console.error("unable to insert user", err);
+    throw err;
+  }
+};
 // TODO INSERT USER, PASSPORT JS LOCAL STRATEGY, REGISTER, LOGIN
