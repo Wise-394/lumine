@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "@styles/Header.module.css";
 import { FiMenu, FiX } from "react-icons/fi";
-
+import { Link } from "react-router";
 export function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -11,14 +11,20 @@ export function Header() {
 
   return (
     <header className={styles.container}>
-      <div className={styles.logo}>lumine</div>
+      <div className={styles.logo}>
+        <Link>lumine</Link>
+      </div>
 
       <nav className={`${styles.nav} ${isSidebarOpen ? styles.active : ""}`}>
         {isSidebarOpen && (
           <FiX className={styles.closeIcon} onClick={toggleSidebar} />
         )}
-        <a className={styles.link}>Login</a>
-        <a className={styles.link}>Create Account</a>
+        <Link to="/login" className={styles.link}>
+          Login
+        </Link>
+        <Link to="/register" className={styles.link}>
+          Create Account
+        </Link>
         <a className={`${styles.link} ${styles.cta}`}>Try Lumine</a>
       </nav>
 

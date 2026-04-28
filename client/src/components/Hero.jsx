@@ -1,6 +1,7 @@
 import styles from "@styles/Hero.module.css";
 import { FiArrowRight } from "react-icons/fi";
 import { HeroTerminal } from "./HeroTerminal.jsx";
+
 export function Hero() {
   return (
     <section className={styles.grid}>

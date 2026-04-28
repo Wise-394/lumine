@@ -1,12 +1,8 @@
-import { Header } from "./components/Header.jsx";
-import { Hero } from "./components/Hero.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { appRoutes } from "./routes/AppRoutes.jsx";
 export function App() {
-  return (
-    <>
-      <Header />
-      <Hero />
-    </>
-  );
+  const router = createBrowserRouter(appRoutes);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
