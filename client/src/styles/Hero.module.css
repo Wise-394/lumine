@@ -1,11 +1,11 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
+  grid-template-columns: repeat(2, 1fr);
   min-height: 92vh;
   padding-inline: clamp(1.5rem, 8vw, 6rem);
-  padding-block: 2rem;
+  padding-block: clamp(3rem, 6vh, 6rem);
   align-items: center;
-  gap: 4rem;
+  gap: clamp(2rem, 5vw, 4rem);
   background: radial-gradient(
     circle at top right,
     rgba(var(--primary-rgb), 0.05),
@@ -17,7 +17,7 @@
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: clamp(1.25rem, 2.5vh, 2rem);
 }
 
 .leftContainer h1 {
@@ -27,27 +27,30 @@
   letter-spacing: -0.04em;
   color: var(--primary);
   overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .leftContainer h2 {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 500;
   color: var(--text-primary);
   opacity: 0.9;
+  text-wrap: balance;
 }
 
 .leftContainer p {
   color: var(--text-muted);
-  line-height: 1.7;
-  max-inline-size: 45ch;
-  font-size: 1.1rem;
+  line-height: 1.75;
+  max-inline-size: 48ch;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  text-wrap: pretty;
 }
 
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .buttons > a {
@@ -62,27 +65,52 @@
   font-weight: 600;
   border-radius: 12px;
   text-align: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   white-space: nowrap;
   flex: 0 1 auto;
+  text-decoration: none;
 }
 
 .buttons > .cta {
   color: #000;
   background-color: var(--primary);
   border-color: var(--primary);
-  box-shadow: 0 10px 15px -3px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 8px 20px -4px rgba(var(--primary-rgb), 0.35);
 }
 
 .buttons > a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 768px) {
+.buttons > .cta:hover {
+  box-shadow: 0 12px 28px -4px rgba(var(--primary-rgb), 0.45);
+}
+
+/* ── Laptop ── */
+@media (max-width: 1280px) {
+  .grid {
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-inline: clamp(1.5rem, 6vw, 4rem);
+  }
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-block: clamp(4rem, 8vh, 6rem);
+    gap: 3rem;
+  }
+
   .leftContainer {
-    text-align: center;
     align-items: center;
+    text-align: center;
   }
 
   .leftContainer p {
@@ -91,5 +119,16 @@
 
   .buttons {
     justify-content: center;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .grid {
+    padding-block: 3rem;
+  }
+
+  .buttons > a {
+    flex: 1 1 100%;
   }
 }

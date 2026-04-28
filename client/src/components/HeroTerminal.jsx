@@ -1,6 +1,7 @@
 import styles from "@styles/HeroTerminal.module.css";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
-
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 export function HeroTerminal() {
   const jsCode = [
     "const checkNumber = (num) => {",
@@ -34,7 +35,23 @@ export function HeroTerminal() {
                 <span className={styles.lineNumber}>{i + 1}</span>
               </div>
               <div className={styles.codeWrapper}>
-                <code className={styles.codeContent}>{line || "\u00A0"}</code>
+                <SyntaxHighlighter
+                  language="javascript"
+                  style={atomOneDark}
+                  wrapLines={true}
+                  wrapLongLines={true}
+                  PreTag="div"
+                  customStyle={{
+                    background: "transparent",
+                    padding: 0,
+                    margin: 0,
+                    fontSize: "1rem",
+                    lineHeight: "18px",
+                  }}
+                  useInlineStyles={true}
+                >
+                  {line || " "}
+                </SyntaxHighlighter>
               </div>
             </div>
           ))}
