@@ -36,6 +36,7 @@ export const insertUser = async (username, password, role) => {
       `INSERT INTO users(username, password, role) VALUES($1, $2, $3)`,
       [username, password, role],
     );
+    return rows[0].id;
   } catch (err) {
     console.error("unable to insert user", err);
     throw err;
