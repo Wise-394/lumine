@@ -9,7 +9,9 @@ export const checkIfUsernameExist = async (req, res, next) => {
   next();
 };
 
-// TODO VALIDATE USER INPUT USING EXPRESS VALIDATOR
+// TODO VALIDATE USER INPUT USING EXPRESS VALIDATOR (DONE)
+//TODO CHECK VALIDATION RESULT
+// CONNECT THE CONTROLLERS TO ROUTE, validate -> check result -> register
 
 export const registerUser = async (req, res, next) => {
   try {
