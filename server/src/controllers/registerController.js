@@ -1,20 +1,23 @@
 import { getUserByUsername, insertUser } from "../models/usersQuery.js";
+import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 
 export const checkIfUsernameExist = async (req, res, next) => {
   const users = await getUserByUsername(req.body.username);
   if (users) {
-    return res.status(400).json({ message: "username already exist" });
+    return res
+      .status(400)
+      .json({ errors: [{ msg: "username already exist", field: "username" }] });
   }
   next();
 };
 
-// TODO VALIDATE USER INPUT USING EXPRESS VALIDATOR (DONE)
-//TODO CHECK VALIDATION RESULT
-// CONNECT THE CONTROLLERS TO ROUTE, validate -> check result -> register
-
 export const registerUser = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 10);
 
