@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --env-file=.env --watch app.js"
+    "test": "vitest",
+    "dev": "node --env-file=.env --watch server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,8 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.2.1",
-    "globals": "^17.5.0"
+    "globals": "^17.5.0",
+    "supertest": "^7.2.2",
+    "vitest": "^4.1.5"
   }
 }

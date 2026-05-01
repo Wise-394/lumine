@@ -12,10 +12,4 @@ passportSetup();
 //routes
 app.use("/register", registerRouter);
 
-app
-  .listen(process.env.PORT, () => {
-    console.log("Server is running at localhost:", process.env.PORT);
-  })
-  .on("error", (err) => {
-    console.log(err);
-  });
+export default app;
