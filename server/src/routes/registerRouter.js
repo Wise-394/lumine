@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { checkIfUsernameExist } from "../controllers/registerController.js";
+import {
+  checkIfUsernameExist,
+  registerUser,
+} from "../controllers/registerController.js";
+import { validateUser } from "../middlewares/validation.js";
 export const registerRouter = Router();
 
-registerRouter.get("/", checkIfUsernameExist);
+registerRouter.post("/", validateUser, checkIfUsernameExist, registerUser);
