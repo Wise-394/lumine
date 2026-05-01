@@ -13,7 +13,7 @@ export const checkIfUsernameExist = async (req, res, next) => {
     const users = await getUserByUsername(req.body.username);
     if (users) {
       return res.status(400).json({
-        errors: [{ msg: "username already exist", field: "username" }],
+        errors: [{ msg: "username already exist", path: "username" }],
       });
     }
 
@@ -33,6 +33,6 @@ export const registerUser = async (req, res, next) => {
     return res.json(id);
   } catch (err) {
     console.error("unable to register user", err);
-    next(new Error("unable to create user"));
+    return next(new Error("unable to create user"));
   }
 };

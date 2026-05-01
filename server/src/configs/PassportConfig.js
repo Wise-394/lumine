@@ -10,7 +10,7 @@ export const passportSetup = () => {
   passport.use(
     new Strategy(opts, async (payload, done) => {
       try {
-        const user = await getUserById(payload.id);
+        const user = await getUserById(payload.sub);
         if (!user) {
           return done(null, false);
         }

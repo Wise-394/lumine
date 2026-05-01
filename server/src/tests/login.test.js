@@ -2,18 +2,18 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import request from "supertest";
 import app from "../../app.js";
 import * as usersQuery from "../models/usersQuery.js";
+import bcrypt from "bcryptjs";
 
 afterEach(() => {
   vi.restoreAllMocks();
 });
 
-// TODO: ADD MORE TEST FOR VALIDATION
-
-describe("User Registration", () => {
+describe("User Login", () => {
   it("responds with error when username is empty", async () => {
     const res = await request(app)
-      .post("/register")
-      .send({ username: "", password: "123" });
+      .post("/login")
+      .send({ username: "", password: "12345678" });
+
     expect(res.status).toBe(400);
     expect(res.body.errors).toEqual(
       expect.arrayContaining([
@@ -24,7 +24,7 @@ describe("User Registration", () => {
 
   it("responds with error when password is empty", async () => {
     const res = await request(app)
-      .post("/register")
+      .post("/login")
       .send({ username: "test", password: "" });
 
     expect(res.status).toBe(400);
@@ -35,35 +35,49 @@ describe("User Registration", () => {
     );
   });
 
-  it("responds with error when username already exists", async () => {
-    vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue({
-      id: 1,
-      username: "test",
-    });
-
+  it("responds with error when username doesn't exist", async () => {
+    vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue(null);
     const res = await request(app)
-      .post("/register")
-      .send({ username: "test", password: "test" });
+      .post("/login")
+      .send({ username: "test", password: "123456" });
 
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(401);
     expect(res.body.errors).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ msg: "username already exist" }),
+        expect.objectContaining({ msg: "Username doesn't exist" }),
       ]),
     );
   });
 
-  it("responds with id when registration is succesful", async () => {
-    vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue(null);
-    vi.spyOn(usersQuery, "insertUser").mockResolvedValue({
-      id: 1,
+  it("responds with incorrect password", async () => {
+    vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue({
+      username: "test",
+      password: "123456",
     });
 
     const res = await request(app)
-      .post("/register")
+      .post("/login")
       .send({ username: "test", password: "test" });
 
+    expect(res.status).toBe(401);
+    expect(res.body.errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ msg: "Incorrect Password" }),
+      ]),
+    );
+  });
+
+  it("logins the user", async () => {
+    const hashedPassword = await bcrypt.hash("123456", 10);
+    vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue({
+      username: "test",
+      password: hashedPassword,
+    });
+
+    const res = await request(app)
+      .post("/login")
+      .send({ username: "test", password: "123456" });
+
     expect(res.status).toBe(200);
-    expect(res.body).toEqual({ id: 1 });
   });
 });

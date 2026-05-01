@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-export const validateUser = [
+export const validateRegister = [
   body("username")
     .trim()
     .notEmpty()
@@ -18,4 +18,20 @@ export const validateUser = [
     .bail()
     .isLength({ max: 15 })
     .withMessage("Password must be within 1-15 characters long only"),
+];
+
+export const validateLogin = [
+  body("username")
+    .trim()
+    .notEmpty()
+    .withMessage("Username cannot be empty")
+    .bail()
+    .isAlphanumeric()
+    .isLength({ max: 15 }),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password cannot be empty")
+    .bail()
+    .isLength({ max: 15 }),
 ];
