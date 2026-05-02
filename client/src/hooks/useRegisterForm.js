@@ -9,8 +9,8 @@ export function useRegisterForm() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const setField = (key) => (e) =>
-    setFields((prev) => ({ ...prev, [key]: e.target.value }));
+  const setField = (key, value) =>
+    setFields((prev) => ({ ...prev, [key]: value }));
 
   return {
     fields,
