@@ -96,7 +96,4 @@ describe("User Registration", () => {
       "username already exist",
     );
   });
-
-  //TODO: MOCK TEST IF API FAILED, if username already exist
-  it("shows error when server isn't availablbe");
 });
