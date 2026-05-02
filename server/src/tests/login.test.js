@@ -49,7 +49,7 @@ describe("User Login", () => {
     );
   });
 
-  it("responds with incorrect password", async () => {
+  it("it responds with error when incorrect password", async () => {
     vi.spyOn(usersQuery, "getUserByUsername").mockResolvedValue({
       username: "test",
       password: "123456",
