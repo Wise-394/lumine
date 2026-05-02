@@ -1,7 +1,8 @@
-import styles from "@styles/HeroTerminal.module.css";
+import styles from "@styles/components/HeroTerminal.module.css";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { TerminalIcons } from "./TerminalIcons.jsx";
 export function HeroTerminal() {
   const jsCode = [
     "const checkNumber = (num) => {",
@@ -17,11 +18,7 @@ export function HeroTerminal() {
     <div className={styles.exportWrapper}>
       <section className={styles.terminal}>
         <header className={styles.terminalHeader}>
-          <div className={styles.terminalIcons}>
-            <span className={styles.iconRed} />
-            <span className={styles.iconYellow} />
-            <span className={styles.iconGreen} />
-          </div>
+          <TerminalIcons />
           <div className={styles.fileName}>
             <span>oddOrEven.js</span>
           </div>

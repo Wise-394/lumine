@@ -39,27 +39,6 @@
   border-bottom: 1px solid var(--border-primary);
 }
 
-.terminalIcons {
-  display: flex;
-  gap: 8px;
-}
-
-.terminalIcons span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.iconRed {
-  background-color: #ff5f56;
-}
-.iconYellow {
-  background-color: #ffbd2e;
-}
-.iconGreen {
-  background-color: #27c93f;
-}
-
 .fileName {
   font-family: var(--font-code);
   color: var(--text-muted);
