@@ -14,5 +14,5 @@ export async function apiFetch(path, options = {}) {
       data.errors?.[0]?.msg || data.message || "Something went wrong",
     );
   }
-  return res.json();
+  return data;
 }
