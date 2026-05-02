@@ -8,7 +8,11 @@ export async function apiFetch(path, options = {}) {
     },
     ...options,
   });
-
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(
+      data.errors?.[0]?.msg || data.message || "Something went wrong",
+    );
+  }
   return res.json();
 }

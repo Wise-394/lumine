@@ -33,7 +33,7 @@ export const getUserByUsername = async (username) => {
 export const insertUser = async (username, password, role) => {
   try {
     const { rows } = await pool.query(
-      `INSERT INTO users(username, password, role) VALUES($1, $2, $3)`,
+      `INSERT INTO users(username, password, role) VALUES($1, $2, $3) RETURNING id`,
       [username, password, role],
     );
     return rows[0].id;
@@ -42,4 +42,3 @@ export const insertUser = async (username, password, role) => {
     throw err;
   }
 };
-// TODO INSERT USER, PASSPORT JS LOCAL STRATEGY, REGISTER, LOGIN

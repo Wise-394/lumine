@@ -1,9 +1,12 @@
 import { useRegisterForm } from "../hooks/useRegisterForm";
 import { apiFetch } from "../helpers/api.js";
+import { useNavigate } from "react-router";
 export function Register() {
+  const navigate = useNavigate();
   const { fields, error, setError, setLoading, loading, setField } =
     useRegisterForm();
 
+  // TODO USE THE ERROR MESSAGES OF SERVER
   const validateInput = () => {
     if (!fields.username || !fields.password) {
       setError("Username or password cannot be empty");
@@ -16,7 +19,7 @@ export function Register() {
     }
 
     if (fields.password !== fields.repeatPassword) {
-      setError("Passwords don't match");
+      setError("Passwords doesn't match");
       return false;
     }
 
@@ -38,6 +41,7 @@ export function Register() {
           password: fields.password,
         }),
       });
+      navigate("/login", { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
