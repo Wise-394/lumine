@@ -9,4 +9,9 @@ export default defineConfig({
       "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
     },
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./tests/setup.js",
+  },
 });

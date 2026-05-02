@@ -1,5 +1,5 @@
 import { useRegisterForm } from "../hooks/useRegisterForm";
-
+import { apiFetch } from "../helpers/api.js";
 export function Register() {
   const { fields, error, setError, setLoading, loading, setField } =
     useRegisterForm();
@@ -13,7 +13,13 @@ export function Register() {
     setError(null);
     setLoading(true);
     try {
-      // TODO: call register api
+      await apiFetch("/register", {
+        method: "POST",
+        body: JSON.stringify({
+          username: fields.username,
+          password: fields.password,
+        }),
+      });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -27,18 +33,21 @@ export function Register() {
         <label>Username</label>
         <input
           type="text"
+          value={fields.username}
           onChange={(e) => setField("username", e.target.value)}
         />
 
         <label>Password</label>
         <input
           type="password"
+          value={fields.password}
           onChange={(e) => setField("password", e.target.value)}
         />
 
         <label>Repeat Password</label>
         <input
           type="password"
+          value={fields.repeatPassword}
           onChange={(e) => setField("repeatPassword", e.target.value)}
         />
 
