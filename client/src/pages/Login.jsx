@@ -34,6 +34,7 @@ export function Login() {
         }),
       });
 
+      clearInputs();
       handleCorrectLogin(data);
     } catch (err) {
       setError(err.message);
@@ -42,6 +43,10 @@ export function Login() {
     }
   };
 
+  const clearInputs = () => {
+    setField("username", "");
+    setField("password", "");
+  };
   const handleCorrectLogin = (data) => {
     setJWT(data.token);
     console.log("success");
