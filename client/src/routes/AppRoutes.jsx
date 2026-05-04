@@ -2,6 +2,7 @@ import { IndexLayout } from "../layouts/IndexLayout.jsx";
 import { Home } from "../pages/Home.jsx";
 import { Register } from "../pages/Register.jsx";
 import { Login } from "../pages/Login.jsx";
+import { Error } from "../pages/Error.jsx";
 export const appRoutes = [
   {
     path: "/",
@@ -18,6 +19,10 @@ export const appRoutes = [
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "*",
+        element: <Error />,
       },
     ],
   },

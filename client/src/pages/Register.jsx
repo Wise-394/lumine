@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { TerminalIcons } from "../components/TerminalIcons.jsx";
 import { FiUser, FiLock } from "react-icons/fi";
 import { CiWarning } from "react-icons/ci";
+import { Link } from "react-router";
 import styles from "@styles/pages/Register.module.css";
 
 export function Register() {
@@ -138,7 +139,7 @@ export function Register() {
               {loading ? "Registering..." : "Register"}
             </button>
             <p className={styles.signIn}>
-              Already have one? <a href="/login">Sign in</a>
+              Already have one? <Link to="/login">Sign in</Link>
             </p>
           </form>
         </div>
