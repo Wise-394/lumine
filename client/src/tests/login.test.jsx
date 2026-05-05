@@ -4,15 +4,75 @@ import userEvent from "@testing-library/user-event";
 import { Login } from "../pages/Login.jsx";
 import { MemoryRouter } from "react-router";
 import { apiFetch } from "../helpers/api.js";
+import { setJWT } from "../helpers/jwt.js";
+
+vi.mock("../helpers/api.js");
+vi.mock("../helpers/jwt.js");
 
 describe("user login", () => {
-  it("says Username or password cannot be empty");
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
-  it("handles incorrect credentials");
+  it("says Username or password cannot be empty", async () => {
+    const user = userEvent.setup();
 
-  it("handle user doesnt exist");
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
 
-  it("handles clearing inputs");
+    const submit = screen.getByRole("button", { name: "Login" });
 
-  it("logins user succesfully");
+    await user.click(submit);
+    expect(screen.getByTestId("errorMsg")).toHaveTextContent(
+      "Username or password cannot be empty",
+    );
+  });
+
+  it("handles incorrect credentials or user doesnt exist", async () => {
+    vi.mocked(apiFetch).mockRejectedValue(new Error("Incorrect password"));
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+    const username = screen.getByRole("textbox", { name: /username/i });
+    const password = screen.getByLabelText("Password");
+    const submit = screen.getByRole("button", { name: /login/i });
+
+    await user.type(username, "test");
+    await user.type(password, "test1234");
+    await user.click(submit);
+
+    expect(screen.getByTestId("errorMsg")).toHaveTextContent(
+      "Incorrect password",
+    );
+  });
+
+  it("logins user successfully", async () => {
+    vi.mocked(apiFetch).mockResolvedValue({ token: "fake-jwt-token" });
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+
+    const username = screen.getByRole("textbox", { name: /username/i });
+    const password = screen.getByLabelText("Password");
+    const submit = screen.getByRole("button", { name: /login/i });
+
+    await user.type(username, "testuser");
+    await user.type(password, "password123");
+    await user.click(submit);
+
+    expect(setJWT).toHaveBeenCalledWith("fake-jwt-token");
+    expect(username).toHaveValue("");
+    expect(password).toHaveValue("");
+  });
 });
