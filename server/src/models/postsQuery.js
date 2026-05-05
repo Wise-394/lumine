@@ -52,12 +52,18 @@ export const updatePost = async (
   visibility = null,
 ) => {
   try {
-    await pool(
-      `UPDATE posts SET title = $1, description = $2, visibility = $3 WHERE id = $4`,
+    const { rows } = await pool.query(
+      `UPDATE posts SET 
+        title = COALESCE($1, title), 
+        description = COALESCE($2, description), 
+        visibility = COALESCE($3, visibility) 
+       WHERE id = $4 
+       RETURNING *`,
       [title, description, visibility, id],
     );
+    return rows[0];
   } catch (err) {
-    console.error("unable to insert post", err);
+    console.error("Unable to update post", err);
     throw err;
   }
 };
