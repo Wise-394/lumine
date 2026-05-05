@@ -19,6 +19,9 @@ const createUsersTable = async () => {
   }
 };
 
+// user id null = guest
+//visibility = link_only, public, private
+// expires at, null = permanent
 export const createPostsTable = async () => {
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS posts(
@@ -36,6 +39,17 @@ export const createPostsTable = async () => {
   }
 };
 
-// user id null = guest
-//visibility = link_only, public, private
-// expires at, null = permanent
+export const createCodeBlocksTable = async () => {
+  try {
+    await pool.query(`CREATE TABLE IF NOT EXISTS code_blocks(
+      id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+      post_id INT REFERENCES posts(id),
+      code TEXT NOT NULL,
+      language TEXT NOT NULL,
+      description TEXT NOT NULL
+      )`);
+  } catch (err) {
+    console.error("unable to create code table", err);
+    throw err;
+  }
+};

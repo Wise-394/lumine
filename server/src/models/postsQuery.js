@@ -24,5 +24,49 @@ export const getPostById = (id) => {
   }
 };
 
-export const insertPost = () => {};
-export const updatePost = () => {};
+export const insertPost = async (
+  user_id = null,
+  title,
+  description,
+  visibility,
+  expires_at,
+) => {
+  try {
+    const { rows } = await pool.query(
+      `INSERT INTO posts(user_id, title, description, visibility, expires_at) 
+   VALUES ($1,$2,$3,$4,$5) 
+   RETURNING *`,
+      [user_id, title, description, visibility, expires_at],
+    );
+    return rows[0];
+  } catch (err) {
+    console.error("unable to insert post", err);
+    throw err;
+  }
+};
+
+export const updatePost = async (
+  id,
+  title = null,
+  description = null,
+  visibility = null,
+) => {
+  try {
+    await pool(
+      `UPDATE posts SET title = $1, description = $2, visibility = $3 WHERE id = $4`,
+      [title, description, visibility, id],
+    );
+  } catch (err) {
+    console.error("unable to insert post", err);
+    throw err;
+  }
+};
+
+export const deletePost = async (id) => {
+  try {
+    await pool(`DELETE FROM posts where id = $1`, [id]);
+  } catch (err) {
+    console.error("unable to delete post", err);
+    throw err;
+  }
+};

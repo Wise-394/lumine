@@ -1,5 +1,5 @@
 import express from "express";
-import { createTablesIfNotExist } from "./src/models/CreateTables.js";
+import { createTablesIfNotExist } from "./src/models/createTables.js";
 import cors from "cors";
 import { registerRouter } from "./src/routes/registerRouter.js";
 import { passportSetup } from "./src/configs/PassportConfig.js";
