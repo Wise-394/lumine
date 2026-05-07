@@ -3,6 +3,7 @@ import { pool } from "../configs/databaseConfig.js";
 export const createTablesIfNotExist = async () => {
   await createUsersTable();
   await createPostsTable();
+  await createCodeBlocksTable();
 };
 
 const createUsersTable = async () => {

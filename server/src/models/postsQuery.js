@@ -3,8 +3,16 @@ import { pool } from "../configs/databaseConfig.js";
 export const getAllPost = async (user_id = null) => {
   try {
     const query = user_id
-      ? { text: "SELECT * FROM posts WHERE user_id = $1", values: [user_id] }
-      : { text: "SELECT * FROM posts" };
+      ? {
+          text: `SELECT * FROM posts 
+                 INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
+                 WHERE posts.user_id = $1`,
+          values: [user_id],
+        }
+      : {
+          text: `SELECT * FROM posts 
+                 INNER JOIN code_blocks ON code_blocks.post_id = posts.id`,
+        };
 
     const { rows } = await pool.query(query);
     return rows;
