@@ -1,13 +1,11 @@
-import { getAllPost, insertPost } from "../models/postsQuery.js";
-import { insertCodeBlock } from "../models/codeBlocksQuery.js";
+import { getAllPost, insertPost, updatePost } from "../models/postsQuery.js";
+import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
+
+const GUEST_POST_EXPIRY_DAYS = 30;
+
 export const getAllPostController = async (req, res) => {
   try {
-    let posts;
-    if (req.body.id) {
-      posts = await getAllPost(req.body.id);
-    } else {
-      posts = await getAllPost();
-    }
+    const posts = await getAllPost(req.body.id ?? null);
     res.json({ posts });
   } catch (err) {
     console.error("unable to get all posts", err);
@@ -17,14 +15,21 @@ export const getAllPostController = async (req, res) => {
 
 export const insertPostController = async (req, res) => {
   try {
-    const userID = req.user ? req.user.id : null;
-    const title = req.body.title;
-    const description = req.body.description;
-    const visibility = req.body.visibility;
-    const expires_at = req.user ? null : "TODO"; //TODO EXPIRES AT
-    const code = req.body.code;
-    const language = req.body.language;
-    const codeBlockDescription = req.body.codeBlockDescription;
+    const {
+      title,
+      description,
+      visibility,
+      code,
+      language,
+      codeBlockDescription,
+    } = req.body;
+    const userID = req.user?.id ?? null;
+    const expires_at = userID
+      ? null
+      : new Date(
+          Date.now() + GUEST_POST_EXPIRY_DAYS * 24 * 60 * 60 * 1000,
+        ).toISOString();
+
     const result = await insertPost(
       userID,
       title,
@@ -33,9 +38,44 @@ export const insertPostController = async (req, res) => {
       expires_at,
     );
     await insertCodeBlock(result.id, code, language, codeBlockDescription);
-    res.json({ message: "success", postID: result.id });
+
+    res.status(201).json({ message: "success", postID: result.id });
   } catch (err) {
     console.error("unable to insert post", err);
     res.status(500).json({ message: "Failed to insert post" });
+  }
+};
+
+export const updatePostController = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      visibility,
+      code,
+      language,
+      codeBlockDescription,
+    } = req.body;
+
+    const updatedPost = await updatePost(
+      req.params.id,
+      title,
+      description,
+      visibility,
+    );
+    if (!updatedPost)
+      return res.status(404).json({ message: "Post not found" });
+
+    await updateCodeBlock(
+      updatedPost.code_block_id,
+      code,
+      language,
+      codeBlockDescription,
+    );
+
+    res.json({ message: "success" });
+  } catch (err) {
+    console.error("unable to update post", err);
+    res.status(500).json({ message: "Failed to update post" });
   }
 };
