@@ -57,9 +57,13 @@ export const insertPostController = async (req, res) => {
   }
 };
 // TODO AUTHENTICATE BEFORE UPDATING
-// export const authenticateUser = async (req, res) => {
-//   //user id == exist in post.userid
-// };
+export const authenticateUser = async (req, res, next) => {
+  const post = await getPostById(req.params.id);
+  if (post.user_id !== req.user.id) {
+    return res.status(400).json({ message: "unable to update the post" });
+  }
+  next();
+};
 
 export const updatePostController = async (req, res) => {
   const errors = validationResult(req);
@@ -101,8 +105,8 @@ export const updatePostController = async (req, res) => {
 
 export const getPostByIDController = async (req, res) => {
   try {
-    const res = await getPostById(req.params.id);
-    res.json({ post: res });
+    const post = await getPostById(req.params.id);
+    res.json({ post: post });
   } catch (err) {
     console.error("unable to get post by id", err);
     res.status(500).json({ message: "Failed to get post id" });
