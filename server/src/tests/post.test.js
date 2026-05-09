@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../app.js";
 import * as postsQuery from "../models/postsQuery.js";
 import * as usersQuery from "../models/usersQuery.js";
-import * as codeBlocksQuery from "../models/codeBlocksQuery.js";
+
 import jwt from "jsonwebtoken";
 afterEach(() => {
   vi.restoreAllMocks();
