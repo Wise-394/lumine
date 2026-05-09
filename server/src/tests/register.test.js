@@ -7,8 +7,6 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-// TODO: ADD MORE TEST FOR VALIDATION
-
 describe("User Registration", () => {
   it("responds with error when username is empty", async () => {
     const res = await request(app)

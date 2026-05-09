@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 import {
   authenticateUser,
   getAllPostController,
@@ -12,4 +13,10 @@ export const postsRouter = Router();
 postsRouter.get("/", getAllPostController);
 postsRouter.get("/:id", getPostByIDController);
 postsRouter.post("/", validatePost, insertPostController);
-postsRouter.put("/:id", authenticateUser, validatePost, updatePostController);
+postsRouter.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  authenticateUser,
+  validatePost,
+  updatePostController,
+);

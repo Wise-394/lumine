@@ -14,5 +14,10 @@ export default defineConfig({
     globals: true,
     globalSetup: "./vitest.setup.js",
     envFile: ".env",
+    server: {
+      deps: {
+        inline: ["jsonwebtoken"], // ✅ forces vitest to transform it
+      },
+    },
   },
 });

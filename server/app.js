@@ -16,5 +16,5 @@ passportSetup();
 //routes
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("posts", postsRouter);
+app.use("/post", postsRouter);
 export default app;

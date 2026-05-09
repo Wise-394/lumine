@@ -8,10 +8,9 @@ import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
 
 const GUEST_POST_EXPIRY_DAYS = 30;
-
 export const getAllPostController = async (req, res) => {
   try {
-    const posts = await getAllPost(req.body.id ?? null);
+    const posts = await getAllPost();
     res.json({ posts });
   } catch (err) {
     console.error("unable to get all posts", err);
@@ -56,7 +55,6 @@ export const insertPostController = async (req, res) => {
     res.status(500).json({ message: "Failed to insert post" });
   }
 };
-// TODO AUTHENTICATE BEFORE UPDATING
 export const authenticateUser = async (req, res, next) => {
   const post = await getPostById(req.params.id);
   if (post.user_id !== req.user.id) {
