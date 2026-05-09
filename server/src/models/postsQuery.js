@@ -22,9 +22,14 @@ export const getAllPost = async (user_id = null) => {
   }
 };
 
-export const getPostById = (id) => {
+export const getPostById = async (id) => {
   try {
-    const { rows } = pool.query("SELECT * FROM POSTS WHERE id = $1", [id]);
+    const { rows } = await pool.query(
+      `SELECT * FROM posts 
+       INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
+       WHERE posts.id = $1`,
+      [id],
+    );
     return rows[0];
   } catch (err) {
     console.error("unable to get post by id", err);

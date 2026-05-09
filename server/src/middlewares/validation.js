@@ -35,3 +35,19 @@ export const validateLogin = [
     .bail()
     .isLength({ max: 15 }),
 ];
+
+export const validatePost = [
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage("title cannot be empty")
+    .bail()
+    .isLength({ min: 6, max: 500 })
+    .withMessage("title must be 6-500 characters"),
+  body("code")
+    .trim()
+    .notEmpty()
+    .withMessage("codeblock cannot be empty")
+    .bail()
+    .isLength({ max: 3000 }),
+];

@@ -1,4 +1,10 @@
-import { getAllPost, insertPost, updatePost } from "../models/postsQuery.js";
+import {
+  getAllPost,
+  getPostById,
+  insertPost,
+  updatePost,
+} from "../models/postsQuery.js";
+import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
 
 const GUEST_POST_EXPIRY_DAYS = 30;
@@ -15,6 +21,11 @@ export const getAllPostController = async (req, res) => {
 
 export const insertPostController = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
       title,
       description,
@@ -45,8 +56,16 @@ export const insertPostController = async (req, res) => {
     res.status(500).json({ message: "Failed to insert post" });
   }
 };
+// TODO AUTHENTICATE BEFORE UPDATING
+// export const authenticateUser = async (req, res) => {
+//   //user id == exist in post.userid
+// };
 
 export const updatePostController = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   try {
     const {
       title,
@@ -77,5 +96,15 @@ export const updatePostController = async (req, res) => {
   } catch (err) {
     console.error("unable to update post", err);
     res.status(500).json({ message: "Failed to update post" });
+  }
+};
+
+export const getPostByIDController = async (req, res) => {
+  try {
+    const res = await getPostById(req.params.id);
+    res.json({ post: res });
+  } catch (err) {
+    console.error("unable to get post by id", err);
+    res.status(500).json({ message: "Failed to get post id" });
   }
 };
