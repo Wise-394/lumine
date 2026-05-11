@@ -54,8 +54,6 @@ describe("posts routes", () => {
         codeBlockDescription: "a block",
       });
 
-    console.log(res.status, res.body); // ← add this
-
     expect(res.status).toBe(400);
     expect(res.body).toEqual({ message: "unable to update the post" });
   });
@@ -70,5 +68,3 @@ describe("posts routes", () => {
     expect(res.body).toEqual({ message: "Failed to get post id" });
   });
 });
-
-// TODO FINISH TEST
