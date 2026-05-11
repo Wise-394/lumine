@@ -9,10 +9,6 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-// postsRouter.get("/", getAllPostController);
-// postsRouter.get("/:id", getPostByIDController);
-// postsRouter.post("/", validatePost, insertPostController);
-// postsRouter.put("/:id", authenticateUser, validatePost, updatePostController);
 describe("posts routes", () => {
   it("responds with all posts when no id specified", async () => {
     const mockPosts = [
