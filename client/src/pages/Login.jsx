@@ -5,8 +5,9 @@ import styles from "@styles/pages/Register.module.css";
 import { Link } from "react-router";
 import { useLoginForm } from "../hooks/useLoginForm.js";
 import { apiFetch } from "../helpers/api.js";
-import { setJWT } from "../helpers/jwt.js";
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function Login() {
+  const { login } = useAuthenticationStore();
   const { fields, error, setError, setLoading, loading, setField } =
     useLoginForm();
 
@@ -35,7 +36,7 @@ export function Login() {
       });
 
       clearInputs();
-      handleCorrectLogin(data);
+      login(data.token);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -47,10 +48,7 @@ export function Login() {
     setField("username", "");
     setField("password", "");
   };
-  const handleCorrectLogin = (data) => {
-    setJWT(data.token);
-    console.log("success");
-  };
+
   return (
     <main className={styles.container}>
       <div className={styles.leftPanel}>
