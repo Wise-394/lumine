@@ -2,14 +2,21 @@ import { TerminalIcons } from "../components/TerminalIcons.jsx";
 import { FiUser, FiLock } from "react-icons/fi";
 import { CiWarning } from "react-icons/ci";
 import styles from "@styles/pages/Register.module.css";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLoginForm } from "../hooks/useLoginForm.js";
 import { apiFetch } from "../helpers/api.js";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { useEffect } from "react";
+
 export function Login() {
-  const { login } = useAuthenticationStore();
+  const { login, isAuthenticated } = useAuthenticationStore();
   const { fields, error, setError, setLoading, loading, setField } =
     useLoginForm();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated, navigate]);
 
   const validateInput = () => {
     if (!fields.username || !fields.password) {

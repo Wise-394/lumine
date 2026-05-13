@@ -1,5 +1,5 @@
 import { Hero } from "../components/Hero.jsx";
-export function Home() {
+export function LandingPage() {
   return (
     <>
       <Hero />
