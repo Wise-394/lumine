@@ -1,5 +1,6 @@
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { useNavigate } from "react-router";
+import styles from "@styles/components/HomeHeader.module.css";
 export function HomeHeader() {
   const { logout } = useAuthenticationStore();
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ export function HomeHeader() {
     navigate("/");
   };
   return (
-    <header>
+    <header className={styles.container}>
       <button onClick={handleLogout}>Logout</button>
     </header>
   );

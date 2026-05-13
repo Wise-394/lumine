@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 7vh;
+  padding: 1rem;
+  justify-content: end;
+}

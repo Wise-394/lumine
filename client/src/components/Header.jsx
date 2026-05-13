@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "@styles/Header.module.css";
+import styles from "@styles/components/Header.module.css";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router";
 export function Header() {
