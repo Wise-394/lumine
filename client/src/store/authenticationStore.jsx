@@ -1,15 +1,8 @@
 import { create } from "zustand";
-import { isLoggedIn } from "../helpers/jwt.js";
-import { setJWT } from "../helpers/jwt.js";
+import { isLoggedIn, setJWT } from "../helpers/jwt.js";
 
 export const useAuthenticationStore = create((set) => ({
-  isAuthenticated: false,
-
-  initAuth: () => {
-    const valid = isLoggedIn();
-    if (!valid) localStorage.removeItem("JWT");
-    set({ isAuthenticated: valid });
-  },
+  isAuthenticated: isLoggedIn(),
 
   login: (token) => {
     setJWT(token);

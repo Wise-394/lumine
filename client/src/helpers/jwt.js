@@ -11,9 +11,7 @@ export const isTokenValid = (token) => {
 
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
-
-    const isExpired = payload.exp * 1000 < Date.now();
-    return !isExpired;
+    return payload.exp * 1000 > Date.now();
   } catch {
     return false;
   }
@@ -21,5 +19,7 @@ export const isTokenValid = (token) => {
 
 export const isLoggedIn = () => {
   const token = getJWT();
-  return isTokenValid(token);
+  const valid = isTokenValid(token);
+  if (!valid) localStorage.removeItem("JWT");
+  return valid;
 };
