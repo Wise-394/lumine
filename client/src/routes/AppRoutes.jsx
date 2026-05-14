@@ -15,9 +15,17 @@ export const appRoutes = [
     children: [
       { index: true, element: <Home /> },
       { path: "code", element: <Code /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    errorElement: <Error />,
   },
   {
     path: "/landing-page",

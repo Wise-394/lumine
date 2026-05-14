@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { Login } from "../pages/Login.jsx";
 import { MemoryRouter } from "react-router";
 import { apiFetch } from "../helpers/api.js";
-import { setJWT } from "../helpers/jwt.js";
+import { setJWT } from "../helpers/localStorage.js";
 
 vi.mock("../helpers/api.js");
 vi.mock("../helpers/jwt.js");

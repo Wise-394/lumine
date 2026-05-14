@@ -1,9 +1,14 @@
 import { create } from "zustand";
-import { isLoggedIn, setJWT } from "../helpers/jwt.js";
+import {
+  isLoggedIn,
+  setJWT,
+  setGuest,
+  getGuest,
+} from "../helpers/localStorage.js";
 
 export const useAuthenticationStore = create((set) => ({
   isAuthenticated: isLoggedIn(),
-  isGuest: false,
+  isGuest: getGuest() === "true",
 
   login: (token) => {
     setJWT(token);
@@ -12,13 +17,16 @@ export const useAuthenticationStore = create((set) => ({
 
   logout: () => {
     localStorage.removeItem("JWT");
+    localStorage.removeItem("guest");
     set({ isAuthenticated: false });
   },
 
   loginGuest: () => {
+    setGuest("true");
     set({ isGuest: true });
   },
   logoutGuest: () => {
+    localStorage.removeItem("guest");
     set({ isGuest: false });
   },
 }));

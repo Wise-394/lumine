@@ -23,3 +23,12 @@ export const isLoggedIn = () => {
   if (!valid) localStorage.removeItem("JWT");
   return valid;
 };
+
+//guest
+export function setGuest(isGuest) {
+  return localStorage.setItem("guest", isGuest);
+}
+
+export function getGuest() {
+  return localStorage.getItem("guest");
+}

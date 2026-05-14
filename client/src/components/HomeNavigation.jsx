@@ -12,11 +12,11 @@ export function HomeNavigation() {
       </div>
       <div className={styles.link}>
         <FaCode />
-        <Link to="/">Code</Link>
+        <Link to="/code">Code</Link>
       </div>
       <div className={styles.link}>
         <CgProfile />
-        <Link to="/">Profile</Link>
+        <Link to="/profile">Profile</Link>
       </div>
     </nav>
   );
