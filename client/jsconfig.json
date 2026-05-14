@@ -5,7 +5,7 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "paths": {
-      "@styles/*": ["./src/style/*"]
+      "@styles/*": ["./src/styles/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
