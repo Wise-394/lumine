@@ -5,7 +5,8 @@ import { FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import styles from "@styles/components/Header.module.css";
 
 export function Header() {
-  const { isAuthenticated, logout } = useAuthenticationStore();
+  const { isAuthenticated, loginGuest, logout, isGuest, logoutGuest } =
+    useAuthenticationStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -15,17 +16,33 @@ export function Header() {
     logout();
     navigate("/");
   };
+  const handleExitGuest = () => {
+    logoutGuest();
+    navigate("/");
+  };
+
+  const handleGuest = () => {
+    loginGuest();
+    navigate("/");
+  };
 
   // Authenticated
-  if (isAuthenticated) {
+  if (isAuthenticated || isGuest) {
     return (
       <header className={styles.container}>
         <div className={styles.logo}>
           <Link to="/">Lumine</Link>
         </div>
-        <button onClick={handleLogout} className={styles.logout}>
-          <FiLogOut /> Logout
-        </button>
+        {isAuthenticated && (
+          <button onClick={handleLogout} className={styles.logout}>
+            <FiLogOut /> Logout
+          </button>
+        )}
+        {isGuest && (
+          <button onClick={handleExitGuest} className={styles.logout}>
+            <FiLogOut /> Exit
+          </button>
+        )}
       </header>
     );
   }
@@ -47,7 +64,9 @@ export function Header() {
         <Link to="/register" className={styles.link}>
           Create Account
         </Link>
-        <a className={`${styles.link} ${styles.cta}`}>Try Lumine</a>
+        <a className={`${styles.link} ${styles.cta}`} onClick={handleGuest}>
+          Try Lumine
+        </a>
       </nav>
 
       {!isSidebarOpen && (

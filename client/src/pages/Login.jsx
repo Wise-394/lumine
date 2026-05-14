@@ -39,6 +39,7 @@ export function Login() {
       });
 
       clearInputs();
+
       login(data.token);
     } catch (err) {
       setError(err.message);

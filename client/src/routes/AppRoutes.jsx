@@ -6,7 +6,7 @@ import { HomeLayout } from "../layouts/homeLayout.jsx";
 import { LandingLayout } from "../layouts/LandingLayout.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { Home } from "../pages/Home.js";
-// routes/AppRoutes.jsx
+
 export const appRoutes = [
   {
     path: "/",
