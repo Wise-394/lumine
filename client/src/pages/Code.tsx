@@ -1,3 +1,7 @@
 export function Code() {
-  return <p>CODE</p>;
+  return (
+    <>
+      <p>Code</p>
+    </>
+  );
 }

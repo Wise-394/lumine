@@ -1,18 +1,40 @@
 import { useState } from "react";
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { useNavigate, Link } from "react-router";
+import { FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import styles from "@styles/components/Header.module.css";
-import { FiMenu, FiX } from "react-icons/fi";
-import { Link } from "react-router";
-export function Header() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+export function Header() {
+  const { isAuthenticated, logout } = useAuthenticationStore();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
+  // Authenticated
+  if (isAuthenticated) {
+    return (
+      <header className={styles.container}>
+        <div className={styles.logo}>
+          <Link to="/">Lumine</Link>
+        </div>
+        <button onClick={handleLogout} className={styles.logout}>
+          <FiLogOut /> Logout
+        </button>
+      </header>
+    );
+  }
+
+  // Guest
   return (
     <header className={styles.container}>
       <div className={styles.logo}>
-        <Link>lumine</Link>
+        <Link to="/">lumine</Link>
       </div>
 
       <nav className={`${styles.nav} ${isSidebarOpen ? styles.active : ""}`}>
@@ -33,7 +55,7 @@ export function Header() {
       )}
 
       {isSidebarOpen && (
-        <div className={styles.overlay} onClick={toggleSidebar}></div>
+        <div className={styles.overlay} onClick={toggleSidebar} />
       )}
     </header>
   );

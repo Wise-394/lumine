@@ -10,35 +10,19 @@ import { Home } from "../pages/Home.js";
 export const appRoutes = [
   {
     path: "/",
-    element: <LandingLayout />,
+    element: <HomeLayout />,
     errorElement: <Error />,
     children: [
-      {
-        index: true,
-        element: <LandingPage />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
+      { index: true, element: <Home /> },
+      { path: "code", element: <Code /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
     ],
   },
   {
-    path: "/home",
-    element: <HomeLayout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-    ],
-  },
-  {
-    path: "/code",
-    element: <Code />,
+    path: "/landing-page",
+    element: <LandingLayout />,
+    errorElement: <Error />,
+    children: [{ index: true, element: <LandingPage /> }],
   },
 ];

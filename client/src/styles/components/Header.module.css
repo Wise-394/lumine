@@ -119,3 +119,25 @@
     text-align: center;
   }
 }
+
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.logout:hover {
+  color: var(--text-normal);
+  border-color: var(--text-normal);
+}

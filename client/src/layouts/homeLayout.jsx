@@ -1,9 +1,10 @@
 import { Outlet } from "react-router";
-import { HomeHeader } from "../components/HomeHeader.jsx";
+import { Header } from "../components/Header.jsx";
+
 export function HomeLayout() {
   return (
     <>
-      <HomeHeader />
+      <Header />
       <Outlet />
     </>
   );
