@@ -1,4 +1,4 @@
-import styles from "@styles/Hero.module.css";
+import styles from "@styles/components/Hero.module.css";
 import { FiArrowRight } from "react-icons/fi";
 import { HeroTerminal } from "./HeroTerminal.jsx";
 

@@ -1,4 +1,4 @@
-import styles from "@styles/Error.module.css";
+import styles from "@styles/pages/Error.module.css";
 import { PiWarningOctagonFill } from "react-icons/pi";
 import { useNavigate } from "react-router";
 

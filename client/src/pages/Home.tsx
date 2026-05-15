@@ -4,5 +4,5 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import styles from "@styles/pages/Home.module.css";
 
 export function Home() {
-  return <main className={styles.container}>test</main>;
+  return <main className={styles.container}>HOME</main>;
 }
