@@ -1,6 +1,6 @@
 .exportWrapper {
   padding: clamp(1rem, 5vw, 2.5rem);
-  background-color: #0d131f;
+  background-color: var(--background-secondary);
   display: flex;
   justify-content: center;
   align-items: center;

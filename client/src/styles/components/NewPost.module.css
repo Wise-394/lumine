@@ -1,84 +1,108 @@
 .newPostcontainer {
-  padding: 2rem;
-  width: clamp(20rem, 25vw, 25rem);
+  padding: 1.5rem;
+  width: clamp(20rem, 30vw, 30rem);
   height: 80vh;
   background-color: var(--background-secondary);
-  border-radius: 10px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.2),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .postHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 1rem;
 }
 
 .postHeader h1 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
   margin: 0;
   color: var(--text-normal);
+  letter-spacing: -0.025em;
 }
 
 .postHeader button {
-  padding: 0.5rem 2rem;
+  padding: 0.6rem 1.5rem;
   background-color: var(--primary);
   border: 0;
-  border-radius: 8px;
-  color: black;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
 }
 
 .postHeader button:hover {
-  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.3);
   cursor: pointer;
   filter: brightness(1.1);
+}
+
+.postHeader button:active {
+  transform: translateY(0);
 }
 
 .postBody {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.25rem;
   flex-grow: 1;
 }
 
 .postBody > div {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .postBody label {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: 2px;
 }
 
 .postBody input,
 .postBody textarea {
-  border-radius: 6px;
-  padding: 0.8rem;
-  background-color: var(--background-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background-color: var(--background);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-normal);
   font-family: inherit;
+  font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .postBody input:focus,
 .postBody textarea:focus {
   border-color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
+}
+
+.postBody input::placeholder,
+.postBody textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
 }
 
 .postBody textarea {
-  resize: vertical;
+  resize: none;
   flex: 1;
+  line-height: 1.5;
 }
 
 .divDescription {
@@ -86,14 +110,15 @@
 }
 
 @media (max-width: 968px) {
-  .newPostContainer {
-    padding: 1rem;
-    height: 80vh;
-    width: 90vw;
+  .newPostcontainer {
+    padding: 1.25rem;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+    border: none;
   }
 
   .postHeader h1 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 }
-/* TODO CHANGE CONTAINER TO ACTUAL NAME FOR EASIER DEBUGGING */

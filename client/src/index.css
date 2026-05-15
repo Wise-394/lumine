@@ -56,7 +56,7 @@ h6 {
 /* ======================== */
 :root {
   --background: #060a12;
-  --background-secondary: rgba(255, 255, 255, 0.05);
+  --background-secondary: #0d131f;
   --primary: #4fa8ff;
   --secondary: #00d4ff;
   --text-normal: white;
@@ -85,4 +85,8 @@ h2,
 h3 {
   font-weight: var(--fw-bold);
   font-family: var(--font-primary);
+}
+
+.highlight {
+  color: var(--primary);
 }

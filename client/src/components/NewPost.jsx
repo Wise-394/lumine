@@ -8,7 +8,9 @@ export function NewPost() {
   return (
     <form className={styles.newPostcontainer} onSubmit={handleSubmit}>
       <div className={styles.postHeader}>
-        <h1>New Post</h1>
+        <h1>
+          <span className="highlight">New Post </span>
+        </h1>
         <button type="submit">Post</button>
       </div>
 
