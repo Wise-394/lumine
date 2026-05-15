@@ -7,3 +7,4 @@ export function Code() {
     </main>
   );
 }
+// fix responsiveness on mobile

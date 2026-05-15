@@ -1,7 +1,7 @@
 .codeContainer {
   display: flex;
   flex-direction: column;
-  padding: 3rem;
+  padding: clamp(1rem, 2vw, 3rem);
 }
 
 @media (max-width: 968px) {
@@ -10,5 +10,6 @@
     position: static;
     transform: translateX(0);
     padding: 1rem;
+    overflow: auto;
   }
 }

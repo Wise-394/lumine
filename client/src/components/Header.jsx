@@ -31,7 +31,7 @@ export function Header() {
     return (
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Link to="/">Lumine</Link>
+          <Link to="/">lumine</Link>
         </div>
         {isLoggedIn && (
           <button onClick={handleLogout} className={styles.logout}>
@@ -47,7 +47,7 @@ export function Header() {
     );
   }
 
-  // Guest
+  // not authenticated
   return (
     <header className={styles.header}>
       <div className={styles.logo}>

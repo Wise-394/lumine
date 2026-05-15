@@ -90,3 +90,7 @@ h3 {
 .highlight {
   color: var(--primary);
 }
+
+#root {
+  max-height: 100vh;
+}

@@ -4,6 +4,7 @@
   border-bottom: var(--border-primary) 1px solid;
   align-items: center;
   position: relative;
+  z-index: 999;
   height: 8vh;
   background-color: var(--background);
 }
