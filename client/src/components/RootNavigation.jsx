@@ -2,10 +2,10 @@ import { Link } from "react-router";
 import { AiFillHome } from "react-icons/ai";
 import { FaCode } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import styles from "@styles/components/HomeNavigation.module.css";
-export function HomeNavigation() {
+import styles from "@styles/components/RootNavigation.module.css";
+export function RootNavigation() {
   return (
-    <nav className={styles.container}>
+    <nav className={styles.rootContainer}>
       <div className={styles.link}>
         <AiFillHome />
         <Link to="/">Home</Link>

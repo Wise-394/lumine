@@ -1,12 +1,14 @@
-.container {
+.rootLayoutcontainer {
   display: grid;
   grid-template-columns: clamp(10rem, 12%, 15rem) 1fr;
 }
 
 @media (max-width: 968px) {
-  .container {
+  .rootLayoutcontainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 92vh;
   }
 }

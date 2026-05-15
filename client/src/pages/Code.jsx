@@ -1,8 +1,8 @@
 import styles from "@styles/pages/Code.module.css";
-import { NewPost } from "./NewPost.jsx";
+import { NewPost } from "../components/NewPost.jsx";
 export function Code() {
   return (
-    <main className={styles.container}>
+    <main className={styles.codeContainer}>
       <NewPost />
     </main>
   );

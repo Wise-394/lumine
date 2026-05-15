@@ -57,7 +57,7 @@ export function Register() {
   return (
     <>
       <Header />
-      <main className={styles.container}>
+      <main className={styles.registerLoginContainer}>
         <div className={styles.leftPanel}>
           <div className={styles.leftContent}>
             <p className={styles.tagline}>

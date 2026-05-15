@@ -1,5 +1,5 @@
 /* ── FULL PAGE LAYOUT ─────────────────────────────────────── */
-.container {
+.registerLoginContainer {
   display: flex;
   min-height: 92vh;
   width: 100%;
@@ -230,7 +230,7 @@
 
 /* ── MOBILE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .container {
+  .registerLoginContainer {
     flex-direction: column;
   }
 

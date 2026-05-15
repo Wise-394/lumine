@@ -29,7 +29,7 @@ export function Header() {
   // Authenticated
   if (isLoggedIn || isGuest) {
     return (
-      <header className={styles.container}>
+      <header className={styles.header}>
         <div className={styles.logo}>
           <Link to="/">Lumine</Link>
         </div>
@@ -49,7 +49,7 @@ export function Header() {
 
   // Guest
   return (
-    <header className={styles.container}>
+    <header className={styles.header}>
       <div className={styles.logo}>
         <Link to="/">lumine</Link>
       </div>

@@ -1,16 +1,16 @@
 import { Register } from "../pages/Register.jsx";
 import { Login } from "../pages/Login.jsx";
 import { Error } from "../pages/Error.jsx";
-import { Code } from "../pages/Code.js";
-import { HomeLayout } from "../layouts/homeLayout.jsx";
+import { Code } from "../pages/Code.jsx";
+import { RootLayout } from "../layouts/RootLayout.jsx";
 import { LandingLayout } from "../layouts/LandingLayout.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
-import { Home } from "../pages/Home.js";
+import { Home } from "../pages/Home.jsx";
 
 export const appRoutes = [
   {
     path: "/",
-    element: <HomeLayout />,
+    element: <RootLayout />,
     errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },

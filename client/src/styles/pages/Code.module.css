@@ -1,5 +1,14 @@
+.codeContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+}
+
 @media (max-width: 968px) {
-  .container {
+  .codeContainer {
     flex: 1;
+    position: static;
+    transform: translateX(0);
+    padding: 1rem;
   }
 }

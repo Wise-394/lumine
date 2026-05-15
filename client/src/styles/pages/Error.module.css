@@ -1,4 +1,4 @@
-.container {
+.errorContainer {
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -24,13 +24,13 @@
   text-transform: uppercase;
 }
 
-.container h1 {
+.errorContainer h1 {
   font-size: clamp(1rem, 2vw, 1.4rem);
   margin: 0;
   line-height: 1.4;
 }
 
-.container span {
+.errorContainer span {
   color: var(--primary);
 }
 

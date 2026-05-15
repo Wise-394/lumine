@@ -6,7 +6,7 @@ export function Error() {
   const navigate = useNavigate();
 
   return (
-    <main className={styles.container}>
+    <main className={styles.errorContainer}>
       <PiWarningOctagonFill className={styles.icon} />
       <p className={styles.code}>404</p>
       <h1>
