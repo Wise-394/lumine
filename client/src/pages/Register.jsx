@@ -9,12 +9,13 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { Header } from "../components/Header.jsx";
 
 export function Register() {
-  const { isAuthenticated } = useAuthenticationStore();
+  const { isAuthenticated, isGuest } = useAuthenticationStore();
+  const canAccess = isAuthenticated || isGuest;
   const navigate = useNavigate();
   const { fields, error, setError, setLoading, loading, setField } =
     useRegisterForm();
 
-  if (isAuthenticated) return <Navigate to="/" replace />;
+  if (canAccess) return <Navigate to="/" replace />;
 
   const validateInput = () => {
     if (!fields.username || !fields.password) {

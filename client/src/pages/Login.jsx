@@ -8,11 +8,12 @@ import { apiFetch } from "../helpers/api.js";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { Header } from "../components/Header.jsx";
 export function Login() {
-  const { login, isAuthenticated } = useAuthenticationStore();
+  const { login, isAuthenticated, isGuest } = useAuthenticationStore();
+  const canAccess = isAuthenticated || isGuest;
   const { fields, error, setError, setLoading, loading, setField } =
     useLoginForm();
 
-  if (isAuthenticated) return <Navigate to="/" replace />;
+  if (canAccess) return <Navigate to="/" replace />;
 
   const validateInput = () => {
     if (!fields.username || !fields.password) {
