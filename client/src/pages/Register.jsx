@@ -1,21 +1,16 @@
 import { useRegisterForm } from "../hooks/useRegisterForm";
 import { apiFetch } from "../helpers/api.js";
-import { useNavigate, Link, Navigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { TerminalIcons } from "../components/TerminalIcons.jsx";
 import { FiUser, FiLock } from "react-icons/fi";
 import { CiWarning } from "react-icons/ci";
 import styles from "@styles/pages/Register.module.css";
-import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { Header } from "../components/Header.jsx";
 
 export function Register() {
-  const { isAuthenticated, isGuest } = useAuthenticationStore();
-  const canAccess = isAuthenticated || isGuest;
   const navigate = useNavigate();
   const { fields, error, setError, setLoading, loading, setField } =
     useRegisterForm();
-
-  if (canAccess) return <Navigate to="/" replace />;
 
   const validateInput = () => {
     if (!fields.username || !fields.password) {

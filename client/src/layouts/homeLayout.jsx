@@ -1,13 +1,14 @@
-import { Outlet, Navigate } from "react-router";
+import { Outlet } from "react-router";
 import { Header } from "../components/Header.jsx";
 import { HomeNavigation } from "../components/HomeNavigation.jsx";
 import styles from "@styles/pages/HomeLayout.module.css";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { redirectIfNotAuthenticated } from "../helpers/redirect.jsx";
 export function HomeLayout() {
-  const { isAuthenticated, isGuest } = useAuthenticationStore();
-  const canAccess = isAuthenticated || isGuest;
+  const { isLoggedIn, isGuest } = useAuthenticationStore();
+  const redirect = redirectIfNotAuthenticated(isLoggedIn, isGuest);
+  if (redirect) return redirect;
 
-  if (!canAccess) return <Navigate to="/landing-page" replace />;
   return (
     <>
       <Header />
@@ -18,7 +19,3 @@ export function HomeLayout() {
     </>
   );
 }
-
-// TODO AUTHENTICATED - redirect to "/
-// NOT AUTHENTICATED - redirect to "/landing-page if accesing "/" and childrens
-//TODO IMPROVE THE CODE READABILITY, put the redirects into helper function

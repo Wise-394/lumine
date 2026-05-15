@@ -5,7 +5,7 @@ import { FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import styles from "@styles/components/Header.module.css";
 
 export function Header() {
-  const { isAuthenticated, loginGuest, logout, isGuest, logoutGuest } =
+  const { isLoggedIn, loginGuest, logout, isGuest, logoutGuest } =
     useAuthenticationStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ export function Header() {
   };
 
   // Authenticated
-  if (isAuthenticated || isGuest) {
+  if (isLoggedIn || isGuest) {
     return (
       <header className={styles.container}>
         <div className={styles.logo}>
           <Link to="/">Lumine</Link>
         </div>
-        {isAuthenticated && (
+        {isLoggedIn && (
           <button onClick={handleLogout} className={styles.logout}>
             <FiLogOut /> Logout
           </button>

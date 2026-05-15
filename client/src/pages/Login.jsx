@@ -2,18 +2,17 @@ import { TerminalIcons } from "../components/TerminalIcons.jsx";
 import { FiUser, FiLock } from "react-icons/fi";
 import { CiWarning } from "react-icons/ci";
 import styles from "@styles/pages/Register.module.css";
-import { Link, Navigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLoginForm } from "../hooks/useLoginForm.js";
 import { apiFetch } from "../helpers/api.js";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { Header } from "../components/Header.jsx";
+
 export function Login() {
-  const { login, isAuthenticated, isGuest } = useAuthenticationStore();
-  const canAccess = isAuthenticated || isGuest;
+  const { login } = useAuthenticationStore();
+  const navigate = useNavigate();
   const { fields, error, setError, setLoading, loading, setField } =
     useLoginForm();
-
-  if (canAccess) return <Navigate to="/" replace />;
 
   const validateInput = () => {
     if (!fields.username || !fields.password) {
@@ -42,6 +41,7 @@ export function Login() {
       clearInputs();
 
       login(data.token);
+      navigate("/");
     } catch (err) {
       setError(err.message);
     } finally {

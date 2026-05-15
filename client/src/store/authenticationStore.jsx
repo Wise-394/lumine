@@ -7,18 +7,18 @@ import {
 } from "../helpers/localStorage.js";
 
 export const useAuthenticationStore = create((set) => ({
-  isAuthenticated: isLoggedIn(),
+  isLoggedIn: isLoggedIn(),
   isGuest: getGuest() === "true",
 
   login: (token) => {
     setJWT(token);
-    set({ isAuthenticated: true, isGuest: false });
+    set({ isLoggedIn: true, isGuest: false });
   },
 
   logout: () => {
     localStorage.removeItem("JWT");
     localStorage.removeItem("guest");
-    set({ isAuthenticated: false });
+    set({ isLoggedIn: false });
   },
 
   loginGuest: () => {
