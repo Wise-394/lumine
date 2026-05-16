@@ -1,16 +1,13 @@
 import styles from "@styles/components/CodeBlock.module.css";
+import { TerminalIcons } from "./TerminalIcons.jsx";
 
 export function CodeBlock() {
   return (
-    <div className={styles.terminalWrapper}>
-      <div className={styles.terminalContainer}>
+    <div className={styles.terminalContainer}>
+      <div className={styles.terminal}>
         {/* Header */}
         <div className={styles.header}>
-          <div className={styles.dots}>
-            <span className={`${styles.dot} ${styles.dotRed}`} />
-            <span className={`${styles.dot} ${styles.dotYellow}`} />
-            <span className={`${styles.dot} ${styles.dotGreen}`} />
-          </div>
+          <TerminalIcons />
           <input
             type="text"
             className={styles.fileNameInput}
@@ -18,7 +15,7 @@ export function CodeBlock() {
             spellCheck={false}
           />
           <div className={styles.headerRight}>
-            <span className={styles.langBadge}>code</span>
+            <span className={styles.langBadge}>lumine</span>
           </div>
         </div>
 
@@ -44,9 +41,8 @@ export function CodeBlock() {
             rows={2}
           />
           <div className={styles.footerMeta}>
-            <div className={styles.metaStats}>
-              <span className={styles.statPill}>0 chars</span>
-              <span className={styles.statPill}>0 words</span>
+            <div className={styles.metaInfo}>
+              <span className={styles.infoPill}>@user</span>
             </div>
           </div>
         </div>

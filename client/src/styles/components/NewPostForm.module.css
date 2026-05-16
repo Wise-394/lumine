@@ -5,13 +5,9 @@
   gap: 1.5rem;
   padding: 2rem;
   border-right: 1px solid var(--border-primary);
-  /*  border-top: 0; */
-  /* box-shadow:
-    0 10px 25px -5px rgba(0, 0, 0, 0.2),
-    0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #1a2a44; */
 }
 
+/* ── HEADER ─────────────────────────────────────────────────── */
 .postHeader {
   display: flex;
   justify-content: space-between;
@@ -50,6 +46,7 @@
   transform: translateY(0);
 }
 
+/* ── BODY ────────────────────────────────────────────────────── */
 .postBody {
   display: flex;
   flex-direction: column;
@@ -63,39 +60,39 @@
   gap: 0.6rem;
 }
 
+/* ── TYPOGRAPHY ──────────────────────────────────────────────── */
 .postBody label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-normal);
+  color: #8fa3bf;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding-left: 2px;
 }
 
+/* ── INPUTS ──────────────────────────────────────────────────── */
 .postBody input,
 .postBody textarea {
-  border-radius: 6px;
-  padding: 0.9rem 1rem;
-  background-color: var(--background-secondary);
-  border: 1px solid #1a2a44;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  background: rgba(79, 168, 255, 0.06);
+  border: 1px solid rgba(79, 168, 255, 0.2);
   color: var(--text-normal);
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
 .postBody input:focus,
 .postBody textarea:focus {
-  border-color: var(--primary);
-  background-color: rgba(255, 255, 255, 0.02);
-  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
+  border-color: rgba(79, 168, 255, 0.6);
+  background: rgba(79, 168, 255, 0.08);
 }
 
 .postBody input::placeholder,
 .postBody textarea::placeholder {
-  color: var(--text-muted);
-  opacity: 0.5;
+  color: #3e567a;
 }
 
 .postBody textarea {
@@ -108,6 +105,7 @@
   flex: 1;
 }
 
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 968px) {
   .formContainer {
     width: 100%;

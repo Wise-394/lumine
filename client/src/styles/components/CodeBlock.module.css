@@ -1,17 +1,16 @@
 /* ─── Wrapper ───────────────────────────────────────────── */
-.terminalWrapper {
-  /* background-color: var(--background-secondary); */
+.terminalContainer {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   transition: 0.5s transform;
   padding: 1rem;
+  background-color: var(--background-secondary);
 }
 
 /* ─── Container ─────────────────────────────────────────── */
-.terminalContainer {
+.terminal {
   --header-bg: #0b121f;
   --body-bg: #060a12;
   --footer-bg: #0b121f;
@@ -21,7 +20,6 @@
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border-primary);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
 }
@@ -31,33 +29,10 @@
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.85rem;
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border-primary);
-}
-
-.dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  opacity: 0.85;
-}
-
-.dotRed {
-  background-color: #ff5f57;
-}
-.dotYellow {
-  background-color: #ffbd2e;
-}
-.dotGreen {
-  background-color: #28c840;
 }
 
 .fileNameInput {
@@ -70,6 +45,7 @@
   color: var(--text-muted);
   caret-color: var(--primary);
   min-width: 0;
+  text-align: center;
 }
 
 .fileNameInput::placeholder {
@@ -157,7 +133,6 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--border-primary);
   outline: none;
   resize: none;
   font-family: var(--font-sans, inherit);
@@ -186,26 +161,22 @@
   gap: 0.75rem;
 }
 
-.metaStats {
+.metaInfo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.statPill {
+.infoPill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-family: var(--font-code);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  opacity: 0.5;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-primary);
-  border-radius: 4px;
-  padding: 2px 8px;
+  font-size: 1rem;
   letter-spacing: 0.02em;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 .publishBtn {
