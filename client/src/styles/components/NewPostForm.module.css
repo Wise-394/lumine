@@ -109,10 +109,9 @@
 
 @media (max-width: 968px) {
   .formContainer {
-    width: 90vw;
-  }
-
-  .postHeader h1 {
-    font-size: 1.15rem;
+    width: 100%;
+    height: 75vh;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-primary);
   }
 }

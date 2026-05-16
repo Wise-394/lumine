@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 92vh;
+    padding: 0 clamp(1rem, 5vw, 5rem);
+    min-height: 93vh;
   }
 }
