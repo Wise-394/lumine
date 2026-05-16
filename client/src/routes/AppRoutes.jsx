@@ -1,7 +1,7 @@
 import { Register } from "../pages/Register.jsx";
 import { Login } from "../pages/Login.jsx";
 import { Error } from "../pages/Error.jsx";
-import { NewPost } from "../pages/Code.jsx";
+import { NewPost } from "../pages/NewPost.jsx";
 import { RootLayout } from "../layouts/RootLayout.jsx";
 import { LandingLayout } from "../layouts/LandingLayout.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";

@@ -1,6 +1,7 @@
 import styles from "@styles/pages/newPost.module.css";
 import { NewPostForm } from "../components/NewPostForm.jsx";
-import { FiSend } from "react-icons/fi";
+import { LuSendHorizontal } from "react-icons/lu";
+import { CodeBlock } from "../components/CodeBlock.jsx";
 // import { CodeBlock } from "../components/CodeBlock.jsx";
 export function NewPost() {
   return (
@@ -10,11 +11,12 @@ export function NewPost() {
           <span className="highlight">New Post </span>
         </h1>
         <button type="button">
-          Post <FiSend />
+          <LuSendHorizontal /> Post
         </button>
       </div>
       <div className={styles.body}>
         <NewPostForm />
+        <CodeBlock />
       </div>
     </main>
   );

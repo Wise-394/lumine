@@ -1,9 +1,10 @@
 .formContainer {
-  width: clamp(20rem, 30vw, 30rem);
-  border-radius: 16px;
+  width: clamp(20rem, 30vw, 35rem);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding: 2rem;
+  border-right: 1px solid var(--border-primary);
   /* box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.2),
     0 8px 10px -6px rgba(0, 0, 0, 0.1);
