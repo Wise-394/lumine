@@ -15,7 +15,7 @@
   --header-bg: #0b121f;
   --body-bg: #060a12;
   --footer-bg: #0b121f;
-  width: 100%;
+  width: 50%;
   max-width: 42rem;
   background-color: var(--body-bg);
   border-radius: 12px;

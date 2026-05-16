@@ -1,7 +1,7 @@
 .header {
   display: flex;
   padding: 0 clamp(1rem, 5vw, 3rem);
-  border-bottom: var(--border-primary) 1px solid;
+  /* border-bottom: var(--border-primary) 1px solid; */
   align-items: center;
   position: relative;
   z-index: 999;

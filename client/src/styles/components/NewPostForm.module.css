@@ -5,6 +5,7 @@
   gap: 1.5rem;
   padding: 2rem;
   border-right: 1px solid var(--border-primary);
+  /*  border-top: 0; */
   /* box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.2),
     0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -65,7 +66,7 @@
 .postBody label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--text-normal);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding-left: 2px;
@@ -73,9 +74,9 @@
 
 .postBody input,
 .postBody textarea {
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 0.9rem 1rem;
-  background-color: var(--background);
+  background-color: var(--background-secondary);
   border: 1px solid #1a2a44;
   color: var(--text-normal);
   font-family: inherit;

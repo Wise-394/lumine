@@ -57,6 +57,7 @@ h6 {
 :root {
   --background: #060a12;
   --background-secondary: #0e1520;
+  --background-tertiary: #0f1622;
   --primary: #4fa8ff;
   --secondary: #00d4ff;
   --text-normal: white;

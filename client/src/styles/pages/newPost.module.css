@@ -1,10 +1,10 @@
 .newPostContainer {
   display: flex;
   flex-direction: column;
-  margin: 3rem;
+  margin: 0 2rem 2rem 2rem;
 
   border-radius: 10px;
-  background-color: var(--background-secondary);
+  /* background-color: var(--background-tertiary); */
   justify-content: center;
 }
 .header {
@@ -14,7 +14,9 @@
   width: 100%;
   justify-content: space-between;
   padding: 0.5rem 1rem 0.5rem 2rem;
-  border-bottom: 1px solid var(--border-primary);
+  border: 1px solid var(--border-primary);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
 }
 .newPostContainer button {
   background-color: var(--primary);
@@ -35,6 +37,8 @@
 .body {
   display: flex;
   height: 100%;
+  border: 1px solid var(--border-primary);
+  border-radius: 0 0 8px 8px;
 }
 
 @media (max-width: 968px) {
