@@ -1,23 +1,39 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import { AiFillHome } from "react-icons/ai";
 import { FaCode } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import styles from "@styles/components/RootNavigation.module.css";
+
 export function RootNavigation() {
   return (
     <nav className={styles.rootContainer}>
-      <div className={styles.link}>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${styles.link} ${isActive ? styles.active : ""}`
+        }
+      >
         <AiFillHome />
-        <Link to="/">Home</Link>
-      </div>
-      <div className={styles.link}>
+        Home
+      </NavLink>
+      <NavLink
+        to="/code"
+        className={({ isActive }) =>
+          `${styles.link} ${isActive ? styles.active : ""}`
+        }
+      >
         <FaCode />
-        <Link to="/code">Code</Link>
-      </div>
-      <div className={styles.link}>
+        Code
+      </NavLink>
+      <NavLink
+        to="/profile"
+        className={({ isActive }) =>
+          `${styles.link} ${isActive ? styles.active : ""}`
+        }
+      >
         <CgProfile />
-        <Link to="/profile">Profile</Link>
-      </div>
+        Profile
+      </NavLink>
     </nav>
   );
 }

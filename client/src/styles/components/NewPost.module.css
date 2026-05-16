@@ -1,16 +1,13 @@
 .newPostcontainer {
-  padding: 1.5rem;
   width: clamp(20rem, 30vw, 30rem);
-  height: 100%;
-  background-color: var(--background-secondary);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  box-shadow:
+  /* box-shadow:
     0 10px 25px -5px rgba(0, 0, 0, 0.2),
     0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid #1a2a44; */
 }
 
 .postHeader {
@@ -67,7 +64,7 @@
 .postBody label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding-left: 2px;
@@ -78,7 +75,7 @@
   border-radius: 12px;
   padding: 0.9rem 1rem;
   background-color: var(--background);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #1a2a44;
   color: var(--text-normal);
   font-family: inherit;
   font-size: 1rem;
@@ -112,7 +109,6 @@
 @media (max-width: 968px) {
   .newPostcontainer {
     width: 90vw;
-    padding: 0.7rem;
   }
 
   .postHeader h1 {

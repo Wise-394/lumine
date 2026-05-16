@@ -1,15 +1,48 @@
+.postContainer {
+  display: flex;
+  padding: 0 0.5rem;
+  flex-direction: column;
+  margin: 3rem;
+
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  justify-content: center;
+}
+.postHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.postContainer button {
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 8px;
+  padding: 0.3rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.postContainer button:hover {
+  cursor: pointer;
+}
 .codeContainer {
   display: flex;
-  flex-direction: column;
-  padding: clamp(1rem, 2vw, 3rem);
+  padding: 1rem;
+  height: 100%;
 }
 
 @media (max-width: 968px) {
-  .codeContainer {
+  .postContainer {
     flex: 1;
-    position: static;
-    transform: translateX(0);
-    padding: 1rem;
+    width: 100%;
     overflow: auto;
+    flex-direction: column;
+    margin: 0;
+    background-color: transparent;
   }
 }
+/* TODO CHANGE CSS NAMES TO BE MORE READABLE */

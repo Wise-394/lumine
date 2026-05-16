@@ -10,12 +10,29 @@
 }
 
 .link {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
   cursor: pointer;
   padding: 1rem;
+  border-radius: 8px;
+  color: #adb6c2;
+  text-decoration: none;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.link:hover {
+  color: #fff;
+  background: #0e1520;
+}
+
+.active {
+  background: #0e1d30;
+  color: #4fa8ff;
 }
 
 @media (max-width: 968px) {
@@ -35,5 +52,13 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .active {
+    background: transparent;
+    color: #4fa8ff;
+    border-top: 2px solid #4fa8ff;
+    border-radius: 0;
   }
 }

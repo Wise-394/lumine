@@ -1,19 +1,8 @@
 import styles from "@styles/components/NewPost.module.css";
 
 export function NewPost() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
-    <form className={styles.newPostcontainer} onSubmit={handleSubmit}>
-      <div className={styles.postHeader}>
-        <h1>
-          <span className="highlight">New Post </span>
-        </h1>
-        <button type="submit">Post</button>
-      </div>
-
+    <div className={styles.newPostcontainer}>
       <div className={styles.postBody}>
         <div>
           <label htmlFor="title">Title</label>
@@ -37,6 +26,6 @@ export function NewPost() {
           ></textarea>
         </div>
       </div>
-    </form>
+    </div>
   );
 }
