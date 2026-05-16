@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { AiFillHome } from "react-icons/ai";
-import { FaCode } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import styles from "@styles/components/RootNavigation.module.css";
 
@@ -17,13 +17,13 @@ export function RootNavigation() {
         Home
       </NavLink>
       <NavLink
-        to="/code"
+        to="/post"
         className={({ isActive }) =>
           `${styles.link} ${isActive ? styles.active : ""}`
         }
       >
-        <FaCode />
-        Code
+        <FiPlus />
+        New Post
       </NavLink>
       <NavLink
         to="/profile"

@@ -1,11 +1,11 @@
-import styles from "@styles/pages/Code.module.css";
-import { NewPost } from "../components/NewPost.jsx";
+import styles from "@styles/pages/newPost.module.css";
+import { NewPostForm } from "../components/NewPostForm.jsx";
 import { FiSend } from "react-icons/fi";
 // import { CodeBlock } from "../components/CodeBlock.jsx";
-export function Code() {
+export function NewPost() {
   return (
-    <main className={styles.postContainer}>
-      <div className={styles.postHeader}>
+    <main className={styles.newPostContainer}>
+      <div className={styles.header}>
         <h1>
           <span className="highlight">New Post </span>
         </h1>
@@ -13,8 +13,8 @@ export function Code() {
           Post <FiSend />
         </button>
       </div>
-      <div className={styles.codeContainer}>
-        <NewPost />
+      <div className={styles.body}>
+        <NewPostForm />
       </div>
     </main>
   );

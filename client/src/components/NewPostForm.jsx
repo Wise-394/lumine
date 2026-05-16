@@ -1,8 +1,8 @@
-import styles from "@styles/components/NewPost.module.css";
+import styles from "@styles/components/NewPostForm.module.css";
 
-export function NewPost() {
+export function NewPostForm() {
   return (
-    <div className={styles.newPostcontainer}>
+    <div className={styles.formContainer}>
       <div className={styles.postBody}>
         <div>
           <label htmlFor="title">Title</label>

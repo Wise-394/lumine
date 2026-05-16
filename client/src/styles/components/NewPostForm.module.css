@@ -1,4 +1,4 @@
-.newPostcontainer {
+.formContainer {
   width: clamp(20rem, 30vw, 30rem);
   border-radius: 16px;
   display: flex;
@@ -107,7 +107,7 @@
 }
 
 @media (max-width: 968px) {
-  .newPostcontainer {
+  .formContainer {
     width: 90vw;
   }
 
