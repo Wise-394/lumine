@@ -24,6 +24,7 @@ export function CodeBlock() {
             value={codeBlockTitle}
             onChange={(e) => updateField("codeBlockTitle", e.target.value)}
             spellCheck={false}
+            required
           />
           <div className={styles.headerRight}>
             <input
@@ -33,6 +34,7 @@ export function CodeBlock() {
               value={language}
               onChange={(e) => updateField("language", e.target.value)}
               spellCheck={false}
+              required
             />
           </div>
         </div>

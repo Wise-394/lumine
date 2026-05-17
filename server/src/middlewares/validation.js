@@ -42,8 +42,9 @@ export const validatePost = [
     .notEmpty()
     .withMessage("title cannot be empty")
     .bail()
-    .isLength({ min: 6, max: 500 })
-    .withMessage("title must be 6-500 characters"),
+    .isLength({ min: 6, max: 256 })
+    .withMessage("title must be 6-256 characters"),
+
   body("code")
     .trim()
     .notEmpty()
@@ -51,3 +52,4 @@ export const validatePost = [
     .bail()
     .isLength({ max: 3000 }),
 ];
+// TODO ADD MORE VALIDATION TO FIELDS

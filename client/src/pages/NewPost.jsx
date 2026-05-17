@@ -38,7 +38,7 @@ export function NewPost() {
         return navigate("/");
       }
     } catch (err) {
-      console.err(err);
+      console.error(err);
       // TODO show  the error to the user for better ux
     }
   };

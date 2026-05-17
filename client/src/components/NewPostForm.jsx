@@ -15,6 +15,8 @@ export function NewPostForm() {
             placeholder="Hello world"
             value={title}
             required
+            minLength={6}
+            maxLength={256}
             onChange={(e) => updateField("title", e.target.value)}
           />
         </div>
@@ -25,7 +27,6 @@ export function NewPostForm() {
             id="description"
             placeholder="Enter post description"
             value={description}
-            required
             onChange={(e) => updateField("description", e.target.value)}
           ></textarea>
         </div>
