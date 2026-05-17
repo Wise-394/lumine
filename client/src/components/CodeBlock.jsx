@@ -7,7 +7,7 @@ import { tokyoNight } from "@uiw/codemirror-themes-all";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 
 export function CodeBlock() {
-  const { code, codeBlockTitle, codeBlockDescription, updateField } =
+  const { code, language, codeBlockTitle, codeBlockDescription, updateField } =
     useNewPostStore();
 
   return (
@@ -25,7 +25,14 @@ export function CodeBlock() {
             spellCheck={false}
           />
           <div className={styles.headerRight}>
-            <span className={styles.langBadge}>lumine</span>
+            <input
+              type="text"
+              className={styles.languageInput}
+              placeholder="Javascript"
+              value={language}
+              onChange={(e) => updateField("language", e.target.value)}
+              spellCheck={false}
+            />
           </div>
         </div>
 

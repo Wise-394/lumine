@@ -1,14 +1,25 @@
 import { create } from "zustand";
 
-export const useNewPostStore = create((set) => ({
+const initialState = {
   title: "",
   description: "",
-  language: "",
-  codeBlockTitle: "",
-  code: "",
-  codeBlockDescription: "",
+  language: "Javascript",
+  codeBlockTitle: "add.js",
+  code: `function add(a, b) {
+  return a + b;
+}
+
+console.log(add(3, 5));`,
+  codeBlockDescription:
+    "The add function takes two numbers a and b and returns their sum using the + operator. The console.log call prints the result 8 to the console.",
+};
+
+export const useNewPostStore = create((set) => ({
+  ...initialState,
 
   updateField: (field, value) => {
     set({ [field]: value });
   },
+
+  resetField: () => set({ ...initialState }),
 }));

@@ -35,9 +35,11 @@
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border-primary);
 }
+.header > * {
+  flex: 1;
+}
 
 .fileNameInput {
-  flex: 1;
   background: transparent;
   border: none;
   outline: none;
@@ -58,13 +60,20 @@
   flex-shrink: 0;
 }
 
-.langBadge {
+.languageInput {
+  background: transparent;
+  border: none;
+  outline: none;
   font-family: var(--font-code);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  text-transform: lowercase;
-  opacity: 0.45;
-  letter-spacing: 0.04em;
+  caret-color: var(--primary);
+  min-width: 0;
+  text-align: end;
+}
+.languageInput::placeholder {
+  color: var(--text-muted);
+  opacity: 0.4;
 }
 
 /* ─── Body ──────────────────────────────────────────────── */

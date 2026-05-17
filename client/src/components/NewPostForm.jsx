@@ -2,7 +2,7 @@ import styles from "@styles/components/NewPostForm.module.css";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 
 export function NewPostForm() {
-  const { title, language, description, updateField } = useNewPostStore();
+  const { title, description, updateField } = useNewPostStore();
   return (
     <div className={styles.formContainer}>
       <div className={styles.postBody}>
@@ -16,17 +16,6 @@ export function NewPostForm() {
             value={title}
             required
             onChange={(e) => updateField("title", e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="language">Language</label>
-          <input
-            type="text"
-            id="language"
-            placeholder="javascript"
-            value={language}
-            required
-            onChange={(e) => updateField("language", e.target.value)}
           />
         </div>
 

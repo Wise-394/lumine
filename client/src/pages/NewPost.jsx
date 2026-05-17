@@ -4,8 +4,10 @@ import { LuSendHorizontal } from "react-icons/lu";
 import { CodeBlock } from "../components/CodeBlock.jsx";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 import { apiFetch } from "../helpers/api.js";
+import { useNavigate } from "react-router";
 // import { CodeBlock } from "../components/CodeBlock.jsx";
 export function NewPost() {
+  const navigate = useNavigate();
   const {
     title,
     description,
@@ -13,24 +15,31 @@ export function NewPost() {
     codeBlockTitle,
     code,
     codeBlockDescription,
+    resetField,
   } = useNewPostStore();
 
   const handleSubmit = async () => {
-    const res = await apiFetch("/post", {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-        description,
-        visibility: "public",
-        code,
-        language,
-        codeBlockTitle,
-        codeBlockDescription,
-      }),
-    });
+    try {
+      const res = await apiFetch("/post", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          description,
+          visibility: "public",
+          code,
+          language,
+          codeBlockTitle,
+          codeBlockDescription,
+        }),
+      });
 
-    if (res) {
-      console.log("success");
+      if (res) {
+        resetField();
+        return navigate("/");
+      }
+    } catch (err) {
+      console.err(err);
+      // TODO show  the error to the user for better ux
     }
   };
   return (
