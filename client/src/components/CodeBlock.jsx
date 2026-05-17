@@ -25,6 +25,8 @@ export function CodeBlock() {
             onChange={(e) => updateField("codeBlockTitle", e.target.value)}
             spellCheck={false}
             required
+            minLength={6}
+            maxLength={256}
           />
           <div className={styles.headerRight}>
             <input
@@ -35,6 +37,8 @@ export function CodeBlock() {
               onChange={(e) => updateField("language", e.target.value)}
               spellCheck={false}
               required
+              minLength={1}
+              maxLength={50}
             />
           </div>
         </div>
@@ -63,6 +67,7 @@ export function CodeBlock() {
                 tabSize: 2,
               }}
               className={styles.codeMirror}
+              // ADD VALIDATION HERE
             />
           </div>
         </div>
