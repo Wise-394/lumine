@@ -5,10 +5,11 @@ import styles from "@styles/components/CodeBlock.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
 import { tokyoNight } from "@uiw/codemirror-themes-all";
 import { useNewPostStore } from "../store/newPostStore.jsx";
-
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function CodeBlock() {
   const { code, language, codeBlockTitle, codeBlockDescription, updateField } =
     useNewPostStore();
+  const { user } = useAuthenticationStore();
 
   return (
     <div className={styles.terminalContainer}>
@@ -77,7 +78,9 @@ export function CodeBlock() {
           />
           <div className={styles.footerMeta}>
             <div className={styles.metaInfo}>
-              <span className={styles.infoPill}>@user</span>
+              <span className={styles.infoPill}>
+                {user?.username ? `@${user.username}` : "@guest"}
+              </span>
             </div>
           </div>
         </div>
