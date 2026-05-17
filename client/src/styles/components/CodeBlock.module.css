@@ -1,4 +1,4 @@
-/* ─── Wrapper ───────────────────────────────────────────── */
+/* ─── container ───────────────────────────────────────────── */
 .terminalContainer {
   display: flex;
   width: 100%;
@@ -7,15 +7,16 @@
   transition: 0.5s transform;
   padding: 1rem;
   background-color: var(--background-secondary);
+  height: 100%;
 }
 
-/* ─── Container ─────────────────────────────────────────── */
+/* ─── terminal ─────────────────────────────────────────── */
 .terminal {
   --header-bg: #0b121f;
   --body-bg: #060a12;
   --footer-bg: #0b121f;
-  width: 50%;
-  max-width: 42rem;
+  width: min(90%, 42rem);
+  max-width: 100%;
   background-color: var(--body-bg);
   border-radius: 12px;
   overflow: hidden;
@@ -76,75 +77,52 @@
 }
 
 .editorCol {
+  padding: 1rem;
   flex: 1;
   min-width: 0;
   display: flex;
-  overflow: auto;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── CodeMirror overrides ──────────────────────────────── */
+
+.codeMirror {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  background: transparent;
+}
+
+.codeMirror :global(.cm-editor) {
+  height: 100%;
+  background: transparent;
+  outline: none;
+}
+
+.codeMirror :global(.cm-scroller) {
   scrollbar-width: thin;
   scrollbar-color: #1e2d44 transparent;
 }
 
-.editorCol::-webkit-scrollbar {
+.codeMirror :global(.cm-scroller)::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.editorCol::-webkit-scrollbar-track {
+.codeMirror :global(.cm-scroller)::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.editorCol::-webkit-scrollbar-thumb {
+.codeMirror :global(.cm-scroller)::-webkit-scrollbar-thumb {
   background: #1e2d44;
   border-radius: 3px;
 }
 
-/* ─── Editor mirror ─────────────────────────────────────── */
-.editorWrapper {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  min-height: 100%;
-}
-
-.highlightLayer,
-.codeArea {
-  font-family: var(--font-code);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  padding: 1.25rem 1.5rem 1.25rem 1rem;
-  box-sizing: border-box;
-  width: 100%;
-  white-space: pre;
-  word-break: normal;
-  tab-size: 2;
-}
-
-.highlightLayer {
-  display: block;
-  background: transparent !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  min-height: 100%;
-  overflow: visible !important;
-}
-
-.codeArea {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  resize: none;
-  color: transparent;
-  caret-color: var(--primary);
-  overflow: hidden;
-  z-index: 1;
-}
-
-.codeArea::placeholder {
-  color: #2d3e5a;
-  opacity: 0.7;
+/* Selection colour */
+.codeMirror :global(.cm-selectionBackground),
+.codeMirror :global(.cm-focused .cm-selectionBackground) {
+  background: rgba(var(--primary-rgb, 99, 179, 237), 0.2) !important;
 }
 
 /* ─── Footer ────────────────────────────────────────────── */

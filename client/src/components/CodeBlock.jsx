@@ -1,23 +1,15 @@
 import { useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+
 import styles from "@styles/components/CodeBlock.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-
-const theme = Object.fromEntries(
-  Object.entries(oneDark).map(([k, v]) => [
-    k,
-    { ...v, background: "transparent" },
-  ]),
-);
-
-const PADDING = "1.25rem 1.5rem 1.25rem 1rem";
-const FONT_SIZE = "0.9rem";
-const LINE_HEIGHT = "1.7";
-const FONT_FAMILY = "var(--font-code)";
+import { tokyoNight } from "@uiw/codemirror-themes-all";
 
 export function CodeBlock() {
   const [code, setCode] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <div className={styles.terminalContainer}>
@@ -29,6 +21,8 @@ export function CodeBlock() {
             type="text"
             className={styles.fileNameInput}
             placeholder="helloWorld.js"
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
             spellCheck={false}
           />
           <div className={styles.headerRight}>
@@ -39,51 +33,28 @@ export function CodeBlock() {
         {/* Body */}
         <div className={styles.body}>
           <div className={styles.editorCol}>
-            <div className={styles.editorWrapper}>
-              <SyntaxHighlighter
-                language="javascript"
-                style={theme}
-                wrapLongLines={false}
-                customStyle={{
-                  margin: 0,
-                  padding: PADDING,
-                  background: "transparent",
-                  fontSize: FONT_SIZE,
-                  fontFamily: FONT_FAMILY,
-                  lineHeight: LINE_HEIGHT,
-                  whiteSpace: "pre",
-                  wordBreak: "normal",
-                  overflowX: "visible",
-                  overflowY: "visible",
-                  minHeight: "100%",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  borderRadius: 0,
-                }}
-                codeTagProps={{
-                  style: {
-                    padding: 0,
-                    background: "transparent",
-                    fontFamily: "inherit",
-                    fontSize: "inherit",
-                    lineHeight: "inherit",
-                  },
-                }}
-              >
-                {code + " "}
-              </SyntaxHighlighter>
-
-              <textarea
-                className={styles.codeArea}
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="// start typing your code here…"
-                spellCheck={false}
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-              />
-            </div>
+            <CodeMirror
+              value={code}
+              onChange={setCode}
+              extensions={[javascript(), tokyoNight]}
+              placeholder="// start typing your code here…"
+              basicSetup={{
+                lineNumbers: false,
+                foldGutter: false,
+                highlightActiveLine: false,
+                highlightActiveLineGutter: false,
+                autocompletion: false,
+                dropCursor: false,
+                allowMultipleSelections: false,
+                indentOnInput: true,
+                bracketMatching: true,
+                closeBrackets: true,
+                syntaxHighlighting: true,
+                searchKeymap: false,
+                tabSize: 2,
+              }}
+              className={styles.codeMirror}
+            />
           </div>
         </div>
 
@@ -92,6 +63,8 @@ export function CodeBlock() {
           <textarea
             className={styles.descriptionInput}
             placeholder="Add a description — what does this code do?"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             rows={2}
           />
           <div className={styles.footerMeta}>
