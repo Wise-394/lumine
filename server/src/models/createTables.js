@@ -45,6 +45,7 @@ export const createCodeBlocksTable = async () => {
     await pool.query(`CREATE TABLE IF NOT EXISTS code_blocks(
       id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
       post_id INT REFERENCES posts(id),
+      title TEXT NOT NULL,
       code TEXT NOT NULL,
       language TEXT NOT NULL,
       description TEXT NOT NULL

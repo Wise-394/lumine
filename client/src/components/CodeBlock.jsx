@@ -1,15 +1,14 @@
-import { useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 
 import styles from "@styles/components/CodeBlock.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
 import { tokyoNight } from "@uiw/codemirror-themes-all";
+import { useNewPostStore } from "../store/newPostStore.jsx";
 
 export function CodeBlock() {
-  const [code, setCode] = useState("");
-  const [fileName, setFileName] = useState("");
-  const [description, setDescription] = useState("");
+  const { code, codeBlockTitle, codeBlockDescription, updateField } =
+    useNewPostStore();
 
   return (
     <div className={styles.terminalContainer}>
@@ -21,8 +20,8 @@ export function CodeBlock() {
             type="text"
             className={styles.fileNameInput}
             placeholder="helloWorld.js"
-            value={fileName}
-            onChange={(e) => setFileName(e.target.value)}
+            value={codeBlockTitle}
+            onChange={(e) => updateField("codeBlockTitle", e.target.value)}
             spellCheck={false}
           />
           <div className={styles.headerRight}>
@@ -35,7 +34,7 @@ export function CodeBlock() {
           <div className={styles.editorCol}>
             <CodeMirror
               value={code}
-              onChange={setCode}
+              onChange={(value) => updateField("code", value)}
               extensions={[javascript(), tokyoNight]}
               placeholder="// start typing your code here…"
               basicSetup={{
@@ -63,8 +62,10 @@ export function CodeBlock() {
           <textarea
             className={styles.descriptionInput}
             placeholder="Add a description — what does this code do?"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={codeBlockDescription}
+            onChange={(e) =>
+              updateField("codeBlockDescription", e.target.value)
+            }
             rows={2}
           />
           <div className={styles.footerMeta}>

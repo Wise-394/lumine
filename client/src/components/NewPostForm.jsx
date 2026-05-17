@@ -1,6 +1,8 @@
 import styles from "@styles/components/NewPostForm.module.css";
+import { useNewPostStore } from "../store/newPostStore.jsx";
 
 export function NewPostForm() {
+  const { title, language, description, updateField } = useNewPostStore();
   return (
     <div className={styles.formContainer}>
       <div className={styles.postBody}>
@@ -11,11 +13,21 @@ export function NewPostForm() {
             type="text"
             name="title"
             placeholder="Hello world"
+            value={title}
+            required
+            onChange={(e) => updateField("title", e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="description">Language</label>
-          <input type="text" id="language" placeholder="javascript" />
+          <label htmlFor="language">Language</label>
+          <input
+            type="text"
+            id="language"
+            placeholder="javascript"
+            value={language}
+            required
+            onChange={(e) => updateField("language", e.target.value)}
+          />
         </div>
 
         <div className={styles.divDescription}>
@@ -23,6 +35,9 @@ export function NewPostForm() {
           <textarea
             id="description"
             placeholder="Enter post description"
+            value={description}
+            required
+            onChange={(e) => updateField("description", e.target.value)}
           ></textarea>
         </div>
       </div>

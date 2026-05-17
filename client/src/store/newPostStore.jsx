@@ -5,7 +5,7 @@ export const useNewPostStore = create((set) => ({
   description: "",
   language: "",
   codeBlockTitle: "",
-  codeBlock: "",
+  code: "",
   codeBlockDescription: "",
 
   updateField: (field, value) => {

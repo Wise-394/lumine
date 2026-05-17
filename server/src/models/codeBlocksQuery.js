@@ -13,11 +13,17 @@ export const getCodeBlockByPostID = async (post_id) => {
   }
 };
 
-export const insertCodeBlock = async (post_id, code, language, description) => {
+export const insertCodeBlock = async (
+  post_id,
+  title,
+  code,
+  language,
+  description,
+) => {
   try {
     const { rows } = await pool.query(
-      `INSERT INTO code_blocks(post_id, code, language, description) VALUES ($1, $2,$3,$4) RETURNING *`,
-      [post_id, code, language, description],
+      `INSERT INTO code_blocks(post_id, title, code, language, description) VALUES ($1, $2,$3,$4, $5) RETURNING *`,
+      [post_id, title, code, language, description],
     );
     return rows[0];
   } catch (err) {
@@ -25,15 +31,22 @@ export const insertCodeBlock = async (post_id, code, language, description) => {
     throw err;
   }
 };
-export const updateCodeBlock = async (id, code, language, description) => {
+export const updateCodeBlock = async (
+  id,
+  title,
+  code,
+  language,
+  description,
+) => {
   try {
     await pool.query(
       `UPDATE code_blocks SET
-      code = COALESCE($1, code),
-      language = COALESCE($2, language),
-      description = COALESCE($3, description)
-      WHERE id = $4`,
-      [code, language, description, id],
+      title = COALESCE($1, title)
+      code = COALESCE($2, code),
+      language = COALESCE($3, language),
+      description = COALESCE($4, description)
+      WHERE id = $5`,
+      [title, code, language, description, id],
     );
   } catch (err) {
     console.error("unable to update code_block", err);

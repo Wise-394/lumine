@@ -28,9 +28,10 @@ export const insertPostController = async (req, res) => {
     const {
       title,
       description,
-      visibility,
-      code,
       language,
+      visibility,
+      codeBlockTitle,
+      code,
       codeBlockDescription,
     } = req.body;
     const userID = req.user?.id ?? null;
@@ -47,7 +48,13 @@ export const insertPostController = async (req, res) => {
       visibility,
       expires_at,
     );
-    await insertCodeBlock(result.id, code, language, codeBlockDescription);
+    await insertCodeBlock(
+      result.id,
+      codeBlockTitle,
+      code,
+      language,
+      codeBlockDescription,
+    );
 
     res.status(201).json({ message: "success", postID: result.id });
   } catch (err) {
