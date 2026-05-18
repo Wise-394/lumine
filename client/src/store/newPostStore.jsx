@@ -10,8 +10,8 @@ const initialState = {
 }
 
 console.log(add(3, 5));`,
-  codeBlockDescription:
-    "The add function takes two numbers a and b and returns their sum using the + operator. The console.log call prints the result 8 to the console.",
+  codeBlockDescription: `The add function takes two numbers a and b and returns their sum 
+using the + operator.`,
   loading: false,
   error: null,
 };

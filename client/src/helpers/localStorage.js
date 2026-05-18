@@ -37,7 +37,6 @@ export const getValidPayload = () => {
   const token = getJWT();
   if (!isTokenValid(token)) {
     localStorage.removeItem("JWT");
-    localStorage.removeItem("guest");
     return null;
   }
   return decodeToken(token);

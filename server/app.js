@@ -18,3 +18,5 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/post", postsRouter);
 export default app;
+
+// TODO ADD ERROR

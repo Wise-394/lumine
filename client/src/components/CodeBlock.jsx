@@ -1,11 +1,12 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
-
+import { EditorView } from "@codemirror/view";
 import styles from "@styles/components/CodeBlock.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
 import { tokyoNight } from "@uiw/codemirror-themes-all";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+
 export function CodeBlock() {
   const { code, language, codeBlockTitle, codeBlockDescription, updateField } =
     useNewPostStore();
@@ -14,20 +15,23 @@ export function CodeBlock() {
   return (
     <div className={styles.terminalContainer}>
       <div className={styles.terminal}>
-        {/* Header */}
         <div className={styles.header}>
-          <TerminalIcons />
-          <input
-            type="text"
-            className={styles.fileNameInput}
-            placeholder="helloWorld.js"
-            value={codeBlockTitle}
-            onChange={(e) => updateField("codeBlockTitle", e.target.value)}
-            spellCheck={false}
-            required
-            minLength={6}
-            maxLength={256}
-          />
+          <div className={styles.headerIcons}>
+            <TerminalIcons />
+          </div>
+          <div className={styles.headerCenter}>
+            <input
+              type="text"
+              className={styles.fileNameInput}
+              placeholder="helloWorld.js"
+              value={codeBlockTitle}
+              onChange={(e) => updateField("codeBlockTitle", e.target.value)}
+              spellCheck={false}
+              required
+              minLength={6}
+              maxLength={256}
+            />
+          </div>
           <div className={styles.headerRight}>
             <input
               type="text"
@@ -43,13 +47,12 @@ export function CodeBlock() {
           </div>
         </div>
 
-        {/* Body */}
         <div className={styles.body}>
           <div className={styles.editorCol}>
             <CodeMirror
               value={code}
               onChange={(value) => updateField("code", value)}
-              extensions={[javascript(), tokyoNight]}
+              extensions={[javascript(), tokyoNight, EditorView.lineWrapping]}
               placeholder="// start typing your code here…"
               basicSetup={{
                 lineNumbers: false,
@@ -67,12 +70,10 @@ export function CodeBlock() {
                 tabSize: 2,
               }}
               className={styles.codeMirror}
-              // ADD VALIDATION HERE
             />
           </div>
         </div>
 
-        {/* Footer */}
         <div className={styles.footer}>
           <textarea
             className={styles.descriptionInput}

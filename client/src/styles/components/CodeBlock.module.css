@@ -1,44 +1,54 @@
-/* ─── container ───────────────────────────────────────────── */
 .terminalContainer {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   transition: 0.5s transform;
-  padding: 1rem;
   background-color: var(--background-secondary);
   height: 100%;
+  overflow: hidden;
 }
-
-/* ─── terminal ─────────────────────────────────────────── */
 .terminal {
   --header-bg: #0b121f;
   --body-bg: #060a12;
   --footer-bg: #0b121f;
-  width: min(90%, 42rem);
-  max-width: 100%;
+  width: fit-content;
+  max-width: min(90%, 42rem);
   background-color: var(--body-bg);
   border-radius: 12px;
-  overflow: hidden;
   border: 1px solid var(--border-primary);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* ─── Header ────────────────────────────────────────────── */
 .header {
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.85rem;
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--border-primary);
 }
-.header > * {
+
+.headerIcons {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
+.headerCenter {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.headerRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
 .fileNameInput {
   background: transparent;
   border: none;
@@ -47,17 +57,14 @@
   font-size: 0.85rem;
   color: var(--text-muted);
   caret-color: var(--primary);
-  min-width: 0;
+  width: 100%;
   text-align: center;
+  min-width: 0;
 }
 
 .fileNameInput::placeholder {
   color: var(--text-muted);
   opacity: 0.4;
-}
-
-.headerRight {
-  flex-shrink: 0;
 }
 
 .languageInput {
@@ -68,20 +75,20 @@
   font-size: 0.85rem;
   color: var(--text-muted);
   caret-color: var(--primary);
-  min-width: 0;
+  width: 100%;
   text-align: end;
+  min-width: 0;
 }
+
 .languageInput::placeholder {
   color: var(--text-muted);
   opacity: 0.4;
 }
 
-/* ─── Body ──────────────────────────────────────────────── */
 .body {
   display: flex;
   align-items: stretch;
-  min-height: 220px;
-  max-height: 480px;
+  max-height: 380px;
   overflow: hidden;
 }
 
@@ -93,8 +100,6 @@
   flex-direction: column;
   overflow: hidden;
 }
-
-/* ─── CodeMirror overrides ──────────────────────────────── */
 
 .codeMirror {
   flex: 1;
@@ -128,13 +133,11 @@
   border-radius: 3px;
 }
 
-/* Selection colour */
 .codeMirror :global(.cm-selectionBackground),
 .codeMirror :global(.cm-focused .cm-selectionBackground) {
   background: rgba(var(--primary-rgb, 99, 179, 237), 0.2) !important;
 }
 
-/* ─── Footer ────────────────────────────────────────────── */
 .footer {
   background-color: var(--footer-bg);
   padding: 1.25rem 1.5rem;
@@ -157,6 +160,10 @@
   padding-bottom: 0.75rem;
   caret-color: var(--primary);
   transition: border-color 0.2s;
+  field-sizing: content;
+  min-height: calc(1.6em * 3);
+  max-height: calc(1.6em * 8);
+  overflow-y: auto;
 }
 
 .descriptionInput:focus {
@@ -221,8 +228,11 @@
   transform: scale(0.97);
 }
 
-/* ─── Responsive ────────────────────────────────────────── */
-@media (max-width: 600px) {
+@media (max-width: 1080px) {
+  .terminalContainer {
+    padding: 1rem;
+  }
+
   .footer {
     padding: 1rem 1.25rem;
   }

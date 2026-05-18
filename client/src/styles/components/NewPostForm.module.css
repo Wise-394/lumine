@@ -1,5 +1,5 @@
 .formContainer {
-  width: clamp(20rem, 30vw, 35rem);
+  width: clamp(15rem, 20vw, 25rem);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -97,12 +97,11 @@
 
 .postBody textarea {
   resize: none;
-  flex: 1;
   line-height: 1.5;
-}
-
-.divDescription {
   flex: 1;
+}
+.divDescription {
+  height: 100%;
 }
 
 .optional {
