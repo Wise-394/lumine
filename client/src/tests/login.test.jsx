@@ -7,7 +7,7 @@ import { apiFetch } from "../helpers/api.js";
 import { setJWT } from "../helpers/localStorage.js";
 
 vi.mock("../helpers/api.js");
-vi.mock("../helpers/jwt.js");
+vi.mock("../helpers/localStorage.js");
 
 describe("user login", () => {
   beforeEach(() => {
