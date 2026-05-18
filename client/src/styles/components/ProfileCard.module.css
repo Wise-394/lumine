@@ -2,3 +2,9 @@
   width: 100%;
   text-align: center;
 }
+
+.info {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

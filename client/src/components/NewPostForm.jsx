@@ -7,7 +7,7 @@ export function NewPostForm() {
     <div className={styles.formContainer}>
       <div className={styles.postBody}>
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Post Title</label>
           <input
             id="title"
             type="text"
