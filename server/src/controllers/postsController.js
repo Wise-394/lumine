@@ -34,15 +34,16 @@ export const insertPostController = async (req, res) => {
       code,
       codeBlockDescription,
     } = req.body;
-    const userID = req.user?.id ?? null;
-    const expires_at = userID
+    const userId = req.user?.id ?? null;
+    const expires_at = userId
       ? null
       : new Date(
           Date.now() + GUEST_POST_EXPIRY_DAYS * 24 * 60 * 60 * 1000,
         ).toISOString();
 
+    console.log("req.user", req.user);
     const result = await insertPost(
-      userID,
+      userId,
       title,
       description,
       visibility,

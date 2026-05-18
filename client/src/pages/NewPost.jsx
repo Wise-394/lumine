@@ -5,8 +5,10 @@ import { CodeBlock } from "../components/CodeBlock.jsx";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { useNavigate } from "react-router";
+import { getJWT } from "../helpers/localStorage.js";
 
 export function NewPost() {
+  const token = getJWT();
   const navigate = useNavigate();
   const {
     title,
@@ -28,10 +30,13 @@ export function NewPost() {
 
     setLoading(true);
     setError(null);
-
     try {
       const res = await apiFetch("/post", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title,
           description,

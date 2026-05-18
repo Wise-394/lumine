@@ -27,7 +27,7 @@ export const loginUser = async (req, res, next) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.json({ token: `Bearer ${token}` });
+    res.json({ token: `${token}` });
   } catch (err) {
     console.error("unable to login user", err);
     return next(new Error("unable to login"));

@@ -3,7 +3,7 @@ import { ProfileCard } from "../components/ProfileCard.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { GuestProfile } from "../components/GuestProfile.jsx";
 export function Profile() {
-  const { user } = useAuthenticationStore;
+  const { user } = useAuthenticationStore();
 
   if (!user) {
     return <GuestProfile />;
@@ -14,4 +14,3 @@ export function Profile() {
     </main>
   );
 }
-// TODO guest got no profile but instead a page saying to login to have profile

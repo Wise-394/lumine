@@ -1,10 +1,10 @@
 import { pool } from "../configs/databaseConfig.js";
 
-export const getCodeBlockByPostID = async (post_id) => {
+export const getCodeBlockByPostID = async (postId) => {
   try {
     const { rows } = await pool.query(
       `SELECT * FROM code_blocks WHERE post_id = $1`,
-      [post_id],
+      [postId],
     );
     return rows[0];
   } catch (err) {
@@ -41,7 +41,7 @@ export const updateCodeBlock = async (
   try {
     await pool.query(
       `UPDATE code_blocks SET
-      title = COALESCE($1, title)
+      title = COALESCE($1, title),
       code = COALESCE($2, code),
       language = COALESCE($3, language),
       description = COALESCE($4, description)
