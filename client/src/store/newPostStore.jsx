@@ -16,16 +16,44 @@ console.log(add(3, 5));`,
   error: null,
 };
 
-export const useNewPostStore = create((set) => ({
+export const useNewPostStore = create((set, get) => ({
   ...initialState,
 
-  updateField: (field, value) => {
-    set({ [field]: value });
-  },
+  updateField: (field, value) => set({ [field]: value }),
 
   setLoading: (loading) => set({ loading }),
 
   setError: (error) => set({ error }),
+
+  validate: () => {
+    const { title, code, codeBlockTitle, language } = get();
+
+    if (!title.trim() || title.length < 6)
+      return (set({ error: "Title must be at least 6 characters." }), false);
+    if (title.length > 256)
+      return (set({ error: "Title must be at most 256 characters." }), false);
+
+    if (!codeBlockTitle.trim() || codeBlockTitle.length < 6)
+      return (
+        set({ error: "File name must be at least 6 characters." }),
+        false
+      );
+    if (codeBlockTitle.length > 256)
+      return (
+        set({ error: "File name must be at most 256 characters." }),
+        false
+      );
+
+    if (!language.trim() || language.length < 1)
+      return (set({ error: "Language is required." }), false);
+    if (language.length > 50)
+      return (set({ error: "Language must be at most 50 characters." }), false);
+
+    if (!code.trim())
+      return (set({ error: "Code block cannot be empty." }), false);
+
+    return true;
+  },
 
   resetField: () => set({ ...initialState }),
 }));

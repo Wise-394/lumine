@@ -20,9 +20,12 @@ export function NewPost() {
     setError,
     loading,
     error,
+    validate,
   } = useNewPostStore();
 
   const handleSubmit = async () => {
+    if (!validate()) return;
+
     setLoading(true);
     setError(null);
 

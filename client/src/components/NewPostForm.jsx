@@ -22,7 +22,9 @@ export function NewPostForm() {
         </div>
 
         <div className={styles.divDescription}>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">
+            Description <span className={styles.optional}>- optional</span>
+          </label>
           <textarea
             id="description"
             placeholder="Enter post description"

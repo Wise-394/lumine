@@ -105,6 +105,11 @@
   flex: 1;
 }
 
+.optional {
+  text-transform: lowercase;
+  font-style: italic;
+}
+
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 968px) {
   .formContainer {
