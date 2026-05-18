@@ -1,11 +1,11 @@
 import styles from "@styles/pages/newPost.module.css";
 import { NewPostForm } from "../components/NewPostForm.jsx";
-import { LuSendHorizontal } from "react-icons/lu";
+import { LuSendHorizontal, LuLoader } from "react-icons/lu";
 import { CodeBlock } from "../components/CodeBlock.jsx";
 import { useNewPostStore } from "../store/newPostStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { useNavigate } from "react-router";
-// import { CodeBlock } from "../components/CodeBlock.jsx";
+
 export function NewPost() {
   const navigate = useNavigate();
   const {
@@ -16,9 +16,16 @@ export function NewPost() {
     code,
     codeBlockDescription,
     resetField,
+    setLoading,
+    setError,
+    loading,
+    error,
   } = useNewPostStore();
 
   const handleSubmit = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
       const res = await apiFetch("/post", {
         method: "POST",
@@ -35,23 +42,37 @@ export function NewPost() {
 
       if (res) {
         resetField();
-        return navigate("/");
+        navigate("/");
       }
     } catch (err) {
-      console.error(err);
-      // TODO show  the error to the user for better ux
+      setError(err?.message ?? "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <main className={styles.newPostContainer}>
       <div className={styles.header}>
         <h1>
-          <span className="highlight">New Post </span>
+          <span className="highlight">New Post</span>
         </h1>
-        <button type="button" onClick={handleSubmit}>
-          <LuSendHorizontal /> Post
-        </button>
+        <div className={styles.headerRight}>
+          <button type="button" onClick={handleSubmit} disabled={loading}>
+            {loading ? (
+              <>
+                <LuLoader className={styles.spinnerIcon} /> Posting...
+              </>
+            ) : (
+              <>
+                <LuSendHorizontal /> Post
+              </>
+            )}
+          </button>
+          {error && <p className={styles.errorText}>{error}</p>}
+        </div>
       </div>
+
       <div className={styles.body}>
         <NewPostForm />
         <CodeBlock />
@@ -59,6 +80,3 @@ export function NewPost() {
     </main>
   );
 }
-
-//TODO ADD CUSTOM VALIDATION THAT SHOWS ERRORS
-// TURN THE SUBMIT INTO A HOOK TO HAVE LOADING AND ERROR STATES
