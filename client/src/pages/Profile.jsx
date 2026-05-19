@@ -29,7 +29,7 @@ export function Profile() {
 
   return (
     <main className={styles.profileContainer}>
-      <ProfileCard />
+      <ProfileCard totalPost={posts?.length ?? 0} />
       {posts === null ? (
         <p className={styles.stateMessage}>loading posts...</p>
       ) : posts.length === 0 ? (
