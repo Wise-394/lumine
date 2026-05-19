@@ -31,16 +31,20 @@ export function Profile() {
     <main className={styles.profileContainer}>
       <ProfileCard />
       {posts === null ? (
-        <p>Loading...</p>
+        <p className={styles.stateMessage}>loading posts...</p>
       ) : posts.length === 0 ? (
-        <p>No posts yet.</p>
+        <p className={styles.stateMessage}>no posts yet.</p>
       ) : (
-        <div>
+        <div className={styles.postListContainer}>
           {posts.map((post) => (
             <PostCard
               key={post.postId}
               postTitle={post.postTitle}
               postDescription={post.postDescription}
+              codeTitle={post.codeBlockTitle}
+              language={post.language}
+              code={post.code}
+              codeDescription={post.codeBlockDescription}
             />
           ))}
         </div>

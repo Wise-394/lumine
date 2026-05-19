@@ -1,23 +1,50 @@
+/* ─── Profile Container ──────────────────────────────── */
 .profileContainer {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem 1rem;
   align-items: center;
+  gap: 2rem;
+  flex: 1;
+  overflow: hidden;
 }
 
+/* ─── Post List ──────────────────────────────────────── */
+.postListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+  overflow: auto;
+}
+
+/* ─── Empty / Loading States ─────────────────────────── */
+.stateMessage {
+  font-size: 13px;
+  color: #4a6580;
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: var(--font-code);
+  letter-spacing: 0.3px;
+}
+
+.stateMessage::before {
+  content: "// ";
+  color: #1e2e3e;
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 968px) {
   .profileContainer {
-    margin: 1rem;
+    margin: 0;
+    padding: 1rem 0.75rem;
     width: 100%;
-    flex: 1;
+    gap: 1.5rem;
   }
-  .body {
-    flex: 1;
-    width: 100%;
-    overflow: auto;
-    flex-direction: column;
-    padding: 0;
-    background-color: transparent;
-    gap: 2rem;
+
+  .postListContainer {
+    max-width: 100%;
+    gap: 12px;
   }
 }

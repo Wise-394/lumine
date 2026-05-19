@@ -8,6 +8,10 @@
   padding-top: 15vh;
   font-size: 1.2rem;
   width: fit-content;
+
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
 }
 
 .link {
