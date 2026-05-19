@@ -2,17 +2,27 @@ import { pool } from "../configs/databaseConfig.js";
 
 export const getAllPost = async (user_id = null) => {
   try {
+    const selectClause = `
+  SELECT 
+    posts.id AS "postId",
+    posts.user_id AS "userId",
+    posts.title AS "postTitle",
+    posts.description AS "postDescription",
+    posts.visibility,
+    posts.expires_at AS "expiresAt",
+    posts.created_at AS "createdAt",
+    code_blocks.id AS "codeBlockId",
+    code_blocks.title AS "codeBlockTitle",
+    code_blocks.code,
+    code_blocks.language,
+    code_blocks.description AS "codeBlockDescription"
+  FROM posts 
+  INNER JOIN code_blocks ON code_blocks.post_id = posts.id
+`;
+
     const query = user_id
-      ? {
-          text: `SELECT * FROM posts 
-                 INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
-                 WHERE posts.user_id = $1`,
-          values: [user_id],
-        }
-      : {
-          text: `SELECT * FROM posts 
-                 INNER JOIN code_blocks ON code_blocks.post_id = posts.id`,
-        };
+      ? { text: selectClause + `WHERE posts.user_id = $1`, values: [user_id] }
+      : { text: selectClause };
 
     const { rows } = await pool.query(query);
     return rows;
@@ -21,13 +31,25 @@ export const getAllPost = async (user_id = null) => {
     throw err;
   }
 };
-
 export const getPostById = async (id) => {
   try {
     const { rows } = await pool.query(
-      `SELECT * FROM posts 
-       INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
-       WHERE posts.id = $1`,
+      `SELECT 
+  posts.id AS "postId",
+  posts.user_id AS "userId",
+  posts.title AS "postTitle",
+  posts.description AS "postDescription",
+  posts.visibility,
+  posts.expires_at AS "expiresAt",
+  posts.created_at AS "createdAt",
+  code_blocks.id AS "codeBlockId",
+  code_blocks.title AS "codeBlockTitle",
+  code_blocks.code,
+  code_blocks.language,
+  code_blocks.description AS "codeBlockDescription"
+FROM posts 
+INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
+WHERE posts.id = $1`,
       [id],
     );
     return rows[0];
@@ -83,7 +105,7 @@ export const updatePost = async (
 
 export const deletePost = async (id) => {
   try {
-    await pool(`DELETE FROM posts where id = $1`, [id]);
+    await pool.query(`DELETE FROM posts where id = $1`, [id]);
   } catch (err) {
     console.error("unable to delete post", err);
     throw err;
