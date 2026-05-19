@@ -1,6 +1,5 @@
 import styles from "@styles/components/PostCard.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
-import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
@@ -11,6 +10,7 @@ const LANG_MAP = {
 };
 
 export function PostCard({
+  username,
   postTitle,
   postDescription = null,
   codeTitle,
@@ -20,8 +20,6 @@ export function PostCard({
   tags = [],
   createdAt,
 }) {
-  const { user } = useAuthenticationStore();
-  const username = user.username;
   const initials = username.slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
 
@@ -30,7 +28,7 @@ export function PostCard({
       <header className={styles.postHeader}>
         <div className={styles.avatar}>{initials}</div>
         <div className={styles.postMeta}>
-          <span className={styles.username}>@{username}</span>
+          <span className={styles.username}>@{username ?? "guest"}</span>
           <span className={styles.time}>{createdAt}</span>
         </div>
         <button className={styles.moreBtn}>···</button>

@@ -39,6 +39,7 @@ export function Profile() {
           {posts.map((post) => (
             <PostCard
               key={post.postId}
+              username={post.username}
               postTitle={post.postTitle}
               postDescription={post.postDescription}
               codeTitle={post.codeBlockTitle}

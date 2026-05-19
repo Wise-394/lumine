@@ -6,6 +6,7 @@ export const getAllPost = async (user_id = null) => {
   SELECT 
     posts.id AS "postId",
     posts.user_id AS "userId",
+    users.username AS "username",
     posts.title AS "postTitle",
     posts.description AS "postDescription",
     posts.visibility,
@@ -18,6 +19,7 @@ export const getAllPost = async (user_id = null) => {
     code_blocks.description AS "codeBlockDescription"
   FROM posts 
   INNER JOIN code_blocks ON code_blocks.post_id = posts.id
+  INNER JOIN users ON users.id = posts.user_id
 `;
 
     const query = user_id
@@ -31,6 +33,7 @@ export const getAllPost = async (user_id = null) => {
     throw err;
   }
 };
+
 export const getPostById = async (id) => {
   try {
     const { rows } = await pool.query(
