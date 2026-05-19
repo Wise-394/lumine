@@ -1,7 +1,6 @@
 .rootContainer {
   display: flex;
   flex-direction: column;
-  height: 92vh;
   align-items: start;
   gap: 1rem;
   padding: 0.5rem;

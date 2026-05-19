@@ -203,6 +203,12 @@
   letter-spacing: 0.3px;
 }
 
+@media (max-width: 968px) {
+  .postCard {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .terminalWrap {
     margin: 0 8px 10px;
