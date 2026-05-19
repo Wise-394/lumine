@@ -9,7 +9,7 @@
 
 **Code snippet sharing, but make it aesthetic.**
 
-*A social platform where developers post and discover beautiful code.*
+*A social platform where developers post and discover beautiful code snippets.*
 
 <br />
 
