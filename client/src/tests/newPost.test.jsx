@@ -78,5 +78,3 @@ describe("New Post", () => {
     ).toBeInTheDocument();
   });
 });
-
-// TODO ADD MORE TEST WHEN SUCCESS
