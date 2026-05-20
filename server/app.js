@@ -6,6 +6,7 @@ import { passportSetup } from "./src/configs/PassportConfig.js";
 import { loginRouter } from "./src/routes/loginRouter.js";
 import { postsRouter } from "./src/routes/postsRouter.js";
 import { userRouter } from "./src/routes/userRouter.js";
+import { errorRouter } from "./src/routes/errorRouter.js";
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,6 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/post", postsRouter);
 app.use("/user", userRouter);
-export default app;
+app.use(errorRouter);
 
-// TODO ADD ERROR
+export default app;

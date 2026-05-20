@@ -65,4 +65,3 @@ export const validatePost = [
     .bail()
     .isLength({ max: 3000 }),
 ];
-// TODO ADD MORE VALIDATION TO FIELDS
