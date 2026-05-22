@@ -7,7 +7,7 @@ export function ProfileCard({ totalPost }) {
     <div className={styles.profileCard}>
       <h1> {user?.username ? `@${user.username}` : "@guest"}</h1>
       <div className={styles.info}>
-        <p>{totalPost} post</p>
+        <p data-testid="totalPost">{totalPost} post</p>
         <p>0 followers</p>
         <p>10 following</p>
       </div>

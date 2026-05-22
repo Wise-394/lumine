@@ -24,7 +24,7 @@ export function PostCard({
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
 
   return (
-    <article className={styles.postCard}>
+    <article className={styles.postCard} data-testid="postCard">
       <header className={styles.postHeader}>
         <div className={styles.avatar}>{initials}</div>
         <div className={styles.postMeta}>
