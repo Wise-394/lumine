@@ -7,6 +7,7 @@ import {
   insertPostController,
   updatePostController,
   getPostByIDController,
+  deletePostByIdController,
 } from "../controllers/postsController.js";
 import { validatePost } from "../middlewares/validation.js";
 export const postsRouter = Router();
@@ -21,3 +22,4 @@ postsRouter.put(
   validatePost,
   updatePostController,
 );
+postsRouter.delete("/", authenticateUser, deletePostByIdController);

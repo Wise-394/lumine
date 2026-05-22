@@ -3,6 +3,7 @@ import {
   getPostById,
   insertPost,
   updatePost,
+  deletePost,
 } from "../models/postsQuery.js";
 import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
@@ -116,5 +117,15 @@ export const getPostByIDController = async (req, res) => {
   } catch (err) {
     console.error("unable to get post by id", err);
     res.status(500).json({ message: "Failed to get post id" });
+  }
+};
+
+export const deletePostByIdController = async (req, res) => {
+  try {
+    await deletePost(req.params.id);
+    res.json({ message: "success" });
+  } catch (err) {
+    console.error("unable to delete post", err);
+    req.status(500).json({ messsage: "failed to delete post" });
   }
 };
