@@ -4,6 +4,7 @@ import { TerminalIcons } from "./TerminalIcons.jsx";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 const LANG_MAP = {
   javascript: javascript(),
@@ -13,6 +14,7 @@ const LANG_MAP = {
 export function PostCard({
   username,
   postTitle,
+  postUserId,
   postDescription = null,
   codeTitle,
   language,
@@ -21,6 +23,7 @@ export function PostCard({
   tags = [],
   createdAt,
 }) {
+  const { userId } = useAuthenticationStore();
   const initials = username.slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
 
@@ -46,28 +49,30 @@ export function PostCard({
           <span className={styles.time}>{createdAt}</span>
         </div>
 
-        <div className={styles.moreMenu} ref={menuRef}>
-          <button
-            className={styles.moreBtn}
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label="More options"
-          >
-            ···
-          </button>
+        {userId === postUserId && (
+          <div className={styles.moreMenu} ref={menuRef}>
+            <button
+              className={styles.moreBtn}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label="More options"
+            >
+              ···
+            </button>
 
-          {menuOpen && (
-            <div className={styles.dropdown}>
-              <button className={styles.dropdownItem}>
-                <span className={styles.dropdownIcon}>✎</span> Edit
-              </button>
-              <button
-                className={`${styles.dropdownItem} ${styles.dropdownItemDelete}`}
-              >
-                <span className={styles.dropdownIcon}>⌫</span> Delete
-              </button>
-            </div>
-          )}
-        </div>
+            {menuOpen && (
+              <div className={styles.dropdown}>
+                <button className={styles.dropdownItem}>
+                  <span className={styles.dropdownIcon}>✎</span> Edit
+                </button>
+                <button
+                  className={`${styles.dropdownItem} ${styles.dropdownItemDelete}`}
+                >
+                  <span className={styles.dropdownIcon}>⌫</span> Delete
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </header>
 
       <div className={styles.postTitle}>{postTitle}</div>

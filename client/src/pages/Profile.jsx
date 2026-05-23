@@ -40,6 +40,7 @@ export function Profile() {
             <PostCard
               key={post.postId}
               username={post.username}
+              postUserId={post.userId}
               postTitle={post.postTitle}
               postDescription={post.postDescription}
               codeTitle={post.codeBlockTitle}

@@ -5,7 +5,6 @@ import { PostCard } from "../components/PostCard.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
-
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await apiFetch("/post");
@@ -27,6 +26,7 @@ export function Home() {
             <PostCard
               key={post.postId}
               username={post.username}
+              postUserId={post.userId}
               postTitle={post.postTitle}
               postDescription={post.postDescription}
               codeTitle={post.codeBlockTitle}
