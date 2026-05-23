@@ -2,7 +2,6 @@ import { Router } from "express";
 import passport from "passport";
 import { optionalAuth } from "../middlewares/optionalAuth.js";
 import {
-  authenticateUser,
   getAllPostController,
   insertPostController,
   updatePostController,
@@ -10,6 +9,8 @@ import {
   deletePostByIdController,
 } from "../controllers/postsController.js";
 import { validatePost } from "../middlewares/validation.js";
+import { authenticateUser } from "../middlewares/authenticate.js";
+
 export const postsRouter = Router();
 
 postsRouter.get("/", getAllPostController);
@@ -22,4 +23,4 @@ postsRouter.put(
   validatePost,
   updatePostController,
 );
-postsRouter.delete("/", authenticateUser, deletePostByIdController);
+postsRouter.delete("/:id", authenticateUser, deletePostByIdController);

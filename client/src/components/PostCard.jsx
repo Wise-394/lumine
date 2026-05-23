@@ -5,7 +5,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
-
+import { apiFetch } from "../helpers/api.js";
+import { getJWT } from "../helpers/localStorage.js";
 const LANG_MAP = {
   javascript: javascript(),
   js: javascript(),
@@ -22,6 +23,8 @@ export function PostCard({
   codeDescription,
   tags = [],
   createdAt,
+  setPosts,
+  postId,
 }) {
   const { userId } = useAuthenticationStore();
   const initials = username.slice(0, 2);
@@ -39,6 +42,20 @@ export function PostCard({
     if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpen]);
+
+  const handleDeletePost = async () => {
+    try {
+      const token = getJWT();
+      await apiFetch(`/post/${postId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPosts((prev) => prev.filter((p) => p.postId !== postId));
+      setMenuOpen(false);
+    } catch (err) {
+      console.error("unable to delete post", err);
+    }
+  };
 
   return (
     <article className={styles.postCard} data-testid="postCard">
@@ -66,6 +83,7 @@ export function PostCard({
                 </button>
                 <button
                   className={`${styles.dropdownItem} ${styles.dropdownItemDelete}`}
+                  onClick={handleDeletePost}
                 >
                   <span className={styles.dropdownIcon}>⌫</span> Delete
                 </button>

@@ -64,13 +64,6 @@ export const insertPostController = async (req, res) => {
     res.status(500).json({ message: "Failed to insert post" });
   }
 };
-export const authenticateUser = async (req, res, next) => {
-  const post = await getPostById(req.params.id);
-  if (post.user_id !== req.user.id) {
-    return res.status(400).json({ message: "unable to update the post" });
-  }
-  next();
-};
 
 export const updatePostController = async (req, res) => {
   const errors = validationResult(req);
@@ -126,6 +119,7 @@ export const deletePostByIdController = async (req, res) => {
     res.json({ message: "success" });
   } catch (err) {
     console.error("unable to delete post", err);
-    req.status(500).json({ messsage: "failed to delete post" });
+    res.status(500).json({ messsage: "failed to delete post" });
   }
 };
+//TODO check if allowed to delete post.userid === userID
