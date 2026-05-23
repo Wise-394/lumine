@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import styles from "@styles/components/PostCard.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
 import CodeMirror from "@uiw/react-codemirror";
@@ -23,6 +24,19 @@ export function PostCard({
   const initials = username.slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
   return (
     <article className={styles.postCard} data-testid="postCard">
       <header className={styles.postHeader}>
@@ -31,7 +45,29 @@ export function PostCard({
           <span className={styles.username}>@{username ?? "guest"}</span>
           <span className={styles.time}>{createdAt}</span>
         </div>
-        <button className={styles.moreBtn}>···</button>
+
+        <div className={styles.moreMenu} ref={menuRef}>
+          <button
+            className={styles.moreBtn}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="More options"
+          >
+            ···
+          </button>
+
+          {menuOpen && (
+            <div className={styles.dropdown}>
+              <button className={styles.dropdownItem}>
+                <span className={styles.dropdownIcon}>✎</span> Edit
+              </button>
+              <button
+                className={`${styles.dropdownItem} ${styles.dropdownItemDelete}`}
+              >
+                <span className={styles.dropdownIcon}>⌫</span> Delete
+              </button>
+            </div>
+          )}
+        </div>
       </header>
 
       <div className={styles.postTitle}>{postTitle}</div>

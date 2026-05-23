@@ -57,6 +57,12 @@
   color: #4a6580;
 }
 
+/* ── More menu ── */
+
+.moreMenu {
+  position: relative;
+}
+
 .moreBtn {
   background: none;
   border: none;
@@ -77,6 +83,69 @@
   background: #1a2a3a;
 }
 
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #111c2d;
+  border: 1px solid #1f3040;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 130px;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: dropIn 0.15s ease;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: left;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+
+.dropdownItem:hover {
+  background: #1a2d40;
+  color: #e2e8f0;
+}
+
+.dropdownItemDelete {
+  color: #f87171;
+}
+
+.dropdownItemDelete:hover {
+  background: #2a1a1a;
+  color: #fca5a5;
+}
+
+.dropdownIcon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ── Post content ── */
+
 .postTitle {
   padding: 0 16px 4px;
   font-size: 14px;
@@ -91,6 +160,8 @@
   color: #64748b;
   line-height: 1.6;
 }
+
+/* ── Terminal ── */
 
 .terminalWrap {
   --header-bg: #0b121f;
@@ -181,6 +252,8 @@
   color: #94a3b8;
 }
 
+/* ── Footer / tags ── */
+
 .postFooter {
   padding: 10px 16px 13px;
   border-top: 1px solid #1a2540;
@@ -202,6 +275,8 @@
   font-family: var(--font-code);
   letter-spacing: 0.3px;
 }
+
+/* ── Responsive ── */
 
 @media (max-width: 968px) {
   .postCard {
