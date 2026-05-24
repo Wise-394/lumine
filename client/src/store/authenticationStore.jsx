@@ -22,6 +22,7 @@ export const useAuthenticationStore = create((set) => ({
       isLoggedIn: true,
       isGuest: false,
       user: payload,
+      userId: payload?.sub ?? null,
     });
   },
 
