@@ -115,11 +115,14 @@ export const getPostByIDController = async (req, res) => {
 
 export const deletePostByIdController = async (req, res) => {
   try {
+    const post = await getPostById(req.params.id);
+    if (post.userId != req.user.id) {
+      return res.status(403).json({ message: "not allowed to delete post" });
+    }
     await deletePost(req.params.id);
-    res.json({ message: "success" });
+    return res.json({ message: "success" });
   } catch (err) {
     console.error("unable to delete post", err);
-    res.status(500).json({ messsage: "failed to delete post" });
+    res.status(500).json({ message: "failed to delete post" });
   }
 };
-//TODO check if allowed to delete post.userid === userID
