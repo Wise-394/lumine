@@ -7,7 +7,6 @@ import { LandingLayout } from "../layouts/LandingLayout.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
 import { Home } from "../pages/Home.jsx";
 import { Profile } from "../pages/Profile.jsx";
-import { PostDetail } from "../pages/PostDetail.jsx";
 
 export const appRoutes = [
   {
@@ -17,7 +16,7 @@ export const appRoutes = [
     children: [
       { index: true, element: <Home /> },
       { path: "post", element: <Post /> },
-      { path: "post/:id", element: <PostDetail /> },
+      { path: "post/:id", element: <Post /> },
       { path: "profile", element: <Profile /> },
     ],
   },

@@ -56,4 +56,14 @@ export const usePostStore = create((set, get) => ({
   },
 
   resetField: () => set({ ...initialState }),
+
+  setPost: (post) =>
+    set({
+      title: post.postTitle,
+      description: post.postDescription,
+      language: post.language,
+      codeBlockTitle: post.codeBlockTitle,
+      code: post.code,
+      codeBlockDescription: post.codeBlockDescription,
+    }),
 }));

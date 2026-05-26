@@ -4,10 +4,14 @@ import { LuSendHorizontal, LuLoader } from "react-icons/lu";
 import { CodeBlock } from "../components/CodeBlock.jsx";
 import { usePostStore } from "../store/PostStore.jsx";
 import { apiFetch } from "../helpers/api.js";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getJWT } from "../helpers/localStorage.js";
+import { useEffect, useState } from "react";
 
 export function Post() {
+  const { id } = useParams();
+  const isEditMode = Boolean(id);
+
   const token = getJWT();
   const navigate = useNavigate();
   const {
@@ -23,7 +27,33 @@ export function Post() {
     loading,
     error,
     validate,
+    setPost,
   } = usePostStore();
+
+  const [isFetching, setIsFetching] = useState(isEditMode);
+  const [fetchError, setFetchError] = useState(null);
+
+  useEffect(() => {
+    if (!isEditMode) return;
+
+    const fetchPost = async () => {
+      try {
+        setFetchError(null);
+        const data = await apiFetch(`/post/${id}`);
+        setPost(data.post);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    fetchPost();
+
+    return () => {
+      resetField();
+    };
+  }, [id, isEditMode, resetField, setPost]);
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -31,8 +61,8 @@ export function Post() {
     setLoading(true);
     setError(null);
     try {
-      const res = await apiFetch("/post", {
-        method: "POST",
+      const res = await apiFetch(isEditMode ? `/post/${id}` : "/post", {
+        method: isEditMode ? "PUT" : "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -59,21 +89,37 @@ export function Post() {
     }
   };
 
+  if (isFetching)
+    return (
+      <main>
+        <p>Loading post...</p>
+      </main>
+    );
+  if (fetchError)
+    return (
+      <main>
+        <p>{fetchError}</p>
+      </main>
+    );
+
   return (
     <main className={styles.newPostContainer}>
       <div className={styles.header}>
         <h1>
-          <span className="highlight">New Post</span>
+          <span className="highlight">
+            {isEditMode ? "Edit Post" : "New Post"}
+          </span>
         </h1>
         <div className={styles.headerRight}>
           <button type="button" onClick={handleSubmit} disabled={loading}>
             {loading ? (
               <>
-                <LuLoader className={styles.spinnerIcon} /> Posting...
+                <LuLoader className={styles.spinnerIcon} />{" "}
+                {isEditMode ? "Saving..." : "Posting..."}
               </>
             ) : (
               <>
-                <LuSendHorizontal /> Post
+                <LuSendHorizontal /> {isEditMode ? "Save" : "Post"}
               </>
             )}
           </button>
