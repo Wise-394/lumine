@@ -5,11 +5,19 @@ import { PostCard } from "../components/PostCard.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
-  // TODO ADD ERROR AND LOADING STATES
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchPosts = async () => {
-      const data = await apiFetch("/post");
-      setPosts(data.posts);
+      try {
+        const data = await apiFetch("/post");
+        setPosts(data.posts);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchPosts();
@@ -17,13 +25,14 @@ export function Home() {
 
   return (
     <main className={styles.homeContainer}>
-      {posts === null ? (
+      {error && <p>{error}</p>}
+      {isLoading && error === null ? (
         <p>loading posts...</p>
-      ) : posts.length === 0 ? (
+      ) : posts?.length === 0 ? (
         <p>no posts yet.</p>
       ) : (
         <div className={styles.postListContainer}>
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <PostCard
               key={post.postId}
               username={post.username}
