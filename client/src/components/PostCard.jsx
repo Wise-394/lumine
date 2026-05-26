@@ -7,6 +7,7 @@ import { oneDark } from "@codemirror/theme-one-dark";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { getJWT } from "../helpers/localStorage.js";
+import { useNavigate } from "react-router";
 const LANG_MAP = {
   javascript: javascript(),
   js: javascript(),
@@ -26,6 +27,7 @@ export function PostCard({
   setPosts,
   postId,
 }) {
+  const navigate = useNavigate();
   const { userId } = useAuthenticationStore();
   const initials = username.slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
@@ -56,6 +58,9 @@ export function PostCard({
       console.error("unable to delete post", err);
     }
   };
+  const redirectToPostDetail = () => {
+    navigate(`/post/${postId}`);
+  };
 
   return (
     <article className={styles.postCard} data-testid="postCard">
@@ -78,7 +83,10 @@ export function PostCard({
 
             {menuOpen && (
               <div className={styles.dropdown}>
-                <button className={styles.dropdownItem}>
+                <button
+                  className={styles.dropdownItem}
+                  onClick={redirectToPostDetail}
+                >
                   <span className={styles.dropdownIcon}>✎</span> Edit
                 </button>
                 <button
