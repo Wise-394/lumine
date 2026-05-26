@@ -1,7 +1,7 @@
 import { Register } from "../pages/Register.jsx";
 import { Login } from "../pages/Login.jsx";
 import { Error } from "../pages/Error.jsx";
-import { NewPost } from "../pages/NewPost.jsx";
+import { Post } from "../pages/Post.jsx";
 import { RootLayout } from "../layouts/RootLayout.jsx";
 import { LandingLayout } from "../layouts/LandingLayout.jsx";
 import { LandingPage } from "../pages/LandingPage.jsx";
@@ -16,7 +16,7 @@ export const appRoutes = [
     errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
-      { path: "post", element: <NewPost /> },
+      { path: "post", element: <Post /> },
       { path: "post/:id", element: <PostDetail /> },
       { path: "profile", element: <Profile /> },
     ],

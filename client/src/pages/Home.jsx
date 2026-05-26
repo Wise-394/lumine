@@ -5,7 +5,7 @@ import { PostCard } from "../components/PostCard.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
-
+  // TODO ADD ERROR AND LOADING STATES
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await apiFetch("/post");

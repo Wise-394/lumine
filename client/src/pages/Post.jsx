@@ -1,13 +1,13 @@
-import styles from "@styles/pages/newPost.module.css";
-import { NewPostForm } from "../components/NewPostForm.jsx";
+import styles from "@styles/pages/Post.module.css";
+import { PostForm } from "../components/PostForm.jsx";
 import { LuSendHorizontal, LuLoader } from "react-icons/lu";
 import { CodeBlock } from "../components/CodeBlock.jsx";
-import { useNewPostStore } from "../store/newPostStore.jsx";
+import { usePostStore } from "../store/PostStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { useNavigate } from "react-router";
 import { getJWT } from "../helpers/localStorage.js";
 
-export function NewPost() {
+export function Post() {
   const token = getJWT();
   const navigate = useNavigate();
   const {
@@ -23,7 +23,7 @@ export function NewPost() {
     loading,
     error,
     validate,
-  } = useNewPostStore();
+  } = usePostStore();
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -82,7 +82,7 @@ export function NewPost() {
       </div>
 
       <div className={styles.body}>
-        <NewPostForm />
+        <PostForm />
         <CodeBlock />
       </div>
     </main>

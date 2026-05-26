@@ -16,7 +16,7 @@ using the + operator.`,
   error: null,
 };
 
-export const useNewPostStore = create((set, get) => ({
+export const usePostStore = create((set, get) => ({
   ...initialState,
 
   updateField: (field, value) => set({ [field]: value }),

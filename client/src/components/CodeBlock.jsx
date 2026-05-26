@@ -4,12 +4,12 @@ import { EditorView } from "@codemirror/view";
 import styles from "@styles/components/CodeBlock.module.css";
 import { TerminalIcons } from "./TerminalIcons.jsx";
 import { tokyoNight } from "@uiw/codemirror-themes-all";
-import { useNewPostStore } from "../store/newPostStore.jsx";
+import { usePostStore } from "../store/PostStore.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function CodeBlock() {
   const { code, language, codeBlockTitle, codeBlockDescription, updateField } =
-    useNewPostStore();
+    usePostStore();
   const { user } = useAuthenticationStore();
 
   return (

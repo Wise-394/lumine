@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { NewPost } from "../pages/NewPost.jsx";
+import { NewPost } from "../pages/Post.jsx";
 import { MemoryRouter } from "react-router";
 import { apiFetch } from "../helpers/api.js";
-import { useNewPostStore } from "../store/newPostStore.jsx";
+import { useNewPostStore } from "../store/PostStore.jsx";
 
 vi.mock("../helpers/api.js");
 vi.mock("react-router", async (importOriginal) => {

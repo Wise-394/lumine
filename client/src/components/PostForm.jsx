@@ -1,8 +1,8 @@
-import styles from "@styles/components/NewPostForm.module.css";
-import { useNewPostStore } from "../store/newPostStore.jsx";
+import styles from "@styles/components/PostForm.module.css";
+import { usePostStore } from "../store/PostStore.jsx";
 
-export function NewPostForm() {
-  const { title, description, updateField } = useNewPostStore();
+export function PostForm() {
+  const { title, description, updateField } = usePostStore();
   return (
     <div className={styles.formContainer}>
       <div className={styles.postBody}>
