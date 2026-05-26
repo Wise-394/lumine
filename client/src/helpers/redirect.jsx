@@ -15,3 +15,10 @@ export function redirectIfNotAuthenticated(isLoggedIn, isGuest) {
   }
   return null;
 }
+
+export function redirectIfNotLoggedIn(isLoggedIn) {
+  if (!isLoggedIn) {
+    return <Navigate to="/landing-page" replace />;
+  }
+  return null;
+}

@@ -8,11 +8,13 @@ import { useNavigate, useParams } from "react-router";
 import { getJWT } from "../helpers/localStorage.js";
 import { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { redirectIfNotLoggedIn } from "../helpers/redirect.jsx";
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function Post() {
   const { id } = useParams();
   const isEditMode = Boolean(id);
-
+  const { isLoggedIn } = useAuthenticationStore();
   const token = getJWT();
   const navigate = useNavigate();
   const {
@@ -105,7 +107,13 @@ export function Post() {
         <p>{fetchError}</p>
       </main>
     );
-
+  const redirect = redirectIfNotLoggedIn(isLoggedIn);
+  if (redirect) {
+    return redirect;
+  }
+  // redirect if post.userId != user id
+  // TODO prevent editing if not authorized
+  // TODO ADD DELETE TESTING
   return (
     <main className={styles.PostContainer}>
       <div className={styles.header}>
