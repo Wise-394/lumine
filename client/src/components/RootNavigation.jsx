@@ -23,7 +23,7 @@ export function RootNavigation() {
         }
       >
         <FiPlus />
-        New Post
+        Post
       </NavLink>
       <NavLink
         to="/profile"

@@ -7,6 +7,7 @@ import { apiFetch } from "../helpers/api.js";
 import { useNavigate, useParams } from "react-router";
 import { getJWT } from "../helpers/localStorage.js";
 import { useEffect, useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
 
 export function Post() {
   const { id } = useParams();
@@ -40,6 +41,9 @@ export function Post() {
       try {
         setFetchError(null);
         const data = await apiFetch(`/post/${id}`);
+        if (!data.post || Object.keys(data.post).length === 0) {
+          return navigate("/post");
+        }
         setPost(data.post);
       } catch (err) {
         setFetchError(err.message);
@@ -53,7 +57,7 @@ export function Post() {
     return () => {
       resetField();
     };
-  }, [id, isEditMode, resetField, setPost]);
+  }, [id, isEditMode, navigate, resetField, setPost]);
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -103,15 +107,25 @@ export function Post() {
     );
 
   return (
-    <main className={styles.newPostContainer}>
+    <main className={styles.PostContainer}>
       <div className={styles.header}>
+        {isEditMode && (
+          <button className={styles.backButton}>
+            <IoIosArrowBack /> Back
+          </button>
+        )}
         <h1>
           <span className="highlight">
             {isEditMode ? "Edit Post" : "New Post"}
           </span>
         </h1>
         <div className={styles.headerRight}>
-          <button type="button" onClick={handleSubmit} disabled={loading}>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={loading}
+            className={styles.cta}
+          >
             {loading ? (
               <>
                 <LuLoader className={styles.spinnerIcon} />{" "}
