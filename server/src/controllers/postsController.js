@@ -70,6 +70,10 @@ export const updatePostController = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  const post = getPostById(req.params.id);
+  if (req.user.id !== post.userId) {
+    return res.status(401).json({ message: "not authorized" });
+  }
   try {
     const {
       title,
