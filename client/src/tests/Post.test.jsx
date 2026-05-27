@@ -1,33 +1,48 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { NewPost } from "../pages/Post.jsx";
+import { Post } from "../pages/Post.jsx";
 import { MemoryRouter } from "react-router";
 import { apiFetch } from "../helpers/api.js";
-import { useNewPostStore } from "../store/PostStore.jsx";
+import { usePostStore } from "../store/PostStore.jsx";
 
 vi.mock("../helpers/api.js");
+vi.mock("../helpers/localStorage.js", () => ({ getJWT: () => "fake-token" }));
+vi.mock("../helpers/redirect.jsx", () => ({
+  redirectIfNotAuthenticated: () => null,
+}));
+vi.mock("../store/authenticationStore.jsx", () => ({
+  useAuthenticationStore: () => ({
+    isLoggedIn: true,
+    isGuest: false,
+    userId: "user-123",
+  }),
+}));
 vi.mock("react-router", async (importOriginal) => {
   const actual = await importOriginal();
-  return { ...actual, useNavigate: () => vi.fn() };
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+    useParams: () => ({}),
+  };
 });
-vi.mock("../components/NewPostForm.jsx", () => ({
-  NewPostForm: () => <div data-testid="new-post-form" />,
+vi.mock("../components/PostForm.jsx", () => ({
+  PostForm: () => <div data-testid="new-post-form" />,
 }));
 vi.mock("../components/CodeBlock.jsx", () => ({
   CodeBlock: () => <div data-testid="code-block" />,
 }));
 
-const renderNewPost = () =>
+const renderPost = () =>
   render(
     <MemoryRouter>
-      <NewPost />
+      <Post />
     </MemoryRouter>,
   );
 
-describe("New Post", () => {
+describe("Post", () => {
   beforeEach(() => {
-    useNewPostStore.setState({
+    usePostStore.setState({
       title: "",
       description: "",
       language: "Javascript",
@@ -42,9 +57,9 @@ describe("New Post", () => {
   });
 
   it("shows error when validation isn't correct", async () => {
-    useNewPostStore.setState({ title: "" });
+    usePostStore.setState({ title: "" });
 
-    renderNewPost();
+    renderPost();
 
     const postButton = screen.getByRole("button", { name: /post/i });
     await userEvent.click(postButton);
@@ -57,7 +72,7 @@ describe("New Post", () => {
   });
 
   it("shows error when backend isn't online", async () => {
-    useNewPostStore.setState({
+    usePostStore.setState({
       title: "My Valid Post Title",
       codeBlockTitle: "add.js",
       language: "Javascript",
@@ -68,7 +83,7 @@ describe("New Post", () => {
       new Error("Unable to connect to the server, Try again later"),
     );
 
-    renderNewPost();
+    renderPost();
 
     const postButton = screen.getByRole("button", { name: /post/i });
     await userEvent.click(postButton);
@@ -78,3 +93,4 @@ describe("New Post", () => {
     ).toBeInTheDocument();
   });
 });
+// ADD edit test, add submit test
