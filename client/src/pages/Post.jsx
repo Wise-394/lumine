@@ -8,13 +8,13 @@ import { useNavigate, useParams } from "react-router";
 import { getJWT } from "../helpers/localStorage.js";
 import { useEffect, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { redirectIfNotLoggedIn } from "../helpers/redirect.jsx";
+import { redirectIfNotAuthenticated } from "../helpers/redirect.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function Post() {
   const { id } = useParams();
   const isEditMode = Boolean(id);
-  const { isLoggedIn } = useAuthenticationStore();
+  const { isLoggedIn, isGuest, userId } = useAuthenticationStore();
   const token = getJWT();
   const navigate = useNavigate();
   const {
@@ -46,6 +46,9 @@ export function Post() {
         if (!data.post || Object.keys(data.post).length === 0) {
           return navigate("/post");
         }
+        if (data.post.userId !== userId) {
+          return navigate("/post");
+        }
         setPost(data.post);
       } catch (err) {
         setFetchError(err.message);
@@ -59,7 +62,7 @@ export function Post() {
     return () => {
       resetField();
     };
-  }, [id, isEditMode, navigate, resetField, setPost]);
+  }, [id, isEditMode, navigate, resetField, setPost, userId]);
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -107,13 +110,13 @@ export function Post() {
         <p>{fetchError}</p>
       </main>
     );
-  const redirect = redirectIfNotLoggedIn(isLoggedIn);
+  const redirect = redirectIfNotAuthenticated(isLoggedIn, isGuest);
   if (redirect) {
     return redirect;
   }
-  // redirect if post.userId != user id
-  // TODO prevent editing if not authorized
-  // TODO ADD DELETE TESTING
+
+  //TODO add delete testing
+
   return (
     <main className={styles.PostContainer}>
       <div className={styles.header}>
