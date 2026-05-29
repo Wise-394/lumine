@@ -114,3 +114,21 @@ export const deletePost = async (id) => {
     throw err;
   }
 };
+
+export const increaseLikes = async (id) => {
+  try {
+    await pool.query(`UPDATE posts SET likes = likes + 1 WHERE id = $1`, [id]);
+  } catch (err) {
+    console.error("unable to increase likes", err);
+    throw err;
+  }
+};
+
+export const decreaseLikes = async (id) => {
+  try {
+    await pool.query(`UPDATE posts SET likes = likes - 1 WHERE id = $1`, [id]);
+  } catch (err) {
+    console.error("Unable to decrease likes", err);
+    throw err;
+  }
+};

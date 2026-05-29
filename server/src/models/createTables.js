@@ -32,13 +32,15 @@ export const createPostsTable = async () => {
       description TEXT,
       visibility TEXT NOT NULL CHECK (visibility IN ('link_only', 'public', 'private')),
       expires_at TIMESTAMPTZ, 
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      likes INT DEFAULT 1
       )`);
   } catch (err) {
     console.error("unable to create Post Table", err);
     throw err;
   }
 };
+//TODO auto delete expired post
 
 export const createCodeBlocksTable = async () => {
   try {

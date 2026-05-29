@@ -24,3 +24,7 @@ postsRouter.put(
   updatePostController,
 );
 postsRouter.delete("/:id", authenticateUser, deletePostByIdController);
+
+// likes
+postsRouter.post("/:id/likes");
+postsRouter.delete("/:id/likes");
