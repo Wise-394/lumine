@@ -4,6 +4,8 @@ import {
   insertPost,
   updatePost,
   deletePost,
+  increaseLikes,
+  decreaseLikes,
 } from "../models/postsQuery.js";
 import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
@@ -130,3 +132,17 @@ export const deletePostByIdController = async (req, res) => {
     res.status(500).json({ message: "failed to delete post" });
   }
 };
+
+export const increasePostLikes = async (req, res) => {
+  const postId = req.params.id;
+  const likes = await increaseLikes(postId);
+  return res.status(200).json({ likes });
+};
+
+export const decreasePostLikes = async (req, res) => {
+  const postId = req.params.id;
+  const likes = await decreaseLikes(postId);
+  return res.status(200).json({ likes });
+};
+// redo implementation
+// make a post likes table

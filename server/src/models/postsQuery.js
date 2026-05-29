@@ -117,7 +117,11 @@ export const deletePost = async (id) => {
 
 export const increaseLikes = async (id) => {
   try {
-    await pool.query(`UPDATE posts SET likes = likes + 1 WHERE id = $1`, [id]);
+    const result = await pool.query(
+      `UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING likes`,
+      [id],
+    );
+    return result.rows[0].likes;
   } catch (err) {
     console.error("unable to increase likes", err);
     throw err;
@@ -126,7 +130,11 @@ export const increaseLikes = async (id) => {
 
 export const decreaseLikes = async (id) => {
   try {
-    await pool.query(`UPDATE posts SET likes = likes - 1 WHERE id = $1`, [id]);
+    const result = await pool.query(
+      `UPDATE posts SET likes = likes - 1 WHERE id = $1 RETURNING likes`,
+      [id],
+    );
+    return result.rows[0].likes;
   } catch (err) {
     console.error("Unable to decrease likes", err);
     throw err;
