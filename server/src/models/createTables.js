@@ -4,6 +4,7 @@ export const createTablesIfNotExist = async () => {
   await createUsersTable();
   await createPostsTable();
   await createCodeBlocksTable();
+  await createLikesTable();
 };
 
 const createUsersTable = async () => {

@@ -130,5 +130,3 @@ export const deletePost = async (id) => {
     throw err;
   }
 };
-
-// TODO ADD LIKES
