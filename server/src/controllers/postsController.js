@@ -133,18 +133,29 @@ export const deletePostByIdController = async (req, res) => {
 };
 
 export const increasePostLikes = async (req, res) => {
-  const postId = req.params.id;
-  const likes = await insertLike(postId, res.user.id);
-  return res.status(200).json({ likes });
-  // todo lije return
+  try {
+    const postId = req.params.id;
+    const likes = await insertLike(postId, res.user.id);
+    return res.status(200).json({ likes });
+  } catch (err) {
+    console.error("unable to increase like", err);
+    res.status(500).json({ message: "failed to like post" });
+  }
+
+  //TODO lije return
 };
 
 export const decreasePostLikes = async (req, res) => {
-  const post = getPostById(req.params.id);
-  if (req.user.id !== post.userId) {
-    return res.status(401).json({ message: "unauthorized" });
+  try {
+    const post = getPostById(req.params.id);
+    if (req.user.id !== post.userId) {
+      return res.status(401).json({ message: "unauthorized" });
+    }
+  } catch (err) {
+    console.error("unable to decrease like", err);
+    res.status(500).json({ message: "failed to decrease post likes" });
   }
+
   const likes = await deleteLike(req.user.id);
   return res.status(200).json({ likes });
 };
-// TODO add try catch to likes
