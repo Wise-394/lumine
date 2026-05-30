@@ -3,28 +3,40 @@ import { pool } from "../configs/databaseConfig.js";
 export const getAllPost = async (user_id = null) => {
   try {
     const selectClause = `
-  SELECT 
-    posts.id AS "postId",
-    posts.user_id AS "userId",
-    users.username AS "username",
-    posts.title AS "postTitle",
-    posts.description AS "postDescription",
-    posts.visibility,
-    posts.expires_at AS "expiresAt",
-    posts.created_at AS "createdAt",
-    code_blocks.id AS "codeBlockId",
-    code_blocks.title AS "codeBlockTitle",
-    code_blocks.code,
-    code_blocks.language,
-    code_blocks.description AS "codeBlockDescription"
-  FROM posts 
-  INNER JOIN code_blocks ON code_blocks.post_id = posts.id
-  INNER JOIN users ON users.id = posts.user_id
-`;
+      SELECT 
+        posts.id AS "postId",
+        posts.user_id AS "userId",
+        users.username AS "username",
+        posts.title AS "postTitle",
+        posts.description AS "postDescription",
+        posts.visibility,
+        posts.expires_at AS "expiresAt",
+        posts.created_at AS "createdAt",
+        code_blocks.id AS "codeBlockId",
+        code_blocks.title AS "codeBlockTitle",
+        code_blocks.code,
+        code_blocks.language,
+        code_blocks.description AS "codeBlockDescription",
+        COUNT(likes.post_id) AS "likesCount",
+        BOOL_OR(likes.user_id = $1) AS "likedByUser"
+      FROM posts 
+      INNER JOIN code_blocks ON code_blocks.post_id = posts.id
+      INNER JOIN users ON users.id = posts.user_id
+      LEFT JOIN likes ON likes.post_id = posts.id
+    `;
 
     const query = user_id
-      ? { text: selectClause + `WHERE posts.user_id = $1`, values: [user_id] }
-      : { text: selectClause };
+      ? {
+          text:
+            selectClause +
+            `WHERE posts.user_id = $1 GROUP BY posts.id, users.username, code_blocks.id`,
+          values: [user_id],
+        }
+      : {
+          text:
+            selectClause + `GROUP BY posts.id, users.username, code_blocks.id`,
+          values: [null],
+        };
 
     const { rows } = await pool.query(query);
     return rows;
@@ -34,26 +46,30 @@ export const getAllPost = async (user_id = null) => {
   }
 };
 
-export const getPostById = async (id) => {
+export const getPostById = async (id, userId = null) => {
   try {
     const { rows } = await pool.query(
       `SELECT 
-  posts.id AS "postId",
-  posts.user_id AS "userId",
-  posts.title AS "postTitle",
-  posts.description AS "postDescription",
-  posts.visibility,
-  posts.expires_at AS "expiresAt",
-  posts.created_at AS "createdAt",
-  code_blocks.id AS "codeBlockId",
-  code_blocks.title AS "codeBlockTitle",
-  code_blocks.code,
-  code_blocks.language,
-  code_blocks.description AS "codeBlockDescription"
-FROM posts 
-INNER JOIN code_blocks ON code_blocks.post_id = posts.id 
-WHERE posts.id = $1`,
-      [id],
+        posts.id AS "postId",
+        posts.user_id AS "userId",
+        posts.title AS "postTitle",
+        posts.description AS "postDescription",
+        posts.visibility,
+        posts.expires_at AS "expiresAt",
+        posts.created_at AS "createdAt",
+        code_blocks.id AS "codeBlockId",
+        code_blocks.title AS "codeBlockTitle",
+        code_blocks.code,
+        code_blocks.language,
+        code_blocks.description AS "codeBlockDescription",
+        COUNT(likes.post_id) AS "likesCount",
+        BOOL_OR(likes.user_id = $2) AS "likedByUser"
+      FROM posts 
+      INNER JOIN code_blocks ON code_blocks.post_id = posts.id
+      LEFT JOIN likes ON likes.post_id = posts.id
+      WHERE posts.id = $1
+      GROUP BY posts.id, code_blocks.id`,
+      [id, userId],
     );
     return rows[0];
   } catch (err) {
@@ -115,29 +131,4 @@ export const deletePost = async (id) => {
   }
 };
 
-export const increaseLikes = async (id) => {
-  try {
-    const result = await pool.query(
-      `UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING likes`,
-      [id],
-    );
-    return result.rows[0].likes;
-  } catch (err) {
-    console.error("unable to increase likes", err);
-    throw err;
-  }
-};
-
-export const decreaseLikes = async (id) => {
-  try {
-    const result = await pool.query(
-      `UPDATE posts SET likes = likes - 1 WHERE id = $1 RETURNING likes`,
-      [id],
-    );
-    return result.rows[0].likes;
-  } catch (err) {
-    console.error("Unable to decrease likes", err);
-    throw err;
-  }
-};
 // TODO ADD LIKES

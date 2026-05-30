@@ -4,8 +4,6 @@ import {
   insertPost,
   updatePost,
   deletePost,
-  increaseLikes,
-  decreaseLikes,
 } from "../models/postsQuery.js";
 import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
@@ -111,7 +109,7 @@ export const updatePostController = async (req, res) => {
 
 export const getPostByIDController = async (req, res) => {
   try {
-    const post = await getPostById(req.params.id);
+    const post = await getPostById(req.params.id, req.user?.id);
     res.json({ post: post });
   } catch (err) {
     console.error("unable to get post by id", err);
@@ -133,16 +131,16 @@ export const deletePostByIdController = async (req, res) => {
   }
 };
 
-export const increasePostLikes = async (req, res) => {
-  const postId = req.params.id;
-  const likes = await increaseLikes(postId);
-  return res.status(200).json({ likes });
-};
+// export const increasePostLikes = async (req, res) => {
+//   const postId = req.params.id;
+//   const likes = await increaseLikes(postId);
+//   return res.status(200).json({ likes });
+// };
 
-export const decreasePostLikes = async (req, res) => {
-  const postId = req.params.id;
-  const likes = await decreaseLikes(postId);
-  return res.status(200).json({ likes });
-};
+// export const decreasePostLikes = async (req, res) => {
+//   const postId = req.params.id;
+//   const likes = await decreaseLikes(postId);
+//   return res.status(200).json({ likes });
+// };
 //TODO redo implementation
 // make a post likes table
