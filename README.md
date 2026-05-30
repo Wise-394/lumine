@@ -228,7 +228,7 @@ cd client && npm run dev
 - [x] Route protection & custom error pages
 - [x] REST API with MVC architecture
 - [x] Frontend & backend test suites
-- [ ] edit and delete posts
+- [x] edit and delete posts
 - [ ] Like and bookmark system
 - [ ] User profiles and follower system
 - [ ] Comments on snippets
