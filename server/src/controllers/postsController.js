@@ -141,8 +141,6 @@ export const increasePostLikes = async (req, res) => {
     console.error("unable to increase like", err);
     res.status(500).json({ message: "failed to like post" });
   }
-
-  //TODO lije return
 };
 
 export const decreasePostLikes = async (req, res) => {
@@ -151,11 +149,10 @@ export const decreasePostLikes = async (req, res) => {
     if (req.user.id !== post.userId) {
       return res.status(401).json({ message: "unauthorized" });
     }
+    const likes = await deleteLike(req.user.id);
+    return res.status(200).json({ likes });
   } catch (err) {
     console.error("unable to decrease like", err);
     res.status(500).json({ message: "failed to decrease post likes" });
   }
-
-  const likes = await deleteLike(req.user.id);
-  return res.status(200).json({ likes });
 };

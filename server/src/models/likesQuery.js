@@ -6,15 +6,30 @@ export const insertLike = async (postId, UserId) => {
       postId,
       UserId,
     ]);
+
+    const { rows } = await pool.query(
+      `SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $1`,
+      [postId],
+    );
+    return parseInt(rows[0].like_count, 10);
   } catch (err) {
     console.error("unable to insert like", err);
     throw err;
   }
 };
 
-export const deleteLike = async (UserId) => {
+export const deleteLike = async (postId, UserId) => {
   try {
-    await pool.query(`DELETE FROM likes WHERE user_id = $1`, [UserId]);
+    await pool.query(`DELETE FROM likes WHERE user_id = $1 AND post_id = $2`, [
+      UserId,
+      postId,
+    ]);
+
+    const { rows } = await pool.query(
+      `SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $1`,
+      [postId],
+    );
+    return parseInt(rows[0].like_count, 10);
   } catch (err) {
     console.error("unable to delete like", err);
     throw err;
