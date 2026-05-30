@@ -115,8 +115,6 @@ export function Post() {
     return redirect;
   }
 
-  //TODO add delete testing
-
   return (
     <main className={styles.PostContainer}>
       <div className={styles.header}>

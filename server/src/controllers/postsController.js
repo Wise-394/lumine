@@ -144,5 +144,5 @@ export const decreasePostLikes = async (req, res) => {
   const likes = await decreaseLikes(postId);
   return res.status(200).json({ likes });
 };
-// redo implementation
+//TODO redo implementation
 // make a post likes table

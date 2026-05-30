@@ -180,7 +180,6 @@ describe("PostCard – menu visibility", () => {
     );
   });
 });
-// TODO
 
 describe("PostCard – edit redirect", () => {
   it("navigates to the post detail page when Edit is clicked", async () => {

@@ -57,3 +57,16 @@ export const createCodeBlocksTable = async () => {
     throw err;
   }
 };
+
+export const createLikesTable = async () => {
+  try {
+    await pool.query(`CREATE TABLE IF NOT EXISTS likes(
+      post_id INT REFERENCES posts(id) ON DELETE CASCADE,
+      user_id INT REFERENCES users(id) ON DELETE CASCADE,
+      PRIMARY KEY(post_id, user_id)
+      )`);
+  } catch (err) {
+    console.error("unable to create likes table");
+    throw err;
+  }
+};
