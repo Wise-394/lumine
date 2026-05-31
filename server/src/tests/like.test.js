@@ -9,20 +9,25 @@ afterEach(() => {
 vi.mock("../middlewares/authenticate.js", () => ({
   authenticateUser: (req, res, next) => {
     req.user = { id: 1 };
-    console.log(req.user);
     next();
   },
 }));
 
 describe("likes", () => {
   it("likes user post", async () => {
-    vi.spyOn(likesQuery, "insertLike").mockResolvedValue({ likes: 1 });
+    vi.spyOn(likesQuery, "insertLike").mockResolvedValue(1);
     const res = await request(app).post("/posts/1/likes");
 
     expect(res.status).toBe(200);
   });
-  it("dislike user post", async () => {
-    vi.spyOn(likesQuery, "deleteLike").mockResolvedValue({ likes: 0 });
+  it("prevent disliking if not like", async () => {
+    vi.spyOn(likesQuery, "deleteLike").mockResolvedValue(false);
+    const res = await request(app).delete("/posts/1/likes");
+    expect(res.status).toBe(401);
   });
-  it("it prevent disliking if not liked");
+  it("dislike post", async () => {
+    vi.spyOn(likesQuery, "deleteLike").mockResolvedValue(1);
+    const res = await request(app).delete("/posts/1/likes");
+    expect(res.status).toBe(200);
+  });
 });

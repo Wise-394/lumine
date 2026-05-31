@@ -155,4 +155,3 @@ export const decreasePostLikes = async (req, res) => {
     res.status(500).json({ message: "failed to decrease post likes" });
   }
 };
-// TODO ADD LIKES TEST
