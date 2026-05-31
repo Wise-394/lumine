@@ -130,3 +130,12 @@ export const deletePost = async (id) => {
     throw err;
   }
 };
+
+export const deleteExpiredPost = async () => {
+  try {
+    await pool.query(`DELETE FROM posts where expires_at <= NOW()`);
+  } catch (err) {
+    console.error("unable to delete expiredPost");
+    throw err;
+  }
+};

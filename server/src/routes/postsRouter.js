@@ -22,5 +22,3 @@ postsRouter.delete("/:id", authenticateUser, deletePostByIdController);
 
 postsRouter.post("/:id/likes", authenticateUser, increasePostLikes);
 postsRouter.delete("/:id/likes", authenticateUser, decreasePostLikes);
-
-// TODO CHANGE TO POSTS (not post)

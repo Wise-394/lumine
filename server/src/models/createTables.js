@@ -24,6 +24,7 @@ const createUsersTable = async () => {
 // user id null = guest
 //visibility = link_only, public, private
 // expires at, null = permanent
+// TODO ADD INITIAL USERS AND POSTS
 export const createPostsTable = async () => {
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS posts(
@@ -42,12 +43,13 @@ export const createPostsTable = async () => {
   }
 };
 //TODO auto delete expired post
-
+// EVERY START OF SERVER DELETE EXPIRED POST
+//
 export const createCodeBlocksTable = async () => {
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS code_blocks(
       id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-      post_id INT REFERENCES posts(id),
+      post_id INT REFERENCES posts(id) ON DELETE CASCADE,
       title TEXT NOT NULL,
       code TEXT NOT NULL,
       language TEXT NOT NULL,
