@@ -145,11 +145,10 @@ export const increasePostLikes = async (req, res) => {
 
 export const decreasePostLikes = async (req, res) => {
   try {
-    const post = getPostById(req.params.id);
-    if (req.user.id !== post.userId) {
+    const likes = await deleteLike(req.params.id, req.user.id);
+    if (likes === false) {
       return res.status(401).json({ message: "unauthorized" });
     }
-    const likes = await deleteLike(req.user.id);
     return res.status(200).json({ likes });
   } catch (err) {
     console.error("unable to decrease like", err);

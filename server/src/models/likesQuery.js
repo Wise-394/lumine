@@ -20,11 +20,13 @@ export const insertLike = async (postId, UserId) => {
 
 export const deleteLike = async (postId, UserId) => {
   try {
-    await pool.query(`DELETE FROM likes WHERE user_id = $1 AND post_id = $2`, [
-      UserId,
-      postId,
-    ]);
-
+    const result = await pool.query(
+      `DELETE FROM likes WHERE user_id = $1 AND post_id = $2`,
+      [UserId, postId],
+    );
+    if (result.rowCount <= 0) {
+      return false;
+    }
     const { rows } = await pool.query(
       `SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $1`,
       [postId],
