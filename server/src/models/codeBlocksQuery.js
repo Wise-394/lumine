@@ -32,7 +32,7 @@ export const insertCodeBlock = async (
   }
 };
 export const updateCodeBlock = async (
-  id,
+  post_id,
   title,
   code,
   language,
@@ -45,8 +45,8 @@ export const updateCodeBlock = async (
       code = COALESCE($2, code),
       language = COALESCE($3, language),
       description = COALESCE($4, description)
-      WHERE id = $5`,
-      [title, code, language, description, id],
+      WHERE post_id = $5`,
+      [title, code, language, description, post_id],
     );
   } catch (err) {
     console.error("unable to update code_block", err);

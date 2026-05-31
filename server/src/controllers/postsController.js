@@ -9,7 +9,7 @@ import { insertLike, deleteLike } from "../models/likesQuery.js";
 import { validationResult } from "express-validator";
 import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
 
-const GUEST_POST_EXPIRY_DAYS = 30;
+const GUEST_POST_EXPIRY_DAYS = 7;
 export const getAllPostController = async (req, res) => {
   try {
     const posts = await getAllPost();
@@ -71,17 +71,21 @@ export const updatePostController = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const post = getPostById(req.params.id);
-  if (req.user.id !== post.userId) {
-    return res.status(401).json({ message: "not authorized" });
-  }
+
   try {
+    const post = await getPostById(req.params.id);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+    if (req.user.id !== post.userId) {
+      return res.status(401).json({ message: "not authorized" });
+    }
+
     const {
       title,
       description,
       visibility,
       code,
       language,
+      codeBlockTitle,
       codeBlockDescription,
     } = req.body;
 
@@ -91,11 +95,13 @@ export const updatePostController = async (req, res) => {
       description,
       visibility,
     );
+    console.log(updatedPost);
     if (!updatedPost)
       return res.status(404).json({ message: "Post not found" });
 
     await updateCodeBlock(
-      updatedPost.code_block_id,
+      req.params.id,
+      codeBlockTitle,
       code,
       language,
       codeBlockDescription,

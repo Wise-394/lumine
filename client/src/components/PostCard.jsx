@@ -31,7 +31,7 @@ export function PostCard({
 }) {
   const navigate = useNavigate();
   const { userId } = useAuthenticationStore();
-  const initials = username.slice(0, 2);
+  const initials = (username ?? "Guest").slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,7 +74,7 @@ export function PostCard({
           <span className={styles.time}>{createdAt}</span>
         </div>
 
-        {userId === postUserId && (
+        {userId && postUserId && userId === postUserId && (
           <div className={styles.moreMenu} ref={menuRef}>
             <button
               className={styles.moreBtn}
@@ -142,6 +142,7 @@ export function PostCard({
             <button className={styles.likeButton}>
               <CiHeart />
             </button>
+            <p>10</p>
           </div>
         </footer>
       </div>
@@ -160,3 +161,5 @@ export function PostCard({
     </article>
   );
 }
+// TODO popup preventing guest to like
+// TODO like functionality

@@ -18,10 +18,10 @@ export const getAllPost = async (user_id = null) => {
         code_blocks.language,
         code_blocks.description AS "codeBlockDescription",
         COUNT(likes.post_id) AS "likesCount",
-        BOOL_OR(likes.user_id = $1) AS "likedByUser"
+        BOOL_OR(likes.user_id = $1) FILTER (WHERE $1::integer IS NOT NULL) AS "likedByUser"
       FROM posts 
       INNER JOIN code_blocks ON code_blocks.post_id = posts.id
-      INNER JOIN users ON users.id = posts.user_id
+      LEFT JOIN users ON users.id = posts.user_id
       LEFT JOIN likes ON likes.post_id = posts.id
     `;
 
