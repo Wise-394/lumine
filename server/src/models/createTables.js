@@ -42,9 +42,7 @@ export const createPostsTable = async () => {
     throw err;
   }
 };
-//TODO auto delete expired post
-// EVERY START OF SERVER DELETE EXPIRED POST
-//
+
 export const createCodeBlocksTable = async () => {
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS code_blocks(

@@ -8,6 +8,8 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { getJWT } from "../helpers/localStorage.js";
 import { useNavigate } from "react-router";
+import { CiHeart } from "react-icons/ci";
+
 const LANG_MAP = {
   javascript: javascript(),
   js: javascript(),
@@ -58,6 +60,7 @@ export function PostCard({
       console.error("unable to delete post", err);
     }
   };
+
   const redirectToPostDetail = () => {
     navigate(`/post/${postId}`);
   };
@@ -131,12 +134,16 @@ export function PostCard({
           />
         </div>
 
-        {codeDescription && (
-          <footer className={styles.terminalFooter}>
+        <footer className={styles.terminalFooter}>
+          {codeDescription && (
             <p className={styles.codeDescription}>{codeDescription}</p>
-            <span className={styles.terminalUser}>@{username}</span>
-          </footer>
-        )}
+          )}
+          <div>
+            <button className={styles.likeButton}>
+              <CiHeart />
+            </button>
+          </div>
+        </footer>
       </div>
 
       {tags.length > 0 && (

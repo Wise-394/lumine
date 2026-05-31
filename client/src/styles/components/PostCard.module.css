@@ -245,18 +245,39 @@
   font-weight: 500;
 }
 
-.terminalUser {
-  font-family: var(--font-code);
-  font-size: 13px;
-  font-weight: 600;
-  color: #94a3b8;
-}
-
 /* ── Footer / tags ── */
 
 .postFooter {
   padding: 10px 16px 13px;
   border-top: 1px solid #1a2540;
+}
+
+.terminalFooter > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.likeButton {
+  background: transparent;
+  border: none;
+}
+
+.likeButton svg {
+  font-size: 1.8rem;
+  color: var(--text-normal);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.likeButton svg:hover {
+  transform: translateY(-4px);
+  color: var(--primary);
+  cursor: pointer;
 }
 
 .tags {
