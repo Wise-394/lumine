@@ -11,7 +11,7 @@ export function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const data = await apiFetch("/post");
+        const data = await apiFetch("/posts");
         setPosts(data.posts);
       } catch (err) {
         setError(err.message);

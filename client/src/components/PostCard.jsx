@@ -48,7 +48,7 @@ export function PostCard({
   const handleDeletePost = async () => {
     try {
       const token = getJWT();
-      await apiFetch(`/post/${postId}`, {
+      await apiFetch(`/posts/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

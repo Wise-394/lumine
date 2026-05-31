@@ -42,7 +42,7 @@ export function Post() {
     const fetchPost = async () => {
       try {
         setFetchError(null);
-        const data = await apiFetch(`/post/${id}`);
+        const data = await apiFetch(`/posts/${id}`);
         if (!data.post || Object.keys(data.post).length === 0) {
           return navigate("/post");
         }
@@ -70,7 +70,7 @@ export function Post() {
     setLoading(true);
     setError(null);
     try {
-      const res = await apiFetch(isEditMode ? `/post/${id}` : "/post", {
+      const res = await apiFetch(isEditMode ? `/posts/${id}` : "/posts", {
         method: isEditMode ? "PUT" : "POST",
         headers: {
           Authorization: `Bearer ${token}`,

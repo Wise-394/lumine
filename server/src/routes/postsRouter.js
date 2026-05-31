@@ -20,7 +20,7 @@ postsRouter.post("/", optionalAuth, validatePost, insertPostController);
 postsRouter.put("/:id", authenticateUser, validatePost, updatePostController);
 postsRouter.delete("/:id", authenticateUser, deletePostByIdController);
 
-// likes
 postsRouter.post("/:id/likes", authenticateUser, increasePostLikes);
 postsRouter.delete("/:id/likes", authenticateUser, decreasePostLikes);
-// add testing to likes
+
+// TODO CHANGE TO POSTS (not post)
