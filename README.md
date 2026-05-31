@@ -229,9 +229,7 @@ cd client && npm run dev
 - [x] REST API with MVC architecture
 - [x] Frontend & backend test suites
 - [x] edit and delete posts
-- [ ] Like and bookmark system
-- [ ] User profiles and follower system
-- [ ] Comments on snippets
+- [ ] Like system
 - [ ] Search and tag filtering
 
 ---
