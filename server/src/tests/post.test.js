@@ -17,14 +17,14 @@ describe("posts routes", () => {
     ];
     vi.spyOn(postsQuery, "getAllPost").mockResolvedValue(mockPosts);
 
-    const res = await request(app).get("/post");
+    const res = await request(app).get("/posts");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ posts: mockPosts });
   });
 
   it("responds with error when input valid", async () => {
-    const res = await request(app).post("/post").send({ title: "" });
+    const res = await request(app).post("/posts").send({ title: "" });
 
     expect(res.body.errors).toEqual(
       expect.arrayContaining([
@@ -43,26 +43,28 @@ describe("posts routes", () => {
     const token = jwt.sign({ sub: 1 }, process.env.JWT_SECRET);
 
     const res = await request(app)
-      .put("/post/1")
+      .put("/posts/1")
       .set("Authorization", `Bearer ${token}`)
       .send({
         title: "Updated",
         description: "desc",
         visibility: "public",
+        codeBlockTitle: "testing",
         code: "console.log()",
         language: "javascript",
         codeBlockDescription: "a block",
       });
 
-    expect(res.status).toBe(400);
-    expect(res.body).toEqual({ message: "unable to update the post" });
+    expect(res.status).toBe(401);
+    expect(res.body).toEqual({ message: "not authorized" });
   });
+
   it("respond with error when post id not found", async () => {
     vi.spyOn(postsQuery, "getPostById").mockRejectedValue(
       new Error("not found"),
     );
 
-    const res = await request(app).get("/post/999");
+    const res = await request(app).get("/posts/999");
 
     expect(res.status).toBe(500);
     expect(res.body).toEqual({ message: "Failed to get post id" });

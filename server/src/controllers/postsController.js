@@ -135,7 +135,7 @@ export const deletePostByIdController = async (req, res) => {
 export const increasePostLikes = async (req, res) => {
   try {
     const postId = req.params.id;
-    const likes = await insertLike(postId, res.user.id);
+    const likes = await insertLike(postId, req.user.id);
     return res.status(200).json({ likes });
   } catch (err) {
     console.error("unable to increase like", err);

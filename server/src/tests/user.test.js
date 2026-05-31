@@ -3,6 +3,7 @@ import request from "supertest";
 import app from "../../app.js";
 import * as postQuery from "../models/postsQuery.js";
 import jwt from "jsonwebtoken";
+import * as usersQuery from "../models/usersQuery.js";
 afterEach(() => {
   vi.restoreAllMocks();
 });
@@ -29,6 +30,9 @@ describe("user route", () => {
         title: "test2",
       },
     ]);
+    vi.spyOn(usersQuery, "getUserById").mockResolvedValue({ id: 1 });
+
+    console.log(process.env.JWT_SECRET);
     const res = await request(app)
       .get("/user/1")
       .set("Authorization", `Bearer ${token}`);
