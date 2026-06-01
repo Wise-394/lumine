@@ -12,7 +12,8 @@ import { insertCodeBlock, updateCodeBlock } from "../models/codeBlocksQuery.js";
 const GUEST_POST_EXPIRY_DAYS = 7;
 export const getAllPostController = async (req, res) => {
   try {
-    const posts = await getAllPost();
+    const user_id = req.query.userId ?? null;
+    const posts = await getAllPost(user_id);
     res.json({ posts });
   } catch (err) {
     console.error("unable to get all posts", err);
@@ -142,7 +143,7 @@ export const increasePostLikes = async (req, res) => {
   try {
     const postId = req.params.id;
     const likes = await insertLike(postId, req.user.id);
-    return res.status(200).json({ likes });
+    return res.status(200).json({ likes, likedByUser: true });
   } catch (err) {
     console.error("unable to increase like", err);
     res.status(500).json({ message: "failed to like post" });
@@ -152,10 +153,7 @@ export const increasePostLikes = async (req, res) => {
 export const decreasePostLikes = async (req, res) => {
   try {
     const likes = await deleteLike(req.params.id, req.user.id);
-    if (likes === false) {
-      return res.status(401).json({ message: "unauthorized" });
-    }
-    return res.status(200).json({ likes });
+    return res.status(200).json({ likes, likedByUser: false });
   } catch (err) {
     console.error("unable to decrease like", err);
     res.status(500).json({ message: "failed to decrease post likes" });

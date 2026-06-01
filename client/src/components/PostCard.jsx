@@ -8,7 +8,7 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { apiFetch } from "../helpers/api.js";
 import { getJWT } from "../helpers/localStorage.js";
 import { useNavigate } from "react-router";
-import { CiHeart } from "react-icons/ci";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 const LANG_MAP = {
   javascript: javascript(),
@@ -28,6 +28,8 @@ export function PostCard({
   createdAt,
   setPosts,
   postId,
+  likesCount,
+  likedByUser,
 }) {
   const navigate = useNavigate();
   const { userId } = useAuthenticationStore();
@@ -36,6 +38,22 @@ export function PostCard({
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const [isLiked, setIsLiked] = useState(likedByUser);
+  const [count, setCount] = useState(likesCount);
+
+  const handleLike = async () => {
+    try {
+      const token = getJWT();
+      const res = await apiFetch(`/posts/${postId}/likes`, {
+        method: isLiked ? "DELETE" : "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setIsLiked(!isLiked);
+      setCount(res.likes);
+    } catch (err) {
+      console.error("unable to like", err);
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -139,10 +157,13 @@ export function PostCard({
             <p className={styles.codeDescription}>{codeDescription}</p>
           )}
           <div>
-            <button className={styles.likeButton}>
-              <CiHeart />
+            <button
+              onClick={handleLike}
+              className={`${styles.likeButton} ${isLiked ? styles.liked : ""}`}
+            >
+              {isLiked ? <FaHeart /> : <FaRegHeart />}
             </button>
-            <p>10</p>
+            <p>{count}</p>
           </div>
         </footer>
       </div>

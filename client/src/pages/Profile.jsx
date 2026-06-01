@@ -8,7 +8,7 @@ import { PostCard } from "../components/PostCard.jsx";
 import styles from "@styles/pages/Profile.module.css";
 
 export function Profile() {
-  const { user } = useAuthenticationStore();
+  const { user, userId } = useAuthenticationStore();
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
@@ -16,14 +16,14 @@ export function Profile() {
 
     const fetchUser = async () => {
       const token = getJWT();
-      const data = await apiFetch(`/user/${user.sub}`, {
+      const data = await apiFetch(`/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts(data.posts);
     };
 
     fetchUser();
-  }, [user]);
+  }, [user, userId]);
 
   if (!user) return <GuestProfile />;
 
@@ -47,6 +47,10 @@ export function Profile() {
               language={post.language}
               code={post.code}
               codeDescription={post.codeBlockDescription}
+              likesCount={post.likesCount}
+              likedByUser={post.likedByUser}
+              setPosts={setPosts}
+              postId={post.postId}
             />
           ))}
         </div>

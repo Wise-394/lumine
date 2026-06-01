@@ -2,16 +2,20 @@ import styles from "@styles/pages/Home.module.css";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../helpers/api.js";
 import { PostCard } from "../components/PostCard.jsx";
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { userId } = useAuthenticationStore();
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const data = await apiFetch("/posts");
+        const data = await apiFetch(
+          `/posts${userId ? `?userId=${userId}` : ""}`,
+        );
         setPosts(data.posts);
       } catch (err) {
         setError(err.message);
@@ -21,7 +25,7 @@ export function Home() {
     };
 
     fetchPosts();
-  }, []);
+  }, [userId]);
 
   return (
     <main className={styles.homeContainer}>
@@ -45,6 +49,8 @@ export function Home() {
               codeDescription={post.codeBlockDescription}
               setPosts={setPosts}
               postId={post.postId}
+              likesCount={post.likesCount}
+              likedByUser={post.likedByUser}
             />
           ))}
         </div>
@@ -52,3 +58,5 @@ export function Home() {
     </main>
   );
 }
+
+// TODO ADD POP UP TO GUEST IF TRYING TO LIKE POSTS

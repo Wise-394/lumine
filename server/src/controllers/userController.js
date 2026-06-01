@@ -1,8 +1,8 @@
-import { getAllPost } from "../models/postsQuery.js";
+import { getPostsByUser } from "../models/postsQuery.js";
 
-export const getUserPosts = async (req, res, next) => {
+export const getUserPostsController = async (req, res, next) => {
   try {
-    const posts = await getAllPost(req.user.id);
+    const posts = await getPostsByUser(req.user.id);
     return res.json({ posts });
   } catch (err) {
     console.error("unable to get user posts", err);
