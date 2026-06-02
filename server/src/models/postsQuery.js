@@ -26,7 +26,8 @@ export const getAllPost = async (user_id = null) => {
       INNER JOIN code_blocks ON code_blocks.post_id = posts.id
       LEFT JOIN users ON users.id = posts.user_id
       LEFT JOIN likes ON likes.post_id = posts.id
-      GROUP BY posts.id, users.username, code_blocks.id`,
+      GROUP BY posts.id, users.username, code_blocks.id
+      ORDER BY posts.created_at DESC`,
       [user_id],
     );
     return rows;
