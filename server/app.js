@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-createTablesIfNotExist();
+await createTablesIfNotExist();
 passportSetup();
 
 //AUTO DELETE EXPIRED POSTS
