@@ -30,12 +30,12 @@ export function PostCard({
   postId,
   likesCount,
   likedByUser,
+  setIsOpenDialog,
 }) {
   const navigate = useNavigate();
-  const { userId } = useAuthenticationStore();
+  const { user, userId } = useAuthenticationStore();
   const initials = (username ?? "Guest").slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
-
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const [isLiked, setIsLiked] = useState(likedByUser);
@@ -43,6 +43,9 @@ export function PostCard({
 
   const handleLike = async () => {
     try {
+      if (!user) {
+        return openDialog();
+      }
       const token = getJWT();
       const res = await apiFetch(`/posts/${postId}/likes`, {
         method: isLiked ? "DELETE" : "POST",
@@ -53,6 +56,10 @@ export function PostCard({
     } catch (err) {
       console.error("unable to like", err);
     }
+  };
+
+  const openDialog = () => {
+    setIsOpenDialog((prev) => !prev);
   };
 
   useEffect(() => {
@@ -183,4 +190,3 @@ export function PostCard({
   );
 }
 // TODO popup preventing guest to like
-// TODO like functionality

@@ -1,14 +1,17 @@
 import styles from "@styles/pages/Home.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { apiFetch } from "../helpers/api.js";
 import { PostCard } from "../components/PostCard.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { GuestPopUp } from "../components/GuestPopUp.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userId } = useAuthenticationStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,6 +32,7 @@ export function Home() {
 
   return (
     <main className={styles.homeContainer}>
+      <GuestPopUp isOpen={isOpen} setIsOpen={setIsOpen} dialogRef={dialogRef} />
       {error && <p>{error}</p>}
       {isLoading && error === null ? (
         <p>loading posts...</p>
@@ -51,6 +55,7 @@ export function Home() {
               postId={post.postId}
               likesCount={post.likesCount}
               likedByUser={post.likedByUser}
+              setIsOpenDialog={setIsOpen}
             />
           ))}
         </div>

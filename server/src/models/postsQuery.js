@@ -36,6 +36,7 @@ export const getAllPost = async (user_id = null) => {
     throw err;
   }
 };
+// TODO ADD DIFFERENT ORDER BY
 
 export const getPostsByUser = async (user_id) => {
   try {
