@@ -54,6 +54,7 @@
   <img src="https://img.shields.io/badge/Passport-34E27A?style=for-the-badge&logo=passport&logoColor=white" alt="Passport" />
   <img src="https://img.shields.io/badge/bcryptjs-525252?style=for-the-badge&logo=lock&logoColor=white" alt="bcryptjs" />
   <img src="https://img.shields.io/badge/express--validator-339933?style=for-the-badge&logo=express&logoColor=white" alt="express-validator" />
+  <img src="https://img.shields.io/badge/express--rate--limit-FF6B35?style=for-the-badge&logo=express&logoColor=white" alt="express-rate-limit" />
   <img src="https://img.shields.io/badge/express--session-000000?style=for-the-badge&logo=express&logoColor=white" alt="express-session" />
   <img src="https://img.shields.io/badge/CORS-007ACC?style=for-the-badge&logo=cors&logoColor=white" alt="CORS" />
   <img src="https://img.shields.io/badge/node--postgres_(pg)-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="pg" />
@@ -85,13 +86,15 @@
 - Custom error pages and descriptive user-facing error messages
 - Custom client-side form validation for a polished UX
 
-### Backend Architecture
+### backend Architecture
 - **MVC pattern** for clean separation of concerns
 - **RESTful API** following modern industry standards
 - Input validation on all routes via `express-validator`
 - **PostgreSQL** database
+- **Rate limiting** via `express-rate-limit` — protects all API routes from abuse.
 
 ---
+
 ## Screenshots
 
 ### Landing Page
