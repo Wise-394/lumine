@@ -165,6 +165,7 @@ export function PostCard({
           )}
           <div>
             <button
+              aria-label="Like post"
               onClick={handleLike}
               className={`${styles.likeButton} ${isLiked ? styles.liked : ""}`}
             >
@@ -189,4 +190,3 @@ export function PostCard({
     </article>
   );
 }
-// TODO popup preventing guest to like

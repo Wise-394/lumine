@@ -9,6 +9,7 @@ import { userRouter } from "./src/routes/userRouter.js";
 import { errorRouter } from "./src/routes/errorRouter.js";
 import cron from "node-cron";
 import { deleteExpiredPost } from "./src/models/postsQuery.js";
+
 const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

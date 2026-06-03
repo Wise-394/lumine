@@ -17,5 +17,6 @@
   .postListContainer {
     max-width: 100%;
     gap: 12px;
+    padding: 0;
   }
 }

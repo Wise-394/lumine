@@ -10,7 +10,7 @@ export function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userId } = useAuthenticationStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDialogOpen, setIsDIalogOpen] = useState(false);
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +32,11 @@ export function Home() {
 
   return (
     <main className={styles.homeContainer}>
-      <GuestPopUp isOpen={isOpen} setIsOpen={setIsOpen} dialogRef={dialogRef} />
+      <GuestPopUp
+        isOpen={isDialogOpen}
+        setIsOpen={isDialogOpen}
+        dialogRef={dialogRef}
+      />
       {error && <p>{error}</p>}
       {isLoading && error === null ? (
         <p>loading posts...</p>
@@ -55,7 +59,7 @@ export function Home() {
               postId={post.postId}
               likesCount={post.likesCount}
               likedByUser={post.likedByUser}
-              setIsOpenDialog={setIsOpen}
+              setIsOpenDialog={setIsDIalogOpen}
             />
           ))}
         </div>
@@ -63,5 +67,3 @@ export function Home() {
     </main>
   );
 }
-
-// TODO ADD POP UP TO GUEST IF TRYING TO LIKE POSTS

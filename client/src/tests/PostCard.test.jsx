@@ -24,7 +24,7 @@ vi.mock("react-router", async (importOriginal) => ({
 const BASE_PROPS = {
   username: "alice",
   postTitle: "My Post",
-  postUserId: "user-1", // matches mocked userId → menu is visible
+  postUserId: "user-1",
   codeTitle: "index.js",
   language: "javascript",
   code: 'console.log("hi")',
@@ -64,13 +64,12 @@ describe("PostCard – delete post", () => {
     await userEvent.click(screen.getByRole("button", { name: /delete/i }));
 
     await waitFor(() =>
-      expect(apiFetch).toHaveBeenCalledWith("/post/post-abc", {
+      expect(apiFetch).toHaveBeenCalledWith("/posts/post-abc", {
         method: "DELETE",
         headers: { Authorization: "Bearer test-token" },
       }),
     );
 
-    // setPosts is called with a functional updater — invoke it to check the result
     await waitFor(() => expect(setPosts).toHaveBeenCalledTimes(1));
     const updater = setPosts.mock.calls[0][0];
     expect(updater(prevPosts)).toEqual([{ postId: "post-xyz" }]);
