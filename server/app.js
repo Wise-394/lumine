@@ -9,6 +9,7 @@ import { userRouter } from "./src/routes/userRouter.js";
 import { errorRouter } from "./src/routes/errorRouter.js";
 import cron from "node-cron";
 import { deleteExpiredPost } from "./src/models/postsQuery.js";
+import { limiter } from "./src/configs/rateLimitConfig.js";
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,7 @@ deleteExpiredPost();
 cron.schedule("0 0 * * *", deleteExpiredPost);
 
 //routes
+app.use(limiter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/posts", postsRouter);
