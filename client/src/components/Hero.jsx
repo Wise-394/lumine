@@ -2,10 +2,13 @@ import styles from "@styles/components/Hero.module.css";
 import { FiArrowRight } from "react-icons/fi";
 import { HeroTerminal } from "./HeroTerminal.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { useNavigate } from "react-router";
 export function Hero() {
   const loginGuest = useAuthenticationStore((state) => state.loginGuest);
-  const handleNavigate = () => {
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
     loginGuest();
+    navigate(path);
   };
   return (
     <section className={styles.grid}>

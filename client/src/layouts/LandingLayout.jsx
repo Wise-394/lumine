@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import { redirectIfAuthenticated } from "../helpers/redirect.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function LandingLayout() {
-  const isLoggedIn = useAuthenticationStore((state) => state.loggedIn);
+  const isLoggedIn = useAuthenticationStore((state) => state.isLoggedIn);
   const isGuest = useAuthenticationStore((state) => state.isGuest);
   const redirect = redirectIfAuthenticated(isLoggedIn, isGuest);
   if (redirect) return redirect;
