@@ -5,8 +5,11 @@ import { FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import styles from "@styles/components/Header.module.css";
 
 export function Header() {
-  const { isLoggedIn, loginGuest, logout, isGuest, logoutGuest } =
-    useAuthenticationStore();
+  const isLoggedIn = useAuthenticationStore((state) => state.isLoggedIn);
+  const loginGuest = useAuthenticationStore((state) => state.loginGuest);
+  const logout = useAuthenticationStore((state) => state.logout);
+  const isGuest = useAuthenticationStore((state) => state.isGuest);
+  const logoutGuest = useAuthenticationStore((state) => state.logoutGuest);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 

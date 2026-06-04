@@ -3,7 +3,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { HeroTerminal } from "./HeroTerminal.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function Hero() {
-  const { loginGuest } = useAuthenticationStore();
+  const loginGuest = useAuthenticationStore((state) => state.loginGuest);
   const handleNavigate = () => {
     loginGuest();
   };

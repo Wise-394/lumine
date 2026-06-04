@@ -8,7 +8,16 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 vi.mock("../helpers/api.js", () => ({ apiFetch: vi.fn() }));
 vi.mock("../helpers/localStorage.js", () => ({ getJWT: () => null }));
 vi.mock("../store/authenticationStore.jsx", () => ({
-  useAuthenticationStore: vi.fn(() => ({ user: null, userId: null })),
+  useAuthenticationStore: vi.fn((selector) =>
+    selector({ user: null, userId: null, isLoggedIn: false, isGuest: false }),
+  ),
+}));
+
+const toggleDialog = vi.fn();
+vi.mock("../store/dialogStore.jsx", () => ({
+  useDialogStore: vi.fn((selector) =>
+    selector({ isDialogOpen: false, toggleDialog }),
+  ),
 }));
 
 const BASE_PROPS = {
@@ -24,7 +33,6 @@ const BASE_PROPS = {
   setPosts: vi.fn(),
   likesCount: 0,
   likedByUser: false,
-  setIsOpenDialog: vi.fn(),
 };
 
 function renderCard(props = {}) {
@@ -38,26 +46,28 @@ function renderCard(props = {}) {
 describe("GuestPopUp via PostCard", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("calls setIsOpenDialog when a guest clicks the like button", async () => {
-    const setIsOpenDialog = vi.fn();
-    renderCard({ setIsOpenDialog });
+  it("calls toggleDialog when a guest clicks the like button", async () => {
+    renderCard();
 
     await userEvent.click(screen.getByRole("button", { name: /like post/i }));
 
-    expect(setIsOpenDialog).toHaveBeenCalledTimes(1);
+    expect(toggleDialog).toHaveBeenCalledTimes(1);
   });
 
-  it("does not call setIsOpenDialog if the user is logged in", async () => {
-    useAuthenticationStore.mockReturnValueOnce({
-      user: { id: "user-1" },
-      userId: "user-1",
-    });
+  it("does not call toggleDialog if the user is logged in", async () => {
+    useAuthenticationStore.mockImplementationOnce((selector) =>
+      selector({
+        user: { id: "user-1" },
+        userId: "user-1",
+        isLoggedIn: true,
+        isGuest: false,
+      }),
+    );
 
-    const setIsOpenDialog = vi.fn();
-    renderCard({ setIsOpenDialog });
+    renderCard();
 
     await userEvent.click(screen.getByRole("button", { name: /like post/i }));
 
-    expect(setIsOpenDialog).not.toHaveBeenCalled();
+    expect(toggleDialog).not.toHaveBeenCalled();
   });
 });

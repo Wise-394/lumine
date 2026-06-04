@@ -8,8 +8,13 @@ import { usePostStore } from "../store/PostStore.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function CodeBlock() {
-  const { code, language, codeBlockTitle, codeBlockDescription, updateField } =
-    usePostStore();
+  const code = usePostStore((state) => state.code);
+  const language = usePostStore((state) => state.language);
+  const codeBlockTitle = usePostStore((state) => state.codeBlockTitle);
+  const codeBlockDescription = usePostStore(
+    (state) => state.codeBlockDescription,
+  );
+  const updateField = usePostStore((state) => state.updateField);
   const { user } = useAuthenticationStore();
 
   return (

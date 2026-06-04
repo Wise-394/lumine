@@ -8,7 +8,8 @@ import { PostCard } from "../components/PostCard.jsx";
 import styles from "@styles/pages/Profile.module.css";
 
 export function Profile() {
-  const { user, userId } = useAuthenticationStore();
+  const user = useAuthenticationStore((state) => state.user);
+  const userId = useAuthenticationStore((state) => state.userId);
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {

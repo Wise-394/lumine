@@ -5,7 +5,8 @@ import styles from "@styles/pages/RootLayout.module.css";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { redirectIfNotAuthenticated } from "../helpers/redirect.jsx";
 export function RootLayout() {
-  const { isLoggedIn, isGuest } = useAuthenticationStore();
+  const isLoggedIn = useAuthenticationStore((state) => state.loggedIn);
+  const isGuest = useAuthenticationStore((state) => state.isGuest);
   const redirect = redirectIfNotAuthenticated(isLoggedIn, isGuest);
   if (redirect) return redirect;
 

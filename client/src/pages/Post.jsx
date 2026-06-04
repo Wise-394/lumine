@@ -14,7 +14,9 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function Post() {
   const { id } = useParams();
   const isEditMode = Boolean(id);
-  const { isLoggedIn, isGuest, userId } = useAuthenticationStore();
+  const isLoggedIn = useAuthenticationStore((state) => state.isLoggedIn);
+  const isGuest = useAuthenticationStore((state) => state.isGuest);
+  const userId = useAuthenticationStore((state) => state.userId);
   const token = getJWT();
   const navigate = useNavigate();
   const {

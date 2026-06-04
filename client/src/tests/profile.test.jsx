@@ -49,7 +49,9 @@ const defaultAuthState = {
 describe("user profile", () => {
   beforeEach(() => {
     vi.mocked(apiFetch).mockResolvedValue(mockPosts);
-    vi.mocked(useAuthenticationStore).mockReturnValue(defaultAuthState);
+    vi.mocked(useAuthenticationStore).mockImplementation((selector) =>
+      selector(defaultAuthState),
+    );
   });
 
   afterEach(() => {
@@ -79,12 +81,14 @@ describe("user profile", () => {
   });
 
   it("doesn't show profile page when not authenticated", async () => {
-    vi.mocked(useAuthenticationStore).mockReturnValue({
-      isLoggedIn: false,
-      isGuest: false,
-      user: null,
-      userId: null,
-    });
+    vi.mocked(useAuthenticationStore).mockImplementation((selector) =>
+      selector({
+        isLoggedIn: false,
+        isGuest: false,
+        user: null,
+        userId: null,
+      }),
+    );
 
     render(
       <MemoryRouter>

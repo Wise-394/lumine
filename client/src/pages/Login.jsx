@@ -9,7 +9,7 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { Header } from "../components/Header.jsx";
 
 export function Login() {
-  const { login } = useAuthenticationStore();
+  const login = useAuthenticationStore((state) => state.login);
   const navigate = useNavigate();
   const { fields, error, setError, setLoading, loading, setField } =
     useLoginForm();

@@ -8,8 +8,9 @@ import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { useDialogStore } from "../store/dialogStore.jsx";
 
 export function GuestPopUp({ dialogRef }) {
-  const { logoutGuest } = useAuthenticationStore();
-  const { isDialogOpen, toggleDialog } = useDialogStore();
+  const logoutGuest = useAuthenticationStore((state) => state.logoutGuest);
+  const isDialogOpen = useDialogStore((state) => state.isDialogOpen);
+  const toggleDialog = useDialogStore((state) => state.toggleDialog);
   const navigate = useNavigate();
   const handleClose = () => {
     toggleDialog();
@@ -24,6 +25,7 @@ export function GuestPopUp({ dialogRef }) {
   }, [dialogRef, isDialogOpen]);
 
   const handleRegisterLogin = (path) => {
+    toggleDialog();
     logoutGuest();
     navigate(path);
   };

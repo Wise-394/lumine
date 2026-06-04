@@ -33,14 +33,15 @@ export function PostCard({
   likedByUser,
 }) {
   const navigate = useNavigate();
-  const { user, userId } = useAuthenticationStore();
+  const user = useAuthenticationStore((state) => state.user);
+  const userId = useAuthenticationStore((state) => state.userId);
   const initials = (username ?? "Guest").slice(0, 2);
   const langExtension = LANG_MAP[language?.toLowerCase()] ?? javascript();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const [isLiked, setIsLiked] = useState(likedByUser);
   const [count, setCount] = useState(likesCount);
-  const { toggleDialog } = useDialogStore((state) => state.isDialog);
+  const toggleDialog = useDialogStore((state) => state.toggleDialog);
   const handleLike = async () => {
     try {
       if (!user) {

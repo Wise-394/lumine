@@ -9,7 +9,7 @@ export function Home() {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { userId } = useAuthenticationStore();
+  const userId = useAuthenticationStore((state) => state.userId);
   const dialogRef = useRef(null);
   useEffect(() => {
     const fetchPosts = async () => {

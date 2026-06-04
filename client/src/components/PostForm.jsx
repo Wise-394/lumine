@@ -2,7 +2,9 @@ import styles from "@styles/components/PostForm.module.css";
 import { usePostStore } from "../store/PostStore.jsx";
 
 export function PostForm() {
-  const { title, description, updateField } = usePostStore();
+  const title = usePostStore((state) => state.title);
+  const description = usePostStore((state) => state.description);
+  const updateField = usePostStore((state) => state.updateField);
   return (
     <div className={styles.formContainer}>
       <div className={styles.postBody}>

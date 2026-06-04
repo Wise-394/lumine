@@ -2,7 +2,7 @@ import styles from "@styles/components/ProfileCard.module.css";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
 export function ProfileCard({ totalPost }) {
-  const { user } = useAuthenticationStore();
+  const user = useAuthenticationStore((state) => state.user);
   return (
     <div className={styles.profileCard}>
       <h1> {user?.username ? `@${user.username}` : "@guest"}</h1>

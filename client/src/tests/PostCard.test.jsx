@@ -5,12 +5,22 @@ import { PostCard } from "../components/PostCard.jsx";
 import { MemoryRouter } from "react-router";
 import { apiFetch } from "../helpers/api.js";
 
-// ─── Mocks ────────────────────────────────────────────────────────────────────
-
 vi.mock("../helpers/api.js", () => ({ apiFetch: vi.fn() }));
 vi.mock("../helpers/localStorage.js", () => ({ getJWT: () => "test-token" }));
 vi.mock("../store/authenticationStore.jsx", () => ({
-  useAuthenticationStore: () => ({ userId: "user-1" }),
+  useAuthenticationStore: vi.fn((selector) =>
+    selector({
+      user: { id: "user-1" },
+      userId: "user-1",
+      isLoggedIn: true,
+      isGuest: false,
+    }),
+  ),
+}));
+vi.mock("../store/dialogStore.jsx", () => ({
+  useDialogStore: vi.fn((selector) =>
+    selector({ isDialogOpen: false, toggleDialog: vi.fn() }),
+  ),
 }));
 
 const mockNavigate = vi.fn();
@@ -18,8 +28,6 @@ vi.mock("react-router", async (importOriginal) => ({
   ...(await importOriginal()),
   useNavigate: () => mockNavigate,
 }));
-
-// ─── Shared helpers ───────────────────────────────────────────────────────────
 
 const BASE_PROPS = {
   username: "alice",
@@ -45,8 +53,6 @@ function renderCard(props = {}) {
 async function openMenu() {
   await userEvent.click(screen.getByRole("button", { name: /more options/i }));
 }
-
-// ─── Tests ────────────────────────────────────────────────────────────────────
 
 describe("PostCard – delete post", () => {
   beforeEach(() => {
@@ -106,7 +112,6 @@ describe("PostCard – delete post", () => {
         expect.any(Error),
       ),
     );
-    // setPosts should NOT have been called — post stays in the list
     expect(BASE_PROPS.setPosts).not.toHaveBeenCalled();
 
     consoleError.mockRestore();
@@ -136,7 +141,6 @@ describe("PostCard – delete post", () => {
 
 describe("PostCard – menu visibility", () => {
   it("shows the ··· menu button when the logged-in user owns the post", () => {
-    // BASE_PROPS has postUserId === mocked userId ("user-1")
     renderCard();
     expect(
       screen.getByRole("button", { name: /more options/i }),
@@ -154,11 +158,9 @@ describe("PostCard – menu visibility", () => {
     renderCard();
     const moreBtn = screen.getByRole("button", { name: /more options/i });
 
-    // Open
     await userEvent.click(moreBtn);
     expect(screen.getByRole("button", { name: /delete/i })).toBeInTheDocument();
 
-    // Close
     await userEvent.click(moreBtn);
     expect(
       screen.queryByRole("button", { name: /delete/i }),
