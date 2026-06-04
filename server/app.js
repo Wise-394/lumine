@@ -24,6 +24,7 @@ cron.schedule("0 0 * * *", deleteExpiredPost);
 
 //routes
 app.use(limiter);
+app.get("/health", (req, res) => res.sendStatus(200));
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/posts", postsRouter);
