@@ -1,8 +1,12 @@
 import styles from "@styles/components/Hero.module.css";
 import { FiArrowRight } from "react-icons/fi";
 import { HeroTerminal } from "./HeroTerminal.jsx";
-
+import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 export function Hero() {
+  const { loginGuest } = useAuthenticationStore();
+  const handleNavigate = () => {
+    loginGuest();
+  };
   return (
     <section className={styles.grid}>
       <div className={styles.leftContainer}>
@@ -14,13 +18,20 @@ export function Hero() {
           export as high-quality styled images.
         </p>
         <div className={styles.buttons}>
-          <a className={styles.cta}>Browse Snippets</a>
-          <a>
+          <button
+            className={styles.cta}
+            onClick={() => handleNavigate("/home")}
+          >
+            Browse Snippets
+          </button>
+          <button onClick={() => handleNavigate("/post")}>
             Paste Code <FiArrowRight />
-          </a>
+          </button>
         </div>
       </div>
       <HeroTerminal />
     </section>
   );
 }
+
+//TODO improve landing page

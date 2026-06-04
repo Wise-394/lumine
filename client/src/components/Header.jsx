@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
-import { useNavigate, Link } from "react-router";
+import { Link } from "react-router";
 import { FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import styles from "@styles/components/Header.module.css";
 
@@ -8,22 +8,18 @@ export function Header() {
   const { isLoggedIn, loginGuest, logout, isGuest, logoutGuest } =
     useAuthenticationStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const handleLogout = () => {
     logout();
-    navigate("/");
   };
   const handleExitGuest = () => {
     logoutGuest();
-    navigate("/");
   };
 
   const handleGuest = () => {
     loginGuest();
-    navigate("/");
   };
 
   // Authenticated

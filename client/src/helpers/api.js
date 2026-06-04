@@ -11,7 +11,12 @@ export async function apiFetch(path, options = {}) {
       ...options,
     });
   } catch {
-    throw new Error("Unable to connect to the server, Try again later");
+    throw new Error("Unable to connect to the server. Try again later.");
+  }
+
+  if (res.status === 429) {
+    const suffix = " Please slow down and try again later.";
+    throw new Error(`Too many requests.${suffix}`);
   }
 
   const data = await res.json();

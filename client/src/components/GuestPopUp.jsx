@@ -70,5 +70,3 @@ export function GuestPopUp({ setIsOpen, isOpen, dialogRef }) {
     </dialog>
   );
 }
-
-// TODO test GUESTPOPUP
