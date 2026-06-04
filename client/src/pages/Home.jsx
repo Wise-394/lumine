@@ -4,13 +4,14 @@ import { apiFetch } from "../helpers/api.js";
 import { PostCard } from "../components/PostCard.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { GuestPopUp } from "../components/GuestPopUp.jsx";
+import { Notice } from "../components/Notice.jsx";
 
 export function Home() {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userId } = useAuthenticationStore();
-  const [isDialogOpen, setIsDIalogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -34,36 +35,39 @@ export function Home() {
     <main className={styles.homeContainer}>
       <GuestPopUp
         isOpen={isDialogOpen}
-        setIsOpen={isDialogOpen}
+        setIsDialogOpen={setIsDialogOpen}
         dialogRef={dialogRef}
       />
-      {error && <p>{error}</p>}
-      {isLoading && error === null ? (
-        <p>loading posts...</p>
-      ) : posts?.length === 0 ? (
-        <p>no posts yet.</p>
-      ) : (
-        <div className={styles.postListContainer}>
-          {posts?.map((post) => (
-            <PostCard
-              key={post.postId}
-              username={post.username}
-              postUserId={post.userId}
-              postTitle={post.postTitle}
-              postDescription={post.postDescription}
-              codeTitle={post.codeBlockTitle}
-              language={post.language}
-              code={post.code}
-              codeDescription={post.codeBlockDescription}
-              setPosts={setPosts}
-              postId={post.postId}
-              likesCount={post.likesCount}
-              likedByUser={post.likedByUser}
-              setIsOpenDialog={setIsDIalogOpen}
-            />
-          ))}
-        </div>
-      )}
+      <div className={styles.feedContainer}>
+        <Notice />
+        {error && <p>{error}</p>}
+        {isLoading && error === null ? (
+          <p>loading posts...</p>
+        ) : posts?.length === 0 ? (
+          <p>no posts yet.</p>
+        ) : (
+          <div className={styles.postListContainer}>
+            {posts?.map((post) => (
+              <PostCard
+                key={post.postId}
+                username={post.username}
+                postUserId={post.userId}
+                postTitle={post.postTitle}
+                postDescription={post.postDescription}
+                codeTitle={post.codeBlockTitle}
+                language={post.language}
+                code={post.code}
+                codeDescription={post.codeBlockDescription}
+                setPosts={setPosts}
+                postId={post.postId}
+                likesCount={post.likesCount}
+                likedByUser={post.likedByUser}
+                setIsDialogOpen={setIsDialogOpen}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </main>
   );
 }

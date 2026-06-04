@@ -30,7 +30,7 @@ export function PostCard({
   postId,
   likesCount,
   likedByUser,
-  setIsOpenDialog,
+  setIsDialogOpen,
 }) {
   const navigate = useNavigate();
   const { user, userId } = useAuthenticationStore();
@@ -59,7 +59,7 @@ export function PostCard({
   };
 
   const openDialog = () => {
-    setIsOpenDialog((prev) => !prev);
+    setIsDialogOpen((prev) => !prev);
   };
 
   useEffect(() => {

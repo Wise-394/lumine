@@ -6,11 +6,11 @@ import { TbLock } from "react-icons/tb";
 import { useNavigate } from "react-router";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 
-export function GuestPopUp({ setIsOpen, isOpen, dialogRef }) {
+export function GuestPopUp({ setIsDialogOpen, isOpen, dialogRef }) {
   const { logoutGuest } = useAuthenticationStore();
   const navigate = useNavigate();
   const handleClose = () => {
-    setIsOpen(false);
+    setIsDialogOpen(false);
   };
   useEffect(() => {
     if (!dialogRef.current) return;

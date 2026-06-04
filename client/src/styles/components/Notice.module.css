@@ -1,0 +1,48 @@
+.noticeCard {
+  background: var(--background-tertiary);
+  border: 1px solid #1f2f42;
+  border-radius: 16px;
+  padding: 1rem;
+  transition: border-color 0.2s;
+}
+
+.noticeCard:hover {
+  border-color: #2a4060;
+}
+
+.noticeHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+
+.iconDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.noticeLabel {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+.noticeTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 4px;
+  line-height: 1.5;
+}
+
+.noticeBody {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}

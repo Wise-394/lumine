@@ -1,10 +1,9 @@
 .postCard {
-  background: #111827;
+  background: var(--background-tertiary);
   border: 1px solid #1f2f42;
   border-radius: 16px;
   overflow: hidden;
   width: 100%;
-  max-width: 50%;
   transition: border-color 0.2s;
 }
 
