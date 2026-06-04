@@ -13,15 +13,12 @@
 .noticeHeader {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 10px;
 }
 
-.iconDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
+.noticeHeader svg {
+  color: var(--primary);
 }
 
 .noticeLabel {

@@ -35,3 +35,4 @@ export function Hero() {
 }
 
 //TODO improve landing page
+// TODO ESCAPE DIALOG
