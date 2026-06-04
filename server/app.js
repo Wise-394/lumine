@@ -12,7 +12,11 @@ import { deleteExpiredPost } from "./src/models/postsQuery.js";
 import { limiter } from "./src/configs/rateLimitConfig.js";
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://lumine.jrdumlao.com", "http://localhost:5173"],
+  }),
+);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 await createTablesIfNotExist();
