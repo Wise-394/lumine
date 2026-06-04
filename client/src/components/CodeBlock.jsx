@@ -15,7 +15,7 @@ export function CodeBlock() {
     (state) => state.codeBlockDescription,
   );
   const updateField = usePostStore((state) => state.updateField);
-  const { user } = useAuthenticationStore();
+  const { user } = useAuthenticationStore(); //TODO FIX THIS SHOULDNT BE OBJECT
 
   return (
     <div className={styles.terminalContainer}>

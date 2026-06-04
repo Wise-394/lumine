@@ -127,12 +127,12 @@
 @media (max-width: 600px) {
   .grid {
     padding-block: 1rem;
-    padding-inline: 0.5rem;
+    padding-inline: 1rem;
   }
-  .leftContainer {
+  /* .leftContainer {
     height: 90vh;
     justify-content: center;
-  }
+  } */
 
   .buttons > a {
     flex: 1 1 100%;
