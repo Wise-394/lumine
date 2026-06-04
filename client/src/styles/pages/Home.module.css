@@ -21,7 +21,7 @@
 
 @media (max-width: 968px) {
   .homeContainer {
-    padding: 0.5rem;
+    padding: 0.5rem 0.3rem;
     flex: 1;
     width: 100%;
     gap: 1rem;
@@ -29,7 +29,7 @@
 
   .feedContainer {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   .postListContainer {

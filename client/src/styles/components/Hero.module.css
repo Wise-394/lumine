@@ -126,7 +126,12 @@
 /* ── Mobile ── */
 @media (max-width: 600px) {
   .grid {
-    padding-block: 3rem;
+    padding-block: 1rem;
+    padding-inline: 0.5rem;
+  }
+  .leftContainer {
+    height: 90vh;
+    justify-content: center;
   }
 
   .buttons > a {

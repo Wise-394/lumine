@@ -310,6 +310,19 @@
     margin: 0 0.5rem 0.625rem;
   }
 
+  .terminalBody {
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  .terminalBody :global(.cm-line) {
+    font-size: 0.7rem !important;
+  }
+
+  .terminalBody :global(.cm-content) {
+    padding: 0.5rem 0.75rem;
+  }
+
   .postFooter {
     padding: 0.625rem 0.75rem;
   }
