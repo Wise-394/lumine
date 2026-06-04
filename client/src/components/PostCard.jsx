@@ -9,6 +9,7 @@ import { apiFetch } from "../helpers/api.js";
 import { getJWT } from "../helpers/localStorage.js";
 import { useNavigate } from "react-router";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useDialogStore } from "../store/dialogStore.jsx";
 
 const LANG_MAP = {
   javascript: javascript(),
@@ -30,7 +31,6 @@ export function PostCard({
   postId,
   likesCount,
   likedByUser,
-  setIsDialogOpen,
 }) {
   const navigate = useNavigate();
   const { user, userId } = useAuthenticationStore();
@@ -40,11 +40,11 @@ export function PostCard({
   const menuRef = useRef(null);
   const [isLiked, setIsLiked] = useState(likedByUser);
   const [count, setCount] = useState(likesCount);
-
+  const { toggleDialog } = useDialogStore((state) => state.isDialog);
   const handleLike = async () => {
     try {
       if (!user) {
-        return openDialog();
+        return toggleDialog();
       }
       const token = getJWT();
       const res = await apiFetch(`/posts/${postId}/likes`, {
@@ -56,10 +56,6 @@ export function PostCard({
     } catch (err) {
       console.error("unable to like", err);
     }
-  };
-
-  const openDialog = () => {
-    setIsDialogOpen((prev) => !prev);
   };
 
   useEffect(() => {

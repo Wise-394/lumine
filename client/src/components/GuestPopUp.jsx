@@ -5,21 +5,23 @@ import { TerminalIcons } from "./TerminalIcons.jsx";
 import { TbLock } from "react-icons/tb";
 import { useNavigate } from "react-router";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
+import { useDialogStore } from "../store/dialogStore.jsx";
 
-export function GuestPopUp({ setIsDialogOpen, isOpen, dialogRef }) {
+export function GuestPopUp({ dialogRef }) {
   const { logoutGuest } = useAuthenticationStore();
+  const { isDialogOpen, toggleDialog } = useDialogStore();
   const navigate = useNavigate();
   const handleClose = () => {
-    setIsDialogOpen(false);
+    toggleDialog();
   };
   useEffect(() => {
     if (!dialogRef.current) return;
-    if (isOpen) {
+    if (isDialogOpen) {
       dialogRef.current.showModal();
     } else {
       dialogRef.current.close();
     }
-  }, [dialogRef, isOpen]);
+  }, [dialogRef, isDialogOpen]);
 
   const handleRegisterLogin = (path) => {
     logoutGuest();
@@ -29,7 +31,7 @@ export function GuestPopUp({ setIsDialogOpen, isOpen, dialogRef }) {
   return (
     <dialog
       ref={dialogRef}
-      className={`${styles.dialog} ${isOpen ? styles.active : ""}`}
+      className={`${styles.dialog} ${isDialogOpen ? styles.active : ""}`}
     >
       <div className={styles.titleBar}>
         <div className={styles.dots}>

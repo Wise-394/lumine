@@ -5,15 +5,12 @@ import { PostCard } from "../components/PostCard.jsx";
 import { useAuthenticationStore } from "../store/authenticationStore.jsx";
 import { GuestPopUp } from "../components/GuestPopUp.jsx";
 import { Notice } from "../components/Notice.jsx";
-
 export function Home() {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userId } = useAuthenticationStore();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dialogRef = useRef(null);
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -33,11 +30,7 @@ export function Home() {
 
   return (
     <main className={styles.homeContainer}>
-      <GuestPopUp
-        isOpen={isDialogOpen}
-        setIsDialogOpen={setIsDialogOpen}
-        dialogRef={dialogRef}
-      />
+      <GuestPopUp dialogRef={dialogRef} />
       <div className={styles.feedContainer}>
         <Notice />
         {error && <p>{error}</p>}
@@ -62,7 +55,6 @@ export function Home() {
                 postId={post.postId}
                 likesCount={post.likesCount}
                 likedByUser={post.likedByUser}
-                setIsDialogOpen={setIsDialogOpen}
               />
             ))}
           </div>
