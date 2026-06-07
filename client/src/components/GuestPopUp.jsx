@@ -33,6 +33,13 @@ export function GuestPopUp({ dialogRef }) {
   return (
     <dialog
       ref={dialogRef}
+      onCancel={(e) => e.preventDefault()}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }}
       className={`${styles.dialog} ${isDialogOpen ? styles.active : ""}`}
     >
       <div className={styles.titleBar}>
