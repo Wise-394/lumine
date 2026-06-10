@@ -13,12 +13,18 @@
 
 <br />
 
+
 ![Status](https://img.shields.io/badge/Status-Active%20Development-orange?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
 </div>
 
 ---
+<div align="center">
+
+### 🌐 [lumine.jrdumlao.com](https://lumine.jrdumlao.com)
+
+</div>
 
 ## Overview
 
@@ -232,7 +238,8 @@ cd client && npm run dev
 - [x] REST API with MVC architecture
 - [x] Frontend & backend test suites
 - [x] edit and delete posts
-- [ ] Like system
+- [x] Like system
+- [ ] saving post as image
 - [ ] Search and tag filtering
 
 ---
